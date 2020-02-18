@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "@material-ui/core";
+import ApolloClient from "apollo-boost";
+import React from "react";
+import { ApolloProvider } from "react-apollo";
+import { Provider } from "unstated";
+import "./App.css";
+import { Routes } from "./routes/Routes";
 
 const App: React.FC = () => {
+  const client = new ApolloClient({
+	uri: "http://localhost:4000",
+	request: (operation) => {
+		const token = localStorage.getItem("token");
+		operation.setContext({
+			headers: {
+				authorization: token ? `Bearer ${token}` : "",
+			},
+		});
+	},
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+	<ApolloProvider client={client}>
+		<Provider>
+			<Container className="app">
+				<Routes/>
+			</Container>
+		</Provider>
+	</ApolloProvider>
   );
-}
+};
 
 export default App;

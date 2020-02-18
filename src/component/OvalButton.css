@@ -1,0 +1,40 @@
+.oval-button {
+	position: relative;
+	display: inline-block;
+	width: 160px;
+	height: 160px;
+}
+
+.oval-button-circle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 154px;
+	width: 154px;
+	transform: translate(-50%, -50%);
+
+	border-radius: 50%;
+	background-color: #303030;
+}
+
+.oval-button-border {
+	position: absolute;
+	top: 50%;
+	left: 50%; 
+	height: 160px;
+	width: 160px;
+	transform: translate(-50%, -50%);
+
+	border-radius: 50%;
+	border: 1px solid #303030;
+}
+
+.oval-button-text {
+	color: #303030;
+	font-family: 'montserrat', 'Roboto';
+	font-weight: 200;
+	margin-top: 176px;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+}

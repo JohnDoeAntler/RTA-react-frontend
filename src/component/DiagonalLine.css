@@ -1,0 +1,12 @@
+.diagonal-line-container {
+	position: relative;
+	width: 35.355px;
+}
+
+.diagonal-line {
+	--length: 50px;
+	width: var(--length);
+	height: var(--length);
+	border-bottom: 1px solid #a0a0a0;
+	transform: translateX(-50%) translateY(75%) rotate(-45deg); 
+}

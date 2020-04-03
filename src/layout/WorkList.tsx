@@ -3,11 +3,13 @@
 import { Box, Grid, TextField } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { Form, Formik } from "formik";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-apollo";
+import { Link } from "react-router-dom";
 import { BackButton } from "../component/BackButton";
 import { CircleButton } from "../component/CircleButton";
 import { WorkListItem } from "../component/WorkListItem";
+import { WorkListItemAnimator, WorkListPageAnimator } from "../component/WorkListPageAnimator";
 import { GET_WORK_LIST } from "../graphql";
 import { GetWorkList, GetWorkListVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
@@ -44,29 +46,35 @@ export const WorkList: React.FC<IWorkListProps> = (props = initialState) => {
 		GET_WORK_LIST,
 		props.id === null
 			? {
-					variables: {
-						where: {
-							name_contains: filter,
+				variables: {
+					where: {
+						name_contains: filter,
+					},
+				},
+				fetchPolicy: "no-cache",
+			} : {
+				variables: {
+					where: {
+						name_contains: filter,
+						user: {
+							id: props.id,
 						},
 					},
-					fetchPolicy: "no-cache",
-			  }
-			: {
-					variables: {
-						where: {
-							name_contains: filter,
-							user: {
-								id: props.id,
-							},
-						},
-					},
-					fetchPolicy: "no-cache",
-			  },
+				},
+				fetchPolicy: "no-cache",
+			},
 	);
+
+	useEffect(() => {
+		WorkListItemAnimator();
+	});
 
 	return (
 		<Grid container className="panel" direction="column">
+			<WorkListPageAnimator />
+
 			{!!!props.id && <BackButton to="/" />}
+
 			<Grid item>
 				<div ref={upperPanel}>
 					<Box height="1rem" />
@@ -84,8 +92,7 @@ export const WorkList: React.FC<IWorkListProps> = (props = initialState) => {
 						}}
 						onSubmit={(props) => {
 							setFilter(props.filter);
-						}}
-					>
+						}}>
 						{(props) => (
 							<Form>
 								<TextField
@@ -97,6 +104,7 @@ export const WorkList: React.FC<IWorkListProps> = (props = initialState) => {
 									variant="filled"
 									onChange={props.handleChange}
 									onBlur={props.handleBlur}
+									autoFocus
 								/>
 							</Form>
 						)}
@@ -112,9 +120,11 @@ export const WorkList: React.FC<IWorkListProps> = (props = initialState) => {
 							<Subtitle>Action</Subtitle>
 
 							<Box my=".5rem" mb="1rem">
-								<CircleButton backgroundColor="#303030" popoverText="Create work">
-									<Add />
-								</CircleButton>
+								<Link to="/work/new">
+									<CircleButton backgroundColor="#303030" popoverText="Create work">
+										<Add />
+									</CircleButton>
+								</Link>
 							</Box>
 						</>
 					)}
@@ -130,17 +140,17 @@ export const WorkList: React.FC<IWorkListProps> = (props = initialState) => {
 				style={{
 					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
 					overflow: "hidden",
-				}}
-			>
-				<Box p={`${getScrollbarWidth() || 3}px`} style={{
-					width: `calc(100% + ${getScrollbarWidth()}px)`,
-					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
-					overflowY: "auto",
 				}}>
-					<Box pr={`${(getScrollbarWidth() || 3)*2}px`} pb={`${getScrollbarWidth()*4}px`}>
+				<Box
+					p={`${getScrollbarWidth() || 3}px`}
+					style={{
+						width: `calc(100% + ${getScrollbarWidth()}px)`,
+						height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
+						overflowY: "auto",
+					}}>
+					<Box pr={`${(getScrollbarWidth() || 3) * 2}px`} pb={`${getScrollbarWidth() * 4}px`}>
 						<Grid container direction="column" spacing={2}>
-							{
-								data?.works &&
+							{data?.works &&
 								data.works.map((work) => (
 									<Grid key={work.id} item>
 										<WorkListItem showUser={!!!props.id} {...work} />

@@ -1,15 +1,19 @@
+/** @format */
+
 import { IconButton } from "@material-ui/core";
 import { KeyboardArrowLeft } from "@material-ui/icons";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 interface IBackButtonProps {
-
 	to: string;
-
 }
 
 export const BackButton: React.FC<IBackButtonProps> = (props) => {
+
+	const [state, setState] = useState({
+		isClicked: false,
+	});
 
 	const style: React.CSSProperties = {
 		position: "fixed",
@@ -18,11 +22,22 @@ export const BackButton: React.FC<IBackButtonProps> = (props) => {
 		transform: "translate(-50%, -50%)",
 	};
 
+	if (state.isClicked) {
+		return (
+			<Redirect {...props}/>
+		)
+	}
+
 	return (
-		<Link to={props.to}>
-			<IconButton style={style}>
-				<KeyboardArrowLeft/>
-			</IconButton>
-		</Link>
+		<IconButton
+			onClick={() =>
+				setState({
+					...state,
+					isClicked: true,
+				})
+			}
+			style={style}>
+			<KeyboardArrowLeft />
+		</IconButton>
 	);
 };

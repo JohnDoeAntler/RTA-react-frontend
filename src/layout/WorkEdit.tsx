@@ -28,6 +28,34 @@ import {
 } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
+import { PageAnimator } from "../component/PageAnimator";
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+
+	name: Yup
+		.string()
+		.required()
+		.min(2),
+
+	description: Yup
+		.string()
+		.required()
+		.min(4),
+
+	categoryId: Yup
+		.string()
+		.required(),
+
+	imageUrl: Yup
+		.string()
+		.required()
+		.url(),
+
+	visibility: Yup
+		.bool()
+		.required(),
+});
 
 export const WorkEdit: React.FC = () => {
 	const { id } = useParams();
@@ -77,7 +105,10 @@ export const WorkEdit: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
+			<PageAnimator/>
+
 			<BackButton to={`/work/${id}`} />
+
 			<Title>Edit Work</Title>
 
 			<TitleLine />
@@ -91,6 +122,7 @@ export const WorkEdit: React.FC = () => {
 						categoryId: data?.work.category.id || "",
 						imageUrl: data?.work.imageUrl || "",
 					}}
+					validationSchema={schema}
 					onSubmit={(props) => {
 						update({
 							variables: {
@@ -124,8 +156,7 @@ export const WorkEdit: React.FC = () => {
 									autoFocus
 								/>
 								<Caption>
-									{(props.touched.name &&
-										props.errors.name) ||
+									{(props.touched.name && props.errors.name ) ? (<span className="error-message">{props.errors.name}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -148,8 +179,7 @@ export const WorkEdit: React.FC = () => {
 									}
 								/>
 								<Caption>
-									{(props.touched.description &&
-										props.errors.description) ||
+									{(props.touched.description && props.errors.description ) ? (<span className="error-message">{props.errors.description}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -168,9 +198,13 @@ export const WorkEdit: React.FC = () => {
 										name="categoryId"
 										value={state.categoryId}
 										onChange={(e) =>
-											handleCategoryId(
-												e.target.value as string,
-											)
+											{
+												handleCategoryId(
+													e.target.value as string,
+												);
+
+												props.handleChange(e);
+											}
 										}
 									>
 										{data.categories.map((category) => (
@@ -181,8 +215,7 @@ export const WorkEdit: React.FC = () => {
 									</Select>
 								</FormControl>
 								<Caption>
-									{(props.touched.categoryId &&
-										props.errors.categoryId) ||
+									{(props.touched.categoryId && props.errors.categoryId ) ? (<span className="error-message">{props.errors.categoryId}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -202,8 +235,7 @@ export const WorkEdit: React.FC = () => {
 									defaultValue={props.initialValues.imageUrl}
 								/>
 								<Caption>
-									{(props.touched.imageUrl &&
-										props.errors.imageUrl) ||
+									{(props.touched.imageUrl && props.errors.imageUrl ) ? (<span className="error-message">{props.errors.imageUrl}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,

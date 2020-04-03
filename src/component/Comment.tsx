@@ -19,8 +19,9 @@ interface ICommentProps {
 }
 
 export const Comment: React.FC<ICommentProps> = (props) => {
+
 	return (
-		<div>
+		<div className="comment">
 			<Link to={`/user/${props.user.id}`}>
 				<UserInfoBar
 					userId={props.user.id}

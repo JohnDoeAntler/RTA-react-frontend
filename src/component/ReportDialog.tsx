@@ -72,6 +72,7 @@ export const ReportDialog: React.FC<ICommandDialogProps> = (props) => {
 								variant="filled"
 								onChange={handleChange}
 								onBlur={handleBlur}
+								autoFocus
 							/>
 						</DialogContent>
 						<DialogActions>

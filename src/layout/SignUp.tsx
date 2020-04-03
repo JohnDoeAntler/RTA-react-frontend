@@ -1,11 +1,12 @@
 /** @format */
 
-import { Backdrop, Box, CircularProgress, Grid, TextField } from "@material-ui/core";
+import { Box, Grid, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
 import { Redirect } from "react-router";
 import * as Yup from "yup";
+import { BackButton } from "../component/BackButton";
 import { ContentDialog } from "../component/ContentDialog";
 import { Reset } from "../component/Reset";
 import { Submit } from "../component/Submit";
@@ -14,6 +15,7 @@ import { SIGNUP } from "../graphql";
 import { Register, RegisterVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
+import { PageAnimator } from "../component/PageAnimator";
 
 const signUpSchema = Yup.object().shape({
 	email: Yup.string()
@@ -39,7 +41,7 @@ export const SignUp: React.FC = () => {
 		open: false,
 	});
 
-	const [signup, { loading, error }] = useMutation<Register, RegisterVariables>(SIGNUP);
+	const [signup, { error }] = useMutation<Register, RegisterVariables>(SIGNUP);
 
 	// const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 	// 	e.preventDefault();
@@ -59,9 +61,9 @@ export const SignUp: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
-			<Backdrop open={loading}>
-				<CircularProgress />
-			</Backdrop>
+			<PageAnimator />
+
+			<BackButton to="/" />
 
 			<Grid item>
 				<Title>Register</Title>
@@ -99,14 +101,13 @@ export const SignUp: React.FC = () => {
 									open: true,
 								});
 							});
-					}}
-				>
+					}}>
 					{(props) => (
 						<Form autoComplete="off">
 							<Box my={3}>
 								<TextField fullWidth name="email" label="Email" variant="filled" onChange={props.handleChange} onBlur={props.handleBlur} />
 								<Caption>
-									{(props.touched.email && props.errors.email) ||
+									{(props.touched.email && props.errors.email ) ? (<span className="error-message">{props.errors.email}</span>) : 
 										`
 											Lorem ipsum dolor sit, amet consectetur adipisicing
 											elit. Hic id architecto possimus, deleniti
@@ -128,7 +129,7 @@ export const SignUp: React.FC = () => {
 									onBlur={props.handleBlur}
 								/>
 								<Caption>
-									{(props.touched.password && props.errors.password) ||
+									{(props.touched.password && props.errors.password ) ? (<span className="error-message">{props.errors.password}</span>) : 
 										`
 											Lorem ipsum dolor, sit amet consectetur adipisicing
 											elit. Dolorem quibusdam quisquam quidem hic quos,
@@ -150,7 +151,7 @@ export const SignUp: React.FC = () => {
 									onBlur={props.handleBlur}
 								/>
 								<Caption>
-									{(props.touched.confirm && props.errors.confirm) ||
+									{(props.touched.confirm && props.errors.confirm ) ? (<span className="error-message">{props.errors.confirm}</span>) : 
 										`
 											Lorem ipsum dolor, sit amet consectetur adipisicing
 											elit. Dolorem quibusdam quisquam quidem hic quos,
@@ -164,7 +165,7 @@ export const SignUp: React.FC = () => {
 							<Box my={3}>
 								<TextField fullWidth name="name" label="Name" variant="filled" onChange={props.handleChange} onBlur={props.handleBlur} />
 								<Caption>
-									{(props.touched.name && props.errors.name) ||
+									{(props.touched.name && props.errors.name ) ? (<span className="error-message">{props.errors.name}</span>) : 
 										`
 											Lorem ipsum dolor, sit amet consectetur adipisicing
 											elit. Dolorem quibusdam quisquam quidem hic quos,

@@ -2,23 +2,23 @@
 
 import { Box, Grid, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-apollo";
 import { BackButton } from "../component/BackButton";
 import { WorkListItem } from "../component/WorkListItem";
+import { WorkListItemAnimator, WorkListPageAnimator } from "../component/WorkListPageAnimator";
 import { GET_WORK_LIST } from "../graphql";
 import { GetWorkList, GetWorkListVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
-import { getId } from "../utils/UserHelper";
 import { getScrollbarWidth } from "../utils/ScrollbarHelper";
+import { getId } from "../utils/UserHelper";
 
 export const Favourites: React.FC = () => {
-
 	//
 	// ─── REF ────────────────────────────────────────────────────────────────────────
 	//
-		
+
 	const upperPanel = useRef<HTMLDivElement>(null);
 
 	//
@@ -43,9 +43,16 @@ export const Favourites: React.FC = () => {
 		fetchPolicy: "network-only",
 	});
 
+	useEffect(() => {
+		WorkListItemAnimator();
+	});
+
 	return (
 		<Grid container className="panel" direction="column">
+			<WorkListPageAnimator />
+
 			<BackButton to="/" />
+
 			<Grid item>
 				<div ref={upperPanel}>
 					<Box height="1rem" />
@@ -63,8 +70,7 @@ export const Favourites: React.FC = () => {
 						}}
 						onSubmit={(props) => {
 							setFilter(props.filter);
-						}}
-					>
+						}}>
 						{(props) => (
 							<Form>
 								<TextField
@@ -97,24 +103,23 @@ export const Favourites: React.FC = () => {
 				style={{
 					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
 					overflow: "hidden",
-				}}
-			>
-				<Box p={`${getScrollbarWidth()/2}px`} style={{
-					width: `calc(100% + ${getScrollbarWidth()}px)`,
-					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
-					overflowY: "auto",
 				}}>
-					<Box pr={`${getScrollbarWidth()}px`}>
+				<Box
+					p={`${getScrollbarWidth() || 3}px`}
+					style={{
+						width: `calc(100% + ${getScrollbarWidth()}px)`,
+						height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
+						overflowY: "auto",
+					}}>
+					<Box pr={`${(getScrollbarWidth() || 3) * 2}px`} pb={`${getScrollbarWidth() * 4}px`}>
 						<Grid container direction="column" spacing={2}>
 							{data &&
 								data.works &&
-								data.works.map((work) => {
-									return (
-										<Grid key={work.id} item>
-											<WorkListItem showUser={true} {...work} />
-										</Grid>
-									);
-								})}
+								data.works.map((work) => (
+									<Grid key={work.id} item>
+										<WorkListItem showUser={true} {...work} />
+									</Grid>
+								))}
 						</Grid>
 					</Box>
 				</Box>

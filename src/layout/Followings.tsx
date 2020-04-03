@@ -2,16 +2,17 @@
 
 import { Box, Grid, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-apollo";
 import { BackButton } from "../component/BackButton";
 import { UserListItem } from "../component/UserListItem";
+import { UserListItemAnimator, UserListPageAnimator } from "../component/UserListPageAnimator";
 import { GET_FOLLOWINGS } from "../graphql";
 import { GetFollowings, GetFollowingsVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
-import { getId } from "../utils/UserHelper";
 import { getScrollbarWidth } from "../utils/ScrollbarHelper";
+import { getId } from "../utils/UserHelper";
 
 export const Followings: React.FC = () => {
 	//
@@ -38,9 +39,16 @@ export const Followings: React.FC = () => {
 		fetchPolicy: "no-cache",
 	});
 
+	useEffect(() => {
+		UserListItemAnimator();
+	});
+
 	return (
 		<Grid container className="panel" direction="column">
+			<UserListPageAnimator />
+
 			<BackButton to="/" />
+
 			<Grid item lg="auto">
 				<div ref={upperPanel}>
 					<Box height="1rem" />
@@ -93,15 +101,15 @@ export const Followings: React.FC = () => {
 					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
 					overflow: "hidden",
 				}}>
-				<Box style={{
-					width: `calc(100% + ${getScrollbarWidth()}px)`,
-					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
-					overflowY: "auto",
-					overflowX: "hidden",
-				}}>
+				<Box
+					style={{
+						width: `calc(100% + ${getScrollbarWidth()}px)`,
+						height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
+						overflowY: "auto",
+						overflowX: "hidden",
+					}}>
 					<Grid container spacing={2}>
-						{
-							data &&
+						{data &&
 							data.user.following.map((user) => {
 								return (
 									<Grid key={user.id} item lg={12}>

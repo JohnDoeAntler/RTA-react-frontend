@@ -24,6 +24,34 @@ import { CreateWork, CreateWorkVariables, GetCategories } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
 import { getId } from "../utils/UserHelper";
+import { PageAnimator } from "../component/PageAnimator";
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+
+	name: Yup
+		.string()
+		.required()
+		.min(2),
+
+	description: Yup
+		.string()
+		.required()
+		.min(4),
+
+	categoryId: Yup
+		.string()
+		.required(),
+
+	imageUrl: Yup
+		.string()
+		.required()
+		.url(),
+
+	visibility: Yup
+		.bool()
+		.required(),
+});
 
 export const WorkCreate: React.FC = () => {
 	const [state, setState] = useState({
@@ -55,6 +83,8 @@ export const WorkCreate: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
+			<PageAnimator/>
+
 			<BackButton to="/work/" />
 
 			<Title>Create Work</Title>
@@ -69,6 +99,7 @@ export const WorkCreate: React.FC = () => {
 					categoryId: "",
 					imageUrl: "",
 				}}
+				validationSchema={schema}
 				onSubmit={(props) => {
 					create({
 						variables: {
@@ -102,7 +133,7 @@ export const WorkCreate: React.FC = () => {
 								autoFocus
 							/>
 							<Caption>
-								{(props.touched.name && props.errors.name) ||
+								{(props.touched.name && props.errors.name ) ? (<span className="error-message">{props.errors.name}</span>) : 
 									`
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -123,8 +154,7 @@ export const WorkCreate: React.FC = () => {
 								defaultValue={props.initialValues.description}
 							/>
 							<Caption>
-								{(props.touched.description &&
-									props.errors.description) ||
+								{(props.touched.description && props.errors.description ) ? (<span className="error-message">{props.errors.description}</span>) : 
 									`
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -146,10 +176,13 @@ export const WorkCreate: React.FC = () => {
 												name="categoryId"
 												value={state.categoryId}
 												onChange={(e) =>
-													handleCategoryId(
-														e.target
-															.value as string,
-													)
+													{
+														handleCategoryId(
+															e.target.value as string,
+														);
+
+														props.handleChange(e);
+													}
 												}
 											>
 												{data &&
@@ -170,8 +203,7 @@ export const WorkCreate: React.FC = () => {
 								</Query>
 							</FormControl>
 							<Caption>
-								{(props.touched.categoryId &&
-									props.errors.categoryId) ||
+								{(props.touched.categoryId && props.errors.categoryId ) ? (<span className="error-message">{props.errors.categoryId}</span>) : 
 									`
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -191,8 +223,7 @@ export const WorkCreate: React.FC = () => {
 								defaultValue={props.initialValues.imageUrl}
 							/>
 							<Caption>
-								{(props.touched.imageUrl &&
-									props.errors.imageUrl) ||
+								{(props.touched.imageUrl && props.errors.imageUrl ) ? (<span className="error-message">{props.errors.imageUrl}</span>) : 
 									`
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,

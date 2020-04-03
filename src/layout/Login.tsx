@@ -1,11 +1,12 @@
 /** @format */
 
-import { Backdrop, Box, CircularProgress, Grid, TextField } from "@material-ui/core";
+import { Box, Grid, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useMutation } from "react-apollo";
 import { Redirect } from "react-router";
 import * as Yup from "yup";
+import { BackButton } from "../component/BackButton";
 import { ContentDialog } from "../component/ContentDialog";
 import { Reset } from "../component/Reset";
 import { Submit } from "../component/Submit";
@@ -14,6 +15,7 @@ import { LOGIN } from "../graphql";
 import { Login as SignIn, LoginVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
+import { PageAnimator } from "../component/PageAnimator";
 
 const loginSchema = Yup.object().shape({
 	email: Yup.string()
@@ -31,7 +33,7 @@ export const Login: React.FC = () => {
 		open: false,
 	});
 
-	const [login, { loading, error }] = useMutation<SignIn, LoginVariables>(LOGIN);
+	const [login, { error }] = useMutation<SignIn, LoginVariables>(LOGIN);
 
 	const handleClose = () => {
 		setState({
@@ -46,9 +48,10 @@ export const Login: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
-			<Backdrop open={loading}>
-				<CircularProgress />
-			</Backdrop>
+			<PageAnimator />
+
+			<BackButton to="/" />
+
 			<Grid item>
 				<Title>Login</Title>
 
@@ -82,14 +85,13 @@ export const Login: React.FC = () => {
 									open: true,
 								});
 							});
-					}}
-				>
+					}}>
 					{(props) => (
 						<Form autoComplete="off">
 							<Box my={3}>
 								<TextField fullWidth name="email" label="Email" variant="filled" onChange={props.handleChange} onBlur={props.handleBlur} />
 								<Caption>
-									{(props.touched.email && props.errors.email) ||
+									{(props.touched.email && props.errors.email ) ? (<span className="error-message">{props.errors.email}</span>) : 
 										`
 											Lorem ipsum dolor sit amet consectetur adipisicing elit.
 											Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -110,7 +112,7 @@ export const Login: React.FC = () => {
 									onBlur={props.handleBlur}
 								/>
 								<Caption>
-									{(props.touched.password && props.errors.password) ||
+									{(props.touched.password && props.errors.password ) ? (<span className="error-message">{props.errors.password}</span>) : 
 										`
 											Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 											Unde porro veritatis sequi provident dolor,

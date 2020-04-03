@@ -2,10 +2,11 @@
 
 import { Box, Grid, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-apollo";
 import { BackButton } from "../component/BackButton";
 import { UserListItem } from "../component/UserListItem";
+import { UserListItemAnimator, UserListPageAnimator } from "../component/UserListPageAnimator";
 import { GET_USER_LIST } from "../graphql";
 import { GetUserList, GetUserListVariables } from "../types/api";
 import { Caption } from "../typography/Caption";
@@ -13,12 +14,14 @@ import { Title } from "../typography/Title";
 import { getScrollbarWidth } from "../utils/ScrollbarHelper";
 
 export const UserList: React.FC = () => {
-
 	//
 	// ─── STATE ──────────────────────────────────────────────────────────────────────
 	//
 
-	const [filter, setFilter] = useState("");
+	const [state, setState] = useState({
+		filter: "",
+		height: 0,
+	});
 
 	//
 	// ─── REF ────────────────────────────────────────────────────────────────────────
@@ -26,24 +29,36 @@ export const UserList: React.FC = () => {
 
 	const upperPanel = useRef<HTMLDivElement>(null);
 
+	useEffect(() => {
+		setState({
+			...state,
+			height: upperPanel.current?.clientHeight || 0,
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [upperPanel]);
+
 	//
 	// ─── USERS QUERY ────────────────────────────────────────────────────────────────
 	//
 
-	const { data } = useQuery<GetUserList, GetUserListVariables>(
-		GET_USER_LIST,
-		{
-			variables: {
-				where: {
-					name_contains: filter,
-				},
+	const { data } = useQuery<GetUserList, GetUserListVariables>(GET_USER_LIST, {
+		variables: {
+			where: {
+				name_contains: state.filter,
 			},
 		},
-	);
+	});
+
+	useEffect(() => {
+		UserListItemAnimator();
+	});
 
 	return (
 		<Grid container className="panel" direction="column">
+			<UserListPageAnimator />
+
 			<BackButton to="/" />
+
 			<Grid item lg="auto">
 				<div ref={upperPanel}>
 					<Box height="1rem" />
@@ -51,10 +66,8 @@ export const UserList: React.FC = () => {
 					<Title>User List</Title>
 
 					<Caption>
-						Lorem, ipsum dolor sit amet consectetur adipisicing
-						elit. Earum rem tenetur vitae, quisquam saepe quod ex
-						minus commodi. Officiis et tempore quis unde non natus
-						velit reprehenderit, est minima error!
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum rem tenetur vitae, quisquam saepe quod ex minus commodi. Officiis et
+						tempore quis unde non natus velit reprehenderit, est minima error!
 					</Caption>
 
 					<Formik
@@ -62,9 +75,11 @@ export const UserList: React.FC = () => {
 							filter: "",
 						}}
 						onSubmit={(props) => {
-							setFilter(props.filter);
-						}}
-					>
+							setState({
+								...state,
+								filter: props.filter,
+							});
+						}}>
 						{(props) => (
 							<Form>
 								<TextField
@@ -76,17 +91,15 @@ export const UserList: React.FC = () => {
 									variant="filled"
 									onChange={props.handleChange}
 									onBlur={props.handleBlur}
+									autoFocus
 								/>
 							</Form>
 						)}
 					</Formik>
 
 					<Caption>
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Aliquid alias consequatur nam fugiat dolore
-						laudantium ab quasi eligendi sunt, vero beatae? Modi,
-						exercitationem. Ipsa, natus eaque accusantium rem porro
-						tempore!
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid alias consequatur nam fugiat dolore laudantium ab quasi eligendi sunt,
+						vero beatae? Modi, exercitationem. Ipsa, natus eaque accusantium rem porro tempore!
 					</Caption>
 
 					<hr />
@@ -99,22 +112,22 @@ export const UserList: React.FC = () => {
 				item
 				lg="auto"
 				style={{
-					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
+					height: `calc(100vh - ${state.height}px)`,
 					overflow: "hidden",
-				}}
-			>
-				<Box style={{
-					width: `calc(100% + ${getScrollbarWidth()}px)`,
-					height: `calc(100vh - ${upperPanel.current?.clientHeight || 0}px)`,
-					overflowY: "auto",
-					overflowX: "hidden",
 				}}>
+				<Box
+					style={{
+						width: `calc(100% + ${getScrollbarWidth()}px)`,
+						height: `calc(100vh - ${state.height}px)`,
+						overflowY: "auto",
+						overflowX: "hidden",
+					}}>
 					<Grid container spacing={2}>
 						{data &&
 							data.users &&
 							data.users.map((user) => {
 								return (
-									<Grid key={user.id} item lg={12}>
+									<Grid key={user.id} item xs={12}>
 										<UserListItem {...user} />
 									</Grid>
 								);

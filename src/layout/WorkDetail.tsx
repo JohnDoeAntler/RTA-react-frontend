@@ -13,7 +13,8 @@ import {
 	ThumbUpAlt,
 	ThumbUpAltOutlined,
 } from "@material-ui/icons";
-import React, { useRef, useState } from "react";
+import { Expo, TweenLite } from "gsap";
+import React, { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -23,6 +24,8 @@ import { CircleButton } from "../component/CircleButton";
 import { Comment } from "../component/Comment";
 import { CommentDialog } from "../component/CommentDialog";
 import { FluidImage } from "../component/FluidImage";
+import { PageAnimator } from "../component/PageAnimator";
+import { ReportDialog } from "../component/ReportDialog";
 import { TitleLine } from "../component/TitleLine";
 import { FAVOURITE_WORK, GET_WORK, LIKE_WORK, UNFAVOURITE_WORK, UNLIKE_WORK } from "../graphql";
 import {
@@ -42,7 +45,6 @@ import { Description } from "../typography/Description";
 import { Subtitle } from "../typography/Subtitle";
 import { Title } from "../typography/Title";
 import { getId } from "../utils/UserHelper";
-import { ReportDialog } from "../component/ReportDialog";
 
 export const WorkDetail: React.FC = () => {
 	//
@@ -63,21 +65,24 @@ export const WorkDetail: React.FC = () => {
 
 	const theme = useTheme();
 
-	const isXs = useMediaQuery(theme.breakpoints.down('xs'));
+	const isXs = useMediaQuery(theme.breakpoints.down("xs"));
 
 	//
 	// ─── STATE ──────────────────────────────────────────────────────────────────────
 	//
 
 	const [state, setState] = useState({
+		likeDisabled: false,
+		favouriteDisabled: false,
 		commentOpen: false,
 		reportOpen: false,
 	});
 
-	const handleCommentOpen = () => setState({
-		...state,
-		commentOpen: true,
-	});
+	const handleCommentOpen = () =>
+		setState({
+			...state,
+			commentOpen: true,
+		});
 	const handleCommentClose = () => {
 		setState({
 			...state,
@@ -86,10 +91,11 @@ export const WorkDetail: React.FC = () => {
 		refetch();
 	};
 
-	const handleReportOpen = () => setState({
-		...state,
-		reportOpen: true,
-	})
+	const handleReportOpen = () =>
+		setState({
+			...state,
+			reportOpen: true,
+		});
 
 	const handleReportClose = () => {
 		setState({
@@ -97,7 +103,7 @@ export const WorkDetail: React.FC = () => {
 			reportOpen: false,
 		});
 		refetch();
-	}
+	};
 
 	//
 	// ─── WORK QUERY ─────────────────────────────────────────────────────────────────
@@ -129,8 +135,24 @@ export const WorkDetail: React.FC = () => {
 
 	const [unfavourite] = useMutation<UnfavouriteWork, UnfavouriteWorkVariables>(UNFAVOURITE_WORK);
 
+	//
+	// ─── COMMENT ANIMATION ──────────────────────────────────────────────────────────
+	//
+
+	useEffect(() => {
+		TweenLite.from(".comment", {
+			marginTop: "10px",
+			opacity: 0.0,
+			stagger: 0.01,
+			ease: Expo.easeOut,
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data?.work.comments]);
+
 	return (
 		<Grid container className="panel" direction="column" alignItems="stretch">
+			<PageAnimator />
+
 			<BackButton to="/work" />
 
 			<Grid item>
@@ -184,34 +206,52 @@ export const WorkDetail: React.FC = () => {
 												<CircleButton
 													backgroundColor="#ff3030"
 													popoverText="Unlike"
-													onClick={() =>
+													disabled={state.likeDisabled}
+													onClick={() => {
+														setState({
+															...state,
+															likeDisabled: true,
+														});
 														unlike({
 															variables: {
 																me: getId(),
 																target: id,
 															},
 														}).then(() => {
-															refetch();
-														})
-													}
-												>
+															refetch().then(() => {
+																setState({
+																	...state,
+																	likeDisabled: false,
+																});
+															});
+														});
+													}}>
 													<ThumbUpAlt />
 												</CircleButton>
 											) : (
 												<CircleButton
 													backgroundColor="#303030"
 													popoverText="Like"
-													onClick={() =>
+													disabled={state.likeDisabled}
+													onClick={() => {
+														setState({
+															...state,
+															likeDisabled: true,
+														});
 														like({
 															variables: {
 																me: getId(),
 																target: id,
 															},
 														}).then(() => {
-															refetch();
-														})
-													}
-												>
+															refetch().then(() => {
+																setState({
+																	...state,
+																	likeDisabled: false,
+																});
+															});
+														});
+													}}>
 													<ThumbUpAltOutlined />
 												</CircleButton>
 											)}
@@ -221,34 +261,52 @@ export const WorkDetail: React.FC = () => {
 												<CircleButton
 													backgroundColor="#dddd00"
 													popoverText="Remove from my favourite."
+													disabled={state.favouriteDisabled}
 													onClick={() => {
+														setState({
+															...state,
+															favouriteDisabled: true,
+														});
 														unfavourite({
 															variables: {
 																me: getId(),
 																target: id,
 															},
 														}).then(() => {
-															refetch();
+															refetch().then(() => {
+																setState({
+																	...state,
+																	favouriteDisabled: false,
+																})
+															});
 														});
-													}}
-												>
+													}}>
 													<Favorite />
 												</CircleButton>
 											) : (
 												<CircleButton
 													backgroundColor="#303030"
 													popoverText="Add to my favourite."
+													disabled={state.favouriteDisabled}
 													onClick={() => {
+														setState({
+															...state,
+															favouriteDisabled: true,
+														});
 														favourite({
 															variables: {
 																me: getId(),
 																target: id,
 															},
 														}).then(() => {
-															refetch();
+															refetch().then(() => {
+																setState({
+																	...state,
+																	favouriteDisabled: false,
+																})
+															});
 														});
-													}}
-												>
+													}}>
 													<FavoriteBorder />
 												</CircleButton>
 											)}
@@ -329,8 +387,7 @@ export const WorkDetail: React.FC = () => {
 										style={{
 											backgroundColor: "rgba(0, 0, 0, 0.02)",
 											textAlign: "center",
-										}}
-									>
+										}}>
 										<Description>No comment as found.</Description>
 									</Box>
 								</Grid>

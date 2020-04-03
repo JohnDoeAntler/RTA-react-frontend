@@ -33,6 +33,17 @@ import {
 } from "../types/api";
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
+import { PageAnimator } from "../component/PageAnimator";
+import * as Yup from "yup";
+
+const schema = Yup.object().shape({
+
+	fileUrl: Yup
+		.string()
+		.required()
+		.url(),
+
+});
 
 export const ImageDataEdit: React.FC = () => {
 	const { id } = useParams();
@@ -55,6 +66,8 @@ export const ImageDataEdit: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
+			<PageAnimator/>
+
 			<BackButton to={`/work/${id}`} />
 
 			<Title>Edit Image Data</Title>
@@ -100,6 +113,7 @@ export const ImageDataEdit: React.FC = () => {
 				initialValues={{
 					fileUrl: "",
 				}}
+				validationSchema={schema}
 				onSubmit={(props) =>
 					create({
 						variables: {
@@ -124,10 +138,10 @@ export const ImageDataEdit: React.FC = () => {
 								onChange={props.handleChange}
 								onBlur={props.handleBlur}
 								defaultValue={props.initialValues.fileUrl}
+								autoFocus
 							/>
 							<Caption>
-								{(props.touched.fileUrl &&
-									props.errors.fileUrl) ||
+								{(props.touched.fileUrl && props.errors.fileUrl ) ? (<span className="error-message">{props.errors.fileUrl}</span>) : 
 									`
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,

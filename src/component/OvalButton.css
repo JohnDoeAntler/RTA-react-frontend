@@ -5,35 +5,21 @@
 	height: 160px;
 }
 
-.oval-button-circle {
+.oval-button-lottie {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	height: 154px;
-	width: 154px;
+	height: 320px;
+	width: 320px;
 	transform: translate(-50%, -50%);
-
-	border-radius: 50%;
-	background-color: #303030;
-}
-
-.oval-button-border {
-	position: absolute;
-	top: 50%;
-	left: 50%; 
-	height: 160px;
-	width: 160px;
-	transform: translate(-50%, -50%);
-
-	border-radius: 50%;
-	border: 1px solid #303030;
+	pointer-events: none;
 }
 
 .oval-button-text {
 	color: #303030;
 	font-family: 'montserrat', 'Roboto';
 	font-weight: 200;
-	margin-top: 176px;
+	margin-top: 200px;
 	text-transform: uppercase;
 	text-decoration: none;
 	text-align: center;

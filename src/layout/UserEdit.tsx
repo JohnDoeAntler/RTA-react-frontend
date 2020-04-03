@@ -21,6 +21,22 @@ import {
 import { Caption } from "../typography/Caption";
 import { Title } from "../typography/Title";
 import { BackButton } from "../component/BackButton";
+import { PageAnimator } from "../component/PageAnimator";
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+
+	name: Yup
+		.string()
+		.required()
+		.min(2),
+
+	imageUrl: Yup
+		.string()
+		.required()
+		.url(),
+
+});
 
 export const UserEdit: React.FC = () => {
 
@@ -70,7 +86,10 @@ export const UserEdit: React.FC = () => {
 
 	return (
 		<Grid container className="panel" direction="column" justify="center">
+			<PageAnimator/>
+
 			<BackButton to={`/user/${id}`} />
+
 			<Title>Edit User Information</Title>
 
 			<TitleLine />
@@ -78,6 +97,7 @@ export const UserEdit: React.FC = () => {
 			{data?.user && (
 				<Formik
 					initialValues={data.user}
+					validationSchema={schema}
 					onSubmit={(props) => {
 						update({
 							variables: {
@@ -107,8 +127,7 @@ export const UserEdit: React.FC = () => {
 									autoFocus
 								/>
 								<Caption>
-									{(props.touched.name &&
-										props.errors.name) ||
+									{(props.touched.name && props.errors.name ) ? (<span className="error-message">{props.errors.name}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,
@@ -128,8 +147,7 @@ export const UserEdit: React.FC = () => {
 									defaultValue={props.initialValues.imageUrl}
 								/>
 								<Caption>
-									{(props.touched.imageUrl &&
-										props.errors.imageUrl) ||
+									{(props.touched.imageUrl && props.errors.imageUrl ) ? (<span className="error-message">{props.errors.imageUrl}</span>) : 
 										`
 										Lorem ipsum dolor sit amet consectetur adipisicing elit.
 										Consequatur explicabo doloremque illum, mollitia eveniet dolor aspernatur earum,

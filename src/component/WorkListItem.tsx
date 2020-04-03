@@ -10,6 +10,7 @@ import { FluidImage } from "./FluidImage";
 import { UserInfoBar } from "./UserInfoBar";
 
 interface IWorkListItem {
+
 	id: string;
 
 	name: string;
@@ -23,11 +24,12 @@ interface IWorkListItem {
 	user: GetUserList_users;
 
 	showUser: boolean;
+
 }
 
 export const WorkListItem = (props: IWorkListItem) => {
 	return (
-		<Grid container direction="column" spacing={1}>
+		<Grid container className="work-list-item" direction="column" spacing={1}>
 			{props.showUser && (
 				<Grid item>
 					<Link to={`/user/${props.user.id}`}>

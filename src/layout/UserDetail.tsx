@@ -28,7 +28,6 @@ import { getId } from "../utils/UserHelper";
 import { WorkList } from "./WorkList";
 
 export const UserDetail: React.FC = () => {
-
 	//
 	// ─── PARAMS ─────────────────────────────────────────────────────────────────────
 	//
@@ -43,6 +42,7 @@ export const UserDetail: React.FC = () => {
 		variables: {
 			id: id || "",
 		},
+		fetchPolicy: "no-cache",
 	});
 
 	//
@@ -76,35 +76,23 @@ export const UserDetail: React.FC = () => {
 		},
 	});
 
-	const [unfollow] = useMutation<UnfollowUser, UnfollowUserVariables>(
-		UNFOLLOW_USER,
-		{
-			onCompleted: () => {
-				setIsFollowing(false);
-			},
+	const [unfollow] = useMutation<UnfollowUser, UnfollowUserVariables>(UNFOLLOW_USER, {
+		onCompleted: () => {
+			setIsFollowing(false);
 		},
-	);
+	});
 
 	return (
 		<Grid container className="panel">
 			<BackButton to={"/user"} />
 			<Grid item xs={12} sm={6}>
-				<Grid
-					container
-					className="panel"
-					direction="column"
-					justify="center"
-				>
+				<Grid container className="panel" direction="column" justify="center">
 					<Grid item>
 						<Title>{`${data?.user.name || ""}'s Profile`}</Title>
 
 						<TitleLine />
 
-						<Avatar
-							size={250}
-							src={data?.user.imageUrl || ""}
-							alt={data?.user.name || ""}
-						/>
+						<Avatar size={250} src={data?.user.imageUrl || ""} alt={data?.user.name || ""} />
 
 						<Box height="1rem" />
 
@@ -113,12 +101,8 @@ export const UserDetail: React.FC = () => {
 						<Grid container>
 							<Grid item xs={12} sm={11}>
 								<Caption>
-									Lorem ipsum dolor sit amet consectetur,
-									adipisicing elit. Cupiditate iusto officiis
-									excepturi? Quas, optio eius. Modi aut labore
-									neque doloribus. Unde, assumenda! Dolore
-									sint facere voluptatibus unde cumque commodi
-									aperiam.
+									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate iusto officiis excepturi? Quas, optio eius. Modi aut
+									labore neque doloribus. Unde, assumenda! Dolore sint facere voluptatibus unde cumque commodi aperiam.
 								</Caption>
 
 								<hr />
@@ -143,8 +127,7 @@ export const UserDetail: React.FC = () => {
 														target: id,
 													},
 												})
-											}
-										>
+											}>
 											<PersonAddDisabled />
 										</CircleButton>
 									</Grid>
@@ -160,8 +143,7 @@ export const UserDetail: React.FC = () => {
 														target: id,
 													},
 												})
-											}
-										>
+											}>
 											<PersonAdd />
 										</CircleButton>
 									</Grid>
@@ -169,10 +151,7 @@ export const UserDetail: React.FC = () => {
 							{getId() === id && (
 								<Grid item>
 									<Link to={`/user/edit/${id}`}>
-										<CircleButton
-											backgroundColor="#303030"
-											popoverText="Edit information."
-										>
+										<CircleButton backgroundColor="#303030" popoverText="Edit information.">
 											<Edit />
 										</CircleButton>
 									</Link>

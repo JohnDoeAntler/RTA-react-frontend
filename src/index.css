@@ -43,3 +43,7 @@ hr {
 .panel {
   min-height: 100vh;
 }
+
+.error-message {
+  color: #cc0000 !important;
+}

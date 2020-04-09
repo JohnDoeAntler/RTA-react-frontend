@@ -1,78 +1,53 @@
-/** @format */
+import React from 'react';
+import './App.css';
+import { useAuth0 } from './utils/react-auth0-spa';
+import { Guest } from './views/guest/Guest';
+import { Router } from './router/Router';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
-import { Container } from "@material-ui/core";
-import ApolloClient from "apollo-boost";
-import React, { useEffect, useRef } from "react";
-import { ApolloProvider } from "react-apollo";
-import { Provider } from "unstated";
-import "./App.css";
-import Routes from "./routes/Routes";
-import Lottie from "lottie-web";
-import { BrowserRouter as Router } from 'react-router-dom';
-import { isLocalhost } from "./serviceWorker";
+const App = () => {
+  const {
+    role,
+    isInitializing,
+    isAuthenticated,
+    getIdTokenClaims
+  } = useAuth0();
 
-const App: React.FC = () => {
+  // loading page.
+  if (isInitializing) {
+    return (
+      <div>loading...</div>
+    );
+  }
 
-	const client = new ApolloClient({
-		uri: isLocalhost ? "http://192.168.0.100:4000" : "http://119.246.37.218:4000",
-		request: (operation) => {
-			const token = localStorage.getItem("token");
-			operation.setContext({
-				headers: {
-					authorization: token ? `Bearer ${token}` : "",
-				},
-			});
-		},
-	});
+  // console log jwt tokens
+  if (isAuthenticated) {
 
-	const clickEl = useRef<HTMLDivElement>(null);
+    const client = new ApolloClient({
+      uri: 'http://3.12.129.211:8080/v1/graphql',
+      request: async (operation) => {
+        const token = await getIdTokenClaims();
 
-	useEffect(() => {
-		const anim = Lottie.loadAnimation({
-			container: clickEl.current as Element,
-			renderer: "svg",
-			loop: false,
-			autoplay: false,
-			path: "/animations/click.json",
-		});
+        console.log(process.env.REACT_APP_FILE_SERVER_ENDPOINT);
+        // console.log(token.__raw);
 
-		anim.addEventListener("data_ready", () => {
-			anim.goToAndStop(2, true);
-		});
+        operation.setContext({
+          headers: {
+            Authorization: `Bearer ${token.__raw}`,
+          },
+        });
+      },
+    });
 
-		document.addEventListener("click", (e) => {
-			anim.playSegments([0, 60], true);
-
-			if (clickEl.current) {
-				clickEl.current.style.left = `${e.clientX}px`;
-				clickEl.current.style.top = `${e.clientY}px`;
-			}
-		});
-
-		return () => {
-			anim.destroy();
-		};
-	}, []);
-
-	return (
-		<ApolloProvider client={client}>
-			<Provider>
-				<Container className="app">
-					<div ref={clickEl} style={{
-						position: "fixed",
-						width: 200,
-						height: 200,
-						transform: "translate(-50%, -50%)",
-						pointerEvents: "none",
-						zIndex: 1000,
-					}}/>
-		<Router>
-					<Routes />
-		</Router>
-				</Container>
-			</Provider>
-		</ApolloProvider>
-	);
-};
+    return (
+      <ApolloProvider client={client}>
+        <Router/>
+      </ApolloProvider>
+    )
+  } else {
+    return <Guest/>;
+  }
+}
 
 export default App;

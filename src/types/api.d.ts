@@ -846,6 +846,33 @@ export interface GetAudioDatasVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AudioDataDelete
+// ====================================================
+
+export interface AudioDataDelete_delete_audio_datas {
+  readonly __typename: "audio_datas_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface AudioDataDelete {
+  /**
+   * delete data from the table: "audio_datas"
+   */
+  readonly delete_audio_datas: AudioDataDelete_delete_audio_datas;
+}
+
+export interface AudioDataDeleteVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetWorkEdit
 // ====================================================
 
@@ -926,6 +953,33 @@ export interface GetImageDatas {
 }
 
 export interface GetImageDatasVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ImageDataDelete
+// ====================================================
+
+export interface ImageDataDelete_delete_image_datas {
+  readonly __typename: "image_datas_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface ImageDataDelete {
+  /**
+   * delete data from the table: "image_datas"
+   */
+  readonly delete_image_datas: ImageDataDelete_delete_image_datas;
+}
+
+export interface ImageDataDeleteVariables {
   readonly id: any;
 }
 

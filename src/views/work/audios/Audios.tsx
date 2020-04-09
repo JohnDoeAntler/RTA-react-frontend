@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-apollo';
-import { GET_AUDIO_DATAS } from './graphql';
-import { GetAudioDatas, GetAudioDatasVariables } from '../../../types/api';
+import { useQuery, useMutation } from 'react-apollo';
+import { GET_AUDIO_DATAS, AUDIO_DATA_DELETE } from './graphql';
+import { GetAudioDatas, GetAudioDatasVariables, AudioDataDelete, AudioDataDeleteVariables } from '../../../types/api';
 import axios from 'axios';
 
 interface IAudiosProps {
@@ -22,7 +22,10 @@ export const Audios: React.FC<IAudiosProps> = (props) => {
 		variables: {
 			id,
 		},
+		fetchPolicy: 'no-cache',
 	});
+
+	const [ audioDataDelete ] = useMutation<AudioDataDelete, AudioDataDeleteVariables>(AUDIO_DATA_DELETE);
 
 	return (
 		<div>
@@ -30,7 +33,22 @@ export const Audios: React.FC<IAudiosProps> = (props) => {
 
 			<pre>
 				{
-					JSON.stringify(data, null, 4)
+					data && data.audio_datas.map((audio) => (
+						// eslint-disable-next-line jsx-a11y/anchor-is-valid
+						<a href="#" onClick={() => {
+							audioDataDelete({
+								variables: {
+									id: audio.id,
+								}
+							})
+						}}>
+							<pre>
+								{
+									JSON.stringify(audio, null, 4)
+								}
+							</pre>
+						</a>
+					))
 				}
 			</pre>
 

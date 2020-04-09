@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-apollo';
-import { GET_IMAGE_DATAS } from './graphql';
-import { GetImageDatas, GetImageDatasVariables } from '../../../types/api';
+import { useQuery, useMutation } from 'react-apollo';
+import { GET_IMAGE_DATAS, IMAGE_DATA_DELETE } from './graphql';
+import { GetImageDatas, GetImageDatasVariables, ImageDataDelete, ImageDataDeleteVariables } from '../../../types/api';
 import axios from 'axios';
 
 interface IImagesProps {
@@ -21,8 +21,11 @@ export const Images: React.FC<IImagesProps> = (props) => {
 	const { data, loading } = useQuery<GetImageDatas, GetImageDatasVariables>(GET_IMAGE_DATAS, {
 		variables: {
 			id,
-		}
+		},
+		fetchPolicy: 'no-cache',
 	});
+
+	const [ imageDataDelete ] = useMutation<ImageDataDelete, ImageDataDeleteVariables>(IMAGE_DATA_DELETE);
 
 	return (
 		<div>
@@ -30,7 +33,22 @@ export const Images: React.FC<IImagesProps> = (props) => {
 
 			<pre>
 				{
-					JSON.stringify(data, null, 4)
+					data && data.image_datas.map((image) => (
+						// eslint-disable-next-line jsx-a11y/anchor-is-valid
+						<a href="#" onClick={() => {
+							imageDataDelete({
+								variables: {
+									id: image.id,
+								}
+							})
+						}}>
+							<pre>
+								{
+									JSON.stringify(image, null, 4)
+								}
+							</pre>
+						</a>
+					))
 				}
 			</pre>
 

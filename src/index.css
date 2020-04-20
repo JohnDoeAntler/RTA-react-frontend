@@ -7,6 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --text-color: #303030;
+}
+
+@font-face {
+  font-family: 'Jaapokki';
+  src: url('/fonts/jaapokkisubtract-regular.woff');
+}
+
+* {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: .9rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

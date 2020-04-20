@@ -5,6 +5,7 @@ import { useAuth0 } from "../../utils/react-auth0-spa";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Grid } from "@material-ui/core";
 import { UnderLineText } from "../UnderLineText/UnderLineText";
+import './Navbar.css';
 
 interface INavbarProps {}
 
@@ -13,9 +14,7 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 
 	return (
 		<AppBar elevation={0} color="transparent">
-			<Toolbar style={{
-				fontFamily: "Poppins",
-			}}>
+			<Toolbar className="navbar-link">
 				<Grid justify="space-between" container>
 					<Grid item>
 						<UnderLineText>

@@ -1,0 +1,11 @@
+.title-text {
+	font-family: "Jaapokki";
+	font-size: 8rem;
+	text-transform: uppercase;
+	line-height: 6rem;
+}
+
+.link-text {
+	font-family: "Poppins";
+	text-transform: uppercase;
+}

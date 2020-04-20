@@ -1,72 +1,85 @@
-import React from 'react';
-import { useAuth0 } from '../../utils/react-auth0-spa';
-import { gql } from 'apollo-boost';
-import { useQuery } from 'react-apollo';
-import { GetUser, GetUserVariables } from '../../types/api';
-import { Link } from 'react-router-dom';
+/** @format */
 
-interface IHomeProps {
-};
+import React from "react";
+import { Grid, Container } from "@material-ui/core";
+import { UnderLineText } from "../../components/UnderLineText/UnderLineText";
+import { Link } from "react-router-dom";
+import './Home.css';
+
+interface IHomeProps {}
 
 export const Home: React.FC<IHomeProps> = (props) => {
-
-	const {
-		id,
-	} = useAuth0();
-
-	const query = gql`
-		query GetUser (
-			$id: String!
-		) {
-			users_by_pk (
-				id: $id
-			) {
-				id
-				name
-				imageUrl
-				created_at
-				updated_at
-			}
-		}
-	`;
-
-	const { data, error, loading } = useQuery<GetUser, GetUserVariables>(query, {
-		variables: {
-			id,
-		}
-	});
-
-	console.log(id);
-
-	if (loading) {
-		return (
-			<div>
-				loading.
-			</div>
-		)
-	} else {
-		console.log(data)
-	}
-
 	return (
-		<div>
-			Hello, {data?.users_by_pk.name}
+		<Container>
+			<Grid
+				direction="column"
+				justify="center"
+				style={{
+					height: "100vh",
+				}}
+				spacing={2}
+				container
+			>
 
-			<div>
-				<Link to="/users">Users</Link>
-			</div>
+				<Grid item>
+					<span className="title-text">
+						Reminiscence
+					</span>
+				</Grid>
 
-			<div>
-				<Link to="/works">Works</Link>
-			</div>
+				<Grid item>
+					<span className="title-text">
+						Therapy
+					</span>
+				</Grid>
 
-			<div>
-				<Link to="/followings">Followings</Link>
-			</div>
+				<Grid item>
+					<span className="title-text">
+						App
+					</span>
+				</Grid>
 
-			<div>
-				<Link to="/favourites">Favourites</Link>
-			</div>
-		</div>
+				<Grid item>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, assumenda labore. Iste sunt illum ipsa quidem nesciunt at. Voluptates
+					quisquam laudantium sit soluta exercitationem delectus odio aspernatur repellendus est quae.
+				</Grid>
+
+				<Grid item>
+					<hr/>
+				</Grid>
+
+				<Grid item>
+					<Grid
+						className="link-text"
+						spacing={4}
+						container
+						>
+						<Grid item>
+							<UnderLineText>
+								<Link to="/users">users</Link>
+							</UnderLineText>
+						</Grid>
+
+						<Grid item>
+							<UnderLineText>
+								<Link to="/works">works</Link>
+							</UnderLineText>
+						</Grid>
+
+						<Grid item>
+							<UnderLineText>
+								<Link to="/followings">followings</Link>
+							</UnderLineText>
+						</Grid>
+
+						<Grid item>
+							<UnderLineText>
+								<Link to="/favourites">favourites</Link>
+							</UnderLineText>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 };

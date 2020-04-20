@@ -29,7 +29,6 @@ const App = () => {
       request: async (operation) => {
         const token = await getIdTokenClaims();
 
-        console.log(process.env.REACT_APP_FILE_SERVER_ENDPOINT);
         // console.log(token.__raw);
 
         operation.setContext({

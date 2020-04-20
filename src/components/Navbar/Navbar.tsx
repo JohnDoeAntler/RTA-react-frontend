@@ -1,30 +1,55 @@
-import React from 'react';
-import { useAuth0 } from '../../utils/react-auth0-spa';
-import { Link } from 'react-router-dom';
+/** @format */
 
-interface INavbarProps {
-}
+import React from "react";
+import { useAuth0 } from "../../utils/react-auth0-spa";
+import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Grid } from "@material-ui/core";
+import { UnderLineText } from "../UnderLineText/UnderLineText";
+
+interface INavbarProps {}
 
 export const Navbar: React.FC<INavbarProps> = (props) => {
-
-	const {
-		id,
-		logout
-	} = useAuth0();
+	const { id, logout } = useAuth0();
 
 	return (
-		<div>
-			Navbar works.
-
-			<Link to={`/`}>Home</Link>
-
-			<Link to={`/notifications`}>Notifications</Link>
-
-			<Link to={`/progresses`}>Progresses</Link>
-
-			<Link to={`/user/${id}`}>Profile</Link>
-
-			<button onClick={async () => await logout()}>Logout</button>
-		</div>
+		<AppBar elevation={0} color="transparent">
+			<Toolbar style={{
+				fontFamily: "Poppins",
+			}}>
+				<Grid justify="space-between" container>
+					<Grid item>
+						<UnderLineText>
+							<Link to={`/`}>HOME</Link>
+						</UnderLineText>
+					</Grid>
+					<Grid item>
+						<Grid container spacing={4}>
+							<Grid item>
+								<UnderLineText>
+									<Link to={`/notifications`}>NOTIFICATIONS</Link>
+								</UnderLineText>
+							</Grid>
+							<Grid item>
+								<UnderLineText>
+									<Link to={`/progresses`}>PROGRESSES</Link>
+								</UnderLineText>
+							</Grid>
+							<Grid item>
+								<UnderLineText>
+									<Link to={`/user/${id}`}>PROFILE</Link>
+								</UnderLineText>
+							</Grid>
+							<Grid item>
+								<UnderLineText>
+									<span onClick={async () => await logout()} style={{ cursor: "pointer" }}>
+										LOGOUT
+									</span>
+								</UnderLineText>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Toolbar>
+		</AppBar>
 	);
-}
+};

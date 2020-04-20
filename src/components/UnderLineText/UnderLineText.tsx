@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import gsap, { Expo } from "gsap";
+import './UnderLineText.css';
 
 export const UnderLineText: React.FC = (props) => {
 
@@ -29,18 +30,15 @@ export const UnderLineText: React.FC = (props) => {
 
 	return (
 		<div
+			className="underline-text-wrapper"
 			onMouseEnter={handleMouseOver}
 			onMouseLeave={handleMouseOut}
-			style={{
-				overflow: "hidden"
-			}}
 		>
 			{props.children}
 			<div
+				className="underline-text-line"
 				ref={line}
 				style={{
-					borderBottom: "2px solid var(--text-color)",
-					transform: "translateX(-105%)"
 				}}
 			></div>
 		</div>

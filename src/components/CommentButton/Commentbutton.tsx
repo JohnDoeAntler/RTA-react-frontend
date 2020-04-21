@@ -14,6 +14,8 @@ import { Comment, CommentVariables } from '../../types/api';
 
 interface ICommentButtonProps {
 	workId: string;
+
+	onCommented?: () => void;
 }
 
 export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
@@ -90,6 +92,7 @@ export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
 								...state,
 								open: false,
 							});
+							props.onCommented && props.onCommented();
 						})
 					}} color="primary" disabled={!state.content}>
 						Comment

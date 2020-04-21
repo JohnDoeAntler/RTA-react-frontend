@@ -1,7 +1,4 @@
-/** @format */
-
 import { gql } from "apollo-boost";
-//(where: { followers: { followerId: { _eq: "auth0|5e89a1ee6595110c10cdbbf7" } } })
 
 export const GET_FOLLOWINGS = gql`
 	query GetFollowings (

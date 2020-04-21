@@ -22,19 +22,19 @@ export const Home: React.FC<IHomeProps> = (props) => {
 			>
 
 				<Grid item>
-					<span className="title-text">
+					<span className="home-title-text">
 						Reminiscence
 					</span>
 				</Grid>
 
 				<Grid item>
-					<span className="title-text">
+					<span className="home-title-text">
 						Therapy
 					</span>
 				</Grid>
 
 				<Grid item>
-					<span className="title-text">
+					<span className="home-title-text">
 						App
 					</span>
 				</Grid>

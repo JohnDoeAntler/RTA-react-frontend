@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-apollo";
 import { GetWorks, GetWorksVariables } from "../../types/api";
-import { GET_WORKS } from "./graphql";
+import { GET_WORKS } from "../../graphql/works";
 import { Link } from "react-router-dom";
 import { Grid, Container, TextField, Tooltip } from "@material-ui/core";
 import "./Works.css";
@@ -37,7 +37,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 				<Grid item xs={6}>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
-							<span className="works-title-text">Search Works</span>
+							<span className="title-text">Search Works</span>
 						</Grid>
 
 						<Grid item>

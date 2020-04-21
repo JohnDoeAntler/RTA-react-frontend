@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
 import { GetUserEdit, GetUserEditVariables, UserEdit as Mutation, UserEditVariables as Variables } from '../../../types/api';
-import { GET_USER_EDIT, USER_EDIT } from './graphql';
+import { GET_USER_EDIT, USER_EDIT } from '../../../graphql/users';
 
 interface IUserEditProps {
 };

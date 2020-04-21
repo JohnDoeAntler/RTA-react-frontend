@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation } from "react-apollo";
-import { GET_WORK } from "./graphql";
+import { GET_WORK } from "../../../graphql/works";
 import {
 	GetWorkVariables,
 	GetWork,

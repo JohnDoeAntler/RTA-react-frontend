@@ -35,7 +35,7 @@ export const User: React.FC<IUserProps> = (props) => {
 	return (
 		<div>
 			{
-				currentUser.id === user.id ? <Link to={`/user/${user.id}/edit`}>Edit</Link> : <FollowButton followerId={currentUser.id} followingId={user.id} onClick={() => refetch()} />
+				currentUser.id === user.id ? <Link to={`/users/${user.id}/edit`}>Edit</Link> : <FollowButton followerId={currentUser.id} followingId={user.id} onClick={() => refetch()} />
 			}
 
 			<pre>

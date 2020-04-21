@@ -49,15 +49,15 @@ export const Work: React.FC<IWorkProps> = (props) => {
 				user.id === data?.works_by_pk.user.id && (
 					<>
 						<div>
-							<Link to={`/work/${params.id}/images`}>Images</Link>
+							<Link to={`/works/${params.id}/images`}>Images</Link>
 						</div>
 	
 						<div>
-							<Link to={`/work/${params.id}/audios`}>Audios</Link>
+							<Link to={`/works/${params.id}/audios`}>Audios</Link>
 						</div>
 	
 						<div>
-							<Link to={`/work/${params.id}/edit`}>Edit</Link>
+							<Link to={`/works/${params.id}/edit`}>Edit</Link>
 						</div>
 					</>
 				)

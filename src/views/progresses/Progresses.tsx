@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { GET_PROGRESSES } from './graphql';
+import { GET_PROGRESSES } from '../../graphql/progresses';
 import { GetProgresses, GetProgressesVariables } from '../../types/api';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '../../utils/react-auth0-spa';

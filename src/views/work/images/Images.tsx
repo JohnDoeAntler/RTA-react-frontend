@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
-import { GET_IMAGE_DATAS, IMAGE_DATA_DELETE } from './graphql';
+import { GET_IMAGE_DATAS, IMAGE_DATA_DELETE } from '../../../graphql/works';
 import { GetImageDatas, GetImageDatasVariables, ImageDataDelete, ImageDataDeleteVariables } from '../../../types/api';
 import axios from 'axios';
 

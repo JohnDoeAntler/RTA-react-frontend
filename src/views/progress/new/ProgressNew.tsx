@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from 'react-apollo';
-import { PROGRESS_NEW } from './graphql';
+import { PROGRESS_NEW } from '../../../graphql/progresses';
 import { ProgressNew as Mutation, ProgressNewVariables as Variables } from '../../../types/api';
 
 interface IProgressNewProps {

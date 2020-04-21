@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-apollo';
 import { GetFavourites, GetFavouritesVariables } from '../../types/api';
-import { GET_FAVOURITES } from './graphql';
+import { GET_FAVOURITES } from '../../graphql/favourites';
 import { useAuth0 } from '../../utils/react-auth0-spa';
 import { Link } from 'react-router-dom';
 

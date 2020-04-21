@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
-import { GET_AUDIO_DATAS, AUDIO_DATA_DELETE } from './graphql';
+import { GET_AUDIO_DATAS, AUDIO_DATA_DELETE } from '../../../graphql/works';
 import { GetAudioDatas, GetAudioDatasVariables, AudioDataDelete, AudioDataDeleteVariables } from '../../../types/api';
 import axios from 'axios';
 

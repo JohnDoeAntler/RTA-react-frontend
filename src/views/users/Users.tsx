@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-apollo';
-import { GET_USERS } from './graphql';
+import { GET_USERS } from '../../graphql/users';
 import { GetUsers, GetUsersVariables } from '../../types/api';
 import { Link } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-apollo';
-import { GET_FOLLOWINGS } from './graphql';
+import { GET_FOLLOWINGS } from '../../graphql/followings';
 import { GetFollowings, GetFollowingsVariables } from '../../types/api';
 import { useAuth0 } from '../../utils/react-auth0-spa';
 import { Link } from 'react-router-dom';

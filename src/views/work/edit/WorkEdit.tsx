@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { WORK_EDIT, GET_WORK_EDIT } from './graphql';
+import { WORK_EDIT, GET_WORK_EDIT } from '../../../graphql/works';
 import { useMutation, useQuery } from 'react-apollo';
 import { WorkEdit as Mutation, WorkEditVariables as Variables, GetWorkEdit, GetWorkEditVariables } from '../../../types/api';
 

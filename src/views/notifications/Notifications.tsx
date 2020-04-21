@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { GET_NOTIFICATIONS } from './graphql';
+import { GET_NOTIFICATIONS } from '../../graphql/notifications';
 import { GetNotifications, GetNotificationsVariables } from '../../types/api';
 import { useAuth0 } from '../../utils/react-auth0-spa';
 

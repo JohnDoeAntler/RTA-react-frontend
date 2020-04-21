@@ -15,5 +15,21 @@
 	color: white !important;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) scale(0.8, 0.8);
+	transform: translate(-50%, -50%);
+}
+
+.circle-button-icon > .circle-button-icon-lottie {
+	position: absolute;
+	color: white !important;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(.8, .8);
+}
+
+.circle-button-icon button svg {
+	position: absolute;
+	color: white !important;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(.8, .8);
 }

@@ -3,6 +3,7 @@ import "./CircleButton.css";
 import Lottie from "lottie-web";
 
 interface ICircleButtonProps {
+	type: "button" | "reset" | "submit";
 	backgroundColor: string;
 	onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void);
 	disabled?: boolean;
@@ -43,13 +44,14 @@ export const CircleButton: React.FC<ICircleButtonProps> = (props) => {
 		<span>
 			<button
 				ref={btn}
+				type={props.type}
 				className="circle-button"
 				style={{ backgroundColor: props.backgroundColor }}
 				onClick={props.onClick}
 				disabled={props.disabled}
 			>
 				<span className="circle-button-icon">
-					<div ref={fx} style={{
+					<div className="circle-button-icon-lottie" ref={fx} style={{
 						position: "absolute",
 						width: 120,
 						height: 120,

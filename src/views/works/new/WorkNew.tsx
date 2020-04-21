@@ -9,6 +9,7 @@ import { Form, Formik } from "formik";
 import { TextField, Checkbox, Container, Grid, FormControl, InputLabel, Select, MenuItem, IconButton } from "@material-ui/core";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
+import { Redirect } from "react-router-dom";
 
 interface IWorkNewProps {}
 
@@ -23,7 +24,19 @@ const schema = Yup.object().shape({
 });
 
 export const WorkNew: React.FC<IWorkNewProps> = (props) => {
+
+	const [state, setState] = useState({
+		id: '',
+		isRedirected: false,
+	});
+
 	const [createWork, { data, error, loading }] = useMutation<Mutation, Variables>(WORK_NEW);
+
+	if (state.isRedirected) {
+		return (
+			<Redirect to={`/works/${state.id}`}/>
+		)
+	}
 
 	return (
 		<Container>
@@ -55,16 +68,17 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 						}}
 						validationSchema={schema}
 						onSubmit={(props) => {
-							console.log("form submitted.");
-
 							createWork({
 								variables: {
 									...props,
 									visibility: props.visibility === "public",
 								},
 							})
-							.then(() => {
-								console.log("work created.");
+							.then((e) => {
+								setState({
+									isRedirected: true,
+									id: e.data?.insert_works.returning[0].id
+								})
 							})
 							.catch((e) => {
 								console.error(e);

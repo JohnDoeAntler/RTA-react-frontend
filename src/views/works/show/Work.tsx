@@ -14,6 +14,11 @@ import { FavouriteButton } from "../../../components/FavouriteButton/FavouriteBu
 import { CommentButton } from "../../../components/CommentButton/Commentbutton";
 import { ReportButton } from "../../../components/ReportButton/ReportButton";
 import { SynthesizeButton } from "../../../components/SynthesizeButton/SynthesizeButton";
+import { Grid, Container, IconButton } from "@material-ui/core";
+import './Work.css';
+import { CircleButton } from "../../../components/CircleButton/CircleButton";
+import { Photo, Audiotrack, Edit, ThumbUp, Star, Report, Comment as CommentIcon, CallMerge } from "@material-ui/icons";
+import { Info } from "../../../components/Info/Info";
 
 interface IWorkProps {}
 
@@ -27,53 +32,149 @@ export const Work: React.FC<IWorkProps> = (props) => {
 		id: string;
 	}>();
 
-	const { data, loading, refetch } = useQuery<GetWork, GetWorkVariables>(GET_WORK, {
+	const { data, refetch } = useQuery<GetWork, GetWorkVariables>(GET_WORK, {
 		variables: {
 			id: params.id,
 		},
 		fetchPolicy: 'no-cache',
 	});
 
-
-	if (loading) {
-		return (
-			<div>
-				Loading work...
-			</div>
-		)
-	}
-
 	return (
 		<div>
-			{
-				user.id === data?.works_by_pk.user.id && (
-					<>
-						<div>
-							<Link to={`/works/${params.id}/images`}>Images</Link>
-						</div>
-	
-						<div>
-							<Link to={`/works/${params.id}/audios`}>Audios</Link>
-						</div>
-	
-						<div>
-							<Link to={`/works/${params.id}/edit`}>Edit</Link>
-						</div>
-					</>
-				)
-			}
+			
+			<div className="work-image-wrapper">
+				<img 
+					className="work-image"
+					src={data?.works_by_pk.imageUrl || ''}
+					alt="work logo."
+				/>
+			</div>
 
-			<LikeButton userId={user.id} workId={params.id} onClick={() => refetch()} />
+			<div>
+				<Grid
+					container
+					direction="column"
+					justify="center"
+					style={{
+						height: '100vh',
+					}}
+				>
+					<Grid item>
+						<Container>
+							<div className="work-title-text">
+								{
+									data?.works_by_pk.name
+								}
+							</div>
 
-			<FavouriteButton userId={user.id} workId={params.id} onClick={() => refetch()} />
+							<hr/>
 
-			<CommentButton workId={params.id}/>
+							<p style={{
+								width: '50%',
+							}}>
+								{
+									data?.works_by_pk.description
+								}
+							</p>
 
-			{
-				(user.id !== data?.works_by_pk.user.id) && <ReportButton workId={params.id}/>
-			}
+							<div>
+								<Grid
+									container
+									spacing={1}
+								>
+									{
+										// owner only button
+										user.id === data?.works_by_pk.user.id && (
+											<>
+												<Grid item>
+													<CircleButton type="button" backgroundColor="black">
+														<Link to={`/works/${params.id}/images`}>
+															<IconButton>
+																<Photo/>
+															</IconButton>
+														</Link>
+													</CircleButton>
+												</Grid>
 
-			<SynthesizeButton workId={params.id}/>
+												<Grid item>
+													<CircleButton type="button" backgroundColor="black">
+														<Link to={`/works/${params.id}/audios`}>
+															<IconButton>
+																<Audiotrack/>
+															</IconButton>
+														</Link>
+													</CircleButton>
+												</Grid>
+
+												<Grid item>
+													<CircleButton type="button" backgroundColor="black">
+														<Link to={`/works/${params.id}/edit`}>
+															<IconButton>
+																<Edit/>
+															</IconButton>
+														</Link>
+													</CircleButton>
+												</Grid>
+											</>
+										)
+									}
+
+									<Grid item>
+										<LikeButton userId={user.id} workId={params.id} onLiked={() => refetch()} />
+									</Grid>
+
+									<Grid item>
+										<FavouriteButton userId={user.id} workId={params.id} onFavourited={() => refetch()} />
+									</Grid>
+
+									<Grid item>
+										<CommentButton workId={params.id} onCommented={() => refetch()}/>
+									</Grid>
+
+									{
+										(user.id !== data?.works_by_pk.user.id) && (
+											<Grid item>
+												<ReportButton workId={params.id}/>
+											</Grid>
+										) 
+									}
+
+									<Grid item>
+										<SynthesizeButton workId={params.id}/>
+									</Grid>
+								</Grid>
+							</div>
+
+							<p className="title-text">
+								- Likes: {data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString()}
+							</p>
+
+							<p className="title-text">
+								- Favourites: {data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString()}
+							</p>
+
+						</Container>
+					</Grid>
+				</Grid>
+			</div>
+
+			<Grid
+				container
+				justify="space-evenly"
+				spacing={4}
+			>
+				<Grid item>
+					<Info largerText={data?.works_by_pk.views.toLocaleString() || ''} smallerText="Views"/>
+				</Grid>
+
+				<Grid item>
+					<Info largerText="/" smallerText=""/>
+				</Grid>
+
+				<Grid item>
+					<Info largerText={data?.works_by_pk.usage.toLocaleString() || ''} smallerText="Usage"/>
+				</Grid>
+			</Grid>
 
 			<pre>
 				{

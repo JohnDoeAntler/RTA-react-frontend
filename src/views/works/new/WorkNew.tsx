@@ -10,18 +10,9 @@ import { TextField, Checkbox, Container, Grid, FormControl, InputLabel, Select, 
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
+import { schema } from '../../../yup/works';
 
 interface IWorkNewProps {}
-
-const schema = Yup.object().shape({
-	name: Yup.string().required().min(2),
-
-	description: Yup.string().required().min(2),
-
-	imageUrl: Yup.string().required().url(),
-
-	visibility: Yup.string().oneOf(["public", "private"]),
-});
 
 export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 

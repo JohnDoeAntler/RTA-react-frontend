@@ -1,3 +1,7 @@
+.work-item {
+	position: relative;
+}
+
 .work-item-img-wrapper {
 	background-color: black;
 	line-height: 0;
@@ -6,7 +10,7 @@
 
 .work-item-img {
 	width: 100%;
-	height: 15rem;
+	height: 50vh;
 	object-fit: cover;
 	opacity: 0.90;
 }
@@ -14,4 +18,12 @@
 .work-item-title {
 	text-transform: uppercase;
 	font-size: 1.2rem;
+}
+
+.work-item-desc {
+	width: 100%;
+	height: 3.5rem;
+	overflow:hidden; 
+	word-wrap: break-word;
+	text-overflow: ellipsis;
 }

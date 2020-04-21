@@ -5,17 +5,18 @@ import { useQuery } from "react-apollo";
 import { GetWorks, GetWorksVariables } from "../../../types/api";
 import { GET_WORKS } from "../../../graphql/works";
 import { Link } from "react-router-dom";
-import { Grid, Container, TextField, Tooltip } from "@material-ui/core";
+import { Grid, Container, TextField, Tooltip, IconButton } from "@material-ui/core";
 import "./Works.css";
 import { WorkItem } from "../../../components/WorkItem/WorkItem";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
-import { Add } from "@material-ui/icons";
+import { Add, ArrowForwardIos, ArrowBackIos, ArrowLeft, ArrowRight } from "@material-ui/icons";
 
 interface IWorksProps {}
 
 export const Works: React.FC<IWorksProps> = (props) => {
 	const [state, setState] = useState({
 		filter: "",
+		index: 0,
 	});
 
 	const { data, loading } = useQuery<GetWorks, GetWorksVariables>(GET_WORKS, {
@@ -30,7 +31,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 			<Grid
 				container
 				alignItems="center"
-				spacing={8}
+				spacing={4}
 				style={{
 					height: "100vh",
 				}}>
@@ -68,8 +69,10 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						<Grid item>
 							<Link to="/work/new">
 								<Tooltip title="Add work.">
-									<CircleButton backgroundColor="black">
-										<Add />
+									<CircleButton type="button" backgroundColor="black">
+										<IconButton>
+											<Add />
+										</IconButton>
 									</CircleButton>
 								</Tooltip>
 							</Link>
@@ -80,16 +83,56 @@ export const Works: React.FC<IWorksProps> = (props) => {
 				<Grid
 					item
 					xs={6}
-					style={{
-						borderLeft: "1px solid rgba(0, 0, 0, .1)",
-					}}>
+				>
 					<Grid container direction="column" spacing={2}>
-						{data &&
-							data.works.map((work) => (
-								<Grid item>
-									<WorkItem key={work.id} {...work} to={`/work/${work.id}`}></WorkItem>
-								</Grid>
-							))}
+						<Grid item>
+							{ !data && loading && <div>loading</div>}
+							{
+								data && (
+									<div>
+										<WorkItem
+											key={data.works[state.index % data.works.length].id}
+											{...data.works[state.index % data.works.length]}
+											to={`/work/${data.works[state.index % data.works.length].id}`}
+										/>
+
+										<Grid spacing={1} container alignItems="center">
+											<Grid item>
+												<CircleButton type="button" backgroundColor="black" onClick={() => {
+													setState({
+														...state,
+														index: state.index + 1,
+													});
+												}}>
+													<IconButton>
+														<ArrowLeft/>
+													</IconButton>
+												</CircleButton>
+											</Grid>
+											<Grid item>
+												{
+													(state.index % data.works.length) + 1
+												}/{
+													data.works.length
+												}
+											</Grid>
+											<Grid item>
+												<CircleButton type="button" backgroundColor="black" onClick={() => {
+													setState({
+														...state,
+														index: state.index + 1,
+													})
+												}}>
+													<IconButton>
+														<ArrowRight/>
+													</IconButton>
+												</CircleButton>
+											</Grid>
+										</Grid>
+									</div>
+								)
+							}
+						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>

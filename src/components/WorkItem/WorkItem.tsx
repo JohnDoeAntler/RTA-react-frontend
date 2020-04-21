@@ -14,28 +14,33 @@ interface IWorkItemProps {
 
 export const WorkItem: React.FC<IWorkItemProps> = (props) => {
 	return (
-		<Link to={props.to}>
-			<div className="work-item-img-wrapper">
-				<img
-					className="work-item-img"
-					src={props.imageUrl}
-				/>
-			</div>
-
-			<div style={{
-				overflow: 'hidden',
-			}}>
-				<span className="work-item-title">
-					{
-						props.name
-					}
-				</span>
-				<div>
-					{
-						props.description
-					}
+		<div className="work-item">
+			<Link to={props.to}>
+				<div className="work-item-img-wrapper">
+					<img
+						className="work-item-img"
+						src={props.imageUrl}
+					/>
 				</div>
-			</div>
-		</Link>
+	
+				<div style={{
+					overflow: 'hidden',
+				}}>
+					<div className="work-item-title">
+						{
+							props.name
+						}
+					</div>
+
+					<hr/>
+
+					<div className="work-item-desc">
+						{
+							props.description
+						}
+					</div>
+				</div>
+			</Link>
+		</div>
 	)
 }

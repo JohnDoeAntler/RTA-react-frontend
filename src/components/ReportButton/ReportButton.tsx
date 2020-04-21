@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
-import { ReportVariables, Report } from '../../types/api';
-import { REPORT } from './graphql';
-import { useMutation } from 'react-apollo';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
+/** @format */
+
+import React, { useState } from "react";
+import { ReportVariables, Report } from "../../types/api";
+import { REPORT } from "./graphql";
+import { useMutation } from "react-apollo";
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, IconButton } from "@material-ui/core";
+import { CircleButton } from "../CircleButton/CircleButton";
+import { Report as ReportIcon } from '@material-ui/icons';
 
 interface IReportButtonProps {
 	workId: string;
 }
 
 export const ReportButton: React.FC<IReportButtonProps> = (props) => {
-
 	const [state, setState] = useState({
 		open: false,
 		reason: "",
 	});
 
-	const [ report ] = useMutation<Report, ReportVariables>(REPORT);
+	const [report] = useMutation<Report, ReportVariables>(REPORT);
 
 	return (
 		<div>
-			<Button
-				variant="outlined"
-				color="primary"
-				onClick={() =>
+			<CircleButton
+				type="button"
+				backgroundColor="black"
+				onClick={() => {
 					setState({
 						...state,
 						open: true,
-					})
-				}>
-				Report
-			</Button>
+					})}}>
+				<IconButton>
+					<ReportIcon />
+				</IconButton>
+			</CircleButton>
 
 			<Dialog
 				open={state.open}
@@ -52,8 +56,8 @@ export const ReportButton: React.FC<IReportButtonProps> = (props) => {
 						onChange={(e) => {
 							setState({
 								...state,
-								reason: e.currentTarget.value
-							})
+								reason: e.currentTarget.value,
+							});
 						}}
 						fullWidth
 						autoFocus
@@ -70,23 +74,26 @@ export const ReportButton: React.FC<IReportButtonProps> = (props) => {
 						color="primary">
 						Cancel
 					</Button>
-					<Button onClick={() => {
-						report({
-							variables: {
-								workId: props.workId,
-								reason: state.reason,
-							}
-						}).then(() => {
-							setState({
-								...state,
-								open: false,
+					<Button
+						onClick={() => {
+							report({
+								variables: {
+									workId: props.workId,
+									reason: state.reason,
+								},
+							}).then(() => {
+								setState({
+									...state,
+									open: false,
+								});
 							});
-						})
-					}} color="primary" disabled={!state.reason}>
+						}}
+						color="primary"
+						disabled={!state.reason}>
 						Report
 					</Button>
 				</DialogActions>
 			</Dialog>
 		</div>
 	);
-}
+};

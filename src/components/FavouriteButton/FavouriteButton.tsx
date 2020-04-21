@@ -4,19 +4,19 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "react-apollo";
 import { GetIsFavourited, GetIsFavouritedVariables, FavouriteVariables, Unfavourite, UnfavouriteVariables, Favourite } from "../../types/api";
 import { GET_IS_FAVOURITED, FAVOURITE, UNFAVOURITE } from "./graphql";
+import { CircleButton } from "../CircleButton/CircleButton";
+import { IconButton } from "@material-ui/core";
+import { Star } from "@material-ui/icons";
 
 interface IFavouriteButtonProps {
-
 	userId: string;
 
 	workId: string;
 
 	onFavourited?: () => void;
-
 }
 
 export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
-
 	const [state, setState] = useState({
 		isFavourited: false,
 		isFavouriting: false,
@@ -39,7 +39,9 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
 	const [unfavourite] = useMutation<Unfavourite, UnfavouriteVariables>(UNFAVOURITE);
 
 	return (
-		<button
+		<CircleButton
+			type="button"
+			backgroundColor={state.isFavourited ? "#dd0000" : "black"}
 			onClick={async () => {
 				setState({
 					...state,
@@ -49,7 +51,7 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
 					await unfavourite({
 						variables: {
 							userId: props.userId,
-							workId: props.workId
+							workId: props.workId,
 						},
 					});
 				} else {
@@ -66,8 +68,11 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
 				});
 				props.onFavourited && props.onFavourited();
 			}}
-			disabled={state.isFavouriting || loading}>
-			{state.isFavouriting ? "favouriting" : state.isFavourited ? "unfavourite" : "favourite"}
-		</button>
+			disabled={state.isFavouriting || loading}
+		>
+			<IconButton>
+				<Star />
+			</IconButton>
+		</CircleButton>
 	);
 };

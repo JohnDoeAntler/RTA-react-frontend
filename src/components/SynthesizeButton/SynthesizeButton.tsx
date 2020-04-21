@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import { useAuth0 } from "../../utils/react-auth0-spa";
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from "@material-ui/core";
-import axios from 'axios';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, IconButton } from "@material-ui/core";
+import axios from "axios";
+import { CircleButton } from "../CircleButton/CircleButton";
+import { CallMerge } from "@material-ui/icons";
 
 interface ISynthesizeButtonProps {
 	workId: string;
 }
 
 export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
-
 	const { id } = useAuth0();
 
 	const [state, setState] = useState<{
@@ -23,17 +24,19 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 
 	return (
 		<div>
-			<Button
-				variant="outlined"
-				color="primary"
+			<CircleButton
+				type="button"
+				backgroundColor="black"
 				onClick={() =>
 					setState({
 						...state,
 						open: true,
 					})
 				}>
-					Synthesize
-			</Button>
+				<IconButton>
+					<CallMerge />
+				</IconButton>
+			</CircleButton>
 
 			<Dialog
 				open={state.open}
@@ -55,21 +58,19 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 						id="raised-button-file"
 						accept="video/mp4"
 						style={{
-							display: 'none',
+							display: "none",
 						}}
 						onChange={(e) => {
 							setState({
 								...state,
 								file: e.target.files && e.target.files[0],
-							})
+							});
 						}}
 					/>
 
 					<label htmlFor="raised-button-file">
 						<Button component="span" fullWidth>
-							{
-								!!state.file ? state.file.name : "Upload"
-							}
+							{!!state.file ? state.file.name : "Upload"}
 						</Button>
 					</label>
 				</DialogContent>
@@ -81,8 +82,7 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 								...state,
 								open: false,
 							});
-						}}
-					>
+						}}>
 						Cancel
 					</Button>
 					<Button
@@ -92,23 +92,22 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 							if (state.file) {
 								const endpoint = `${process.env.REACT_APP_FILE_SERVER_ENDPOINT}/progress`;
 								const formData = new FormData();
-								formData.append('workId', props.workId || "");
-								formData.append('userId', id);
-								formData.append('file', state.file);
+								formData.append("workId", props.workId || "");
+								formData.append("userId", id);
+								formData.append("file", state.file);
 								const config = {
 									headers: {
-										'content-type': 'multipart/form-data',
+										"content-type": "multipart/form-data",
 									},
 								};
-								axios.post(endpoint, formData, config).then(x => {
+								axios.post(endpoint, formData, config).then((x) => {
 									setState({
 										...state,
 										open: false,
 									});
 								});
 							}
-						}}
-					>
+						}}>
 						Synthesize
 					</Button>
 				</DialogActions>

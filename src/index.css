@@ -7,10 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  --text-color: #303030;
-}
-
 @font-face {
   font-family: 'Jaapokki';
   src: url('/fonts/jaapokkisubtract-regular.woff');
@@ -18,8 +14,16 @@ body {
 
 * {
   text-decoration: none;
-  color: var(--text-color);
   font-size: .9rem;
+}
+
+a {
+  color: black;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
 code {

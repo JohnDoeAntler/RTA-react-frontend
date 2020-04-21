@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { GET_PROGRESSES } from '../../graphql/progresses';
-import { GetProgresses, GetProgressesVariables } from '../../types/api';
+import { GET_PROGRESSES } from '../../../graphql/progresses';
+import { GetProgresses, GetProgressesVariables } from '../../../types/api';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '../../utils/react-auth0-spa';
+import { useAuth0 } from '../../../utils/react-auth0-spa';
 
 interface IProgressesProps {
 };
@@ -22,7 +22,6 @@ export const Progresses: React.FC<IProgressesProps> = (props) => {
 	return (
 		<div>
 			Progresses works.
-
 			{
 				data && data.progresses.map((progress) => {
 					return (

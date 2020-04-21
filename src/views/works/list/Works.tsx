@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { useQuery } from "react-apollo";
-import { GetWorks, GetWorksVariables } from "../../types/api";
-import { GET_WORKS } from "../../graphql/works";
+import { GetWorks, GetWorksVariables } from "../../../types/api";
+import { GET_WORKS } from "../../../graphql/works";
 import { Link } from "react-router-dom";
 import { Grid, Container, TextField, Tooltip } from "@material-ui/core";
 import "./Works.css";
-import { WorkItem } from "../../components/WorkItem/WorkItem";
-import { CircleButton } from "../../components/CircleButton/CircleButton";
+import { WorkItem } from "../../../components/WorkItem/WorkItem";
+import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Add } from "@material-ui/icons";
 
 interface IWorksProps {}

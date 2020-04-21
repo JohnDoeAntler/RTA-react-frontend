@@ -1,20 +1,20 @@
 import React from 'react';
 import { Route, Switch, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Home } from '../views/home/Home';
-import { Users } from '../views/users/Users';
-import { User } from '../views/user/show/User';
-import { UserEdit } from '../views/user/edit/UserEdit';
-import { Works } from '../views/works/Works';
-import { WorkNew } from '../views/work/new/WorkNew';
-import { WorkEdit } from '../views/work/edit/WorkEdit';
-import { Images } from '../views/work/images/Images';
-import { Audios } from '../views/work/audios/Audios';
-import { Work } from '../views/work/show/Work';
+import { Users } from '../views/users/list/Users';
+import { User } from '../views/users/show/User';
+import { UserEdit } from '../views/users/edit/UserEdit';
+import { Works } from '../views/works/list/Works';
+import { WorkNew } from '../views/works/new/WorkNew';
+import { WorkEdit } from '../views/works/edit/WorkEdit';
+import { Images } from '../views/works/images/Images';
+import { Audios } from '../views/works/audios/Audios';
+import { Work } from '../views/works/show/Work';
 import { Favourites } from '../views/favourites/Favourites';
 import { Followings } from '../views/followings/Followings';
 import { Notifications } from '../views/notifications/Notifications';
-import { Progresses } from '../views/progresses/Progresses';
-import { ProgressNew } from '../views/progress/new/ProgressNew';
+import { Progresses } from '../views/progresses/list/Progresses';
+import { ProgressNew } from '../views/progresses/new/ProgressNew';
 
 export const Routes = withRouter((props) => {
 	return (

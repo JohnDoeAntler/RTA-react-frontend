@@ -11,7 +11,7 @@ interface IFavouriteButtonProps {
 
 	workId: string;
 
-	onClick?: () => void;
+	onFavourited?: () => void;
 
 }
 
@@ -64,7 +64,7 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
 					isFavourited: !state.isFavourited,
 					isFavouriting: false,
 				});
-				props.onClick && props.onClick();
+				props.onFavourited && props.onFavourited();
 			}}
 			disabled={state.isFavouriting || loading}>
 			{state.isFavouriting ? "favouriting" : state.isFavourited ? "unfavourite" : "favourite"}

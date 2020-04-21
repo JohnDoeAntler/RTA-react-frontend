@@ -28,6 +28,10 @@ a {
 	line-height: 2rem;
 }
 
+.warning-text {
+	color: rgba(255, 0, 0, .8);
+}
+
 hr {
 	border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, .1);

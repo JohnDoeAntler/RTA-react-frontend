@@ -4,19 +4,19 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { GetIsLiked, GetIsLikedVariables, Like, LikeVariables, UnlikeVariables, Unlike } from "../../types/api";
 import { GET_IS_LIKED, LIKE, UNLIKE } from "./graphql";
+import { IconButton } from "@material-ui/core";
+import { ThumbUp } from "@material-ui/icons";
+import { CircleButton } from "../CircleButton/CircleButton";
 
 interface ILikeButtonProps {
-
 	userId: string;
 
 	workId: string;
 
 	onLiked?: () => void;
-
 }
 
 export const LikeButton: React.FC<ILikeButtonProps> = (props) => {
-
 	const [state, setState] = useState({
 		isLiked: false,
 		isLiking: false,
@@ -39,7 +39,9 @@ export const LikeButton: React.FC<ILikeButtonProps> = (props) => {
 	const [unlike] = useMutation<Unlike, UnlikeVariables>(UNLIKE);
 
 	return (
-		<button
+		<CircleButton
+			type="button"
+			backgroundColor={state.isLiked ? "#dddd00" : "black"}
 			onClick={async () => {
 				setState({
 					...state,
@@ -66,8 +68,11 @@ export const LikeButton: React.FC<ILikeButtonProps> = (props) => {
 				});
 				props.onLiked && props.onLiked();
 			}}
-			disabled={state.isLiking || loading}>
-			{state.isLiking ? "Liking" : state.isLiked ? "unlike" : "like"}
-		</button>
+			disabled={state.isLiking || loading}
+		>
+			<IconButton>
+				<ThumbUp />
+			</IconButton>
+		</CircleButton>
 	);
 };

@@ -10,7 +10,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useMutation } from "react-apollo";
 import { COMMENT } from "./graphql";
-import { Comment, CommentVariables } from '../../types/api';
+import { Comment, CommentVariables } from "../../types/api";
+import { CircleButton } from "../CircleButton/CircleButton";
+import { IconButton } from "@material-ui/core";
+import { Comment as CommentIcon } from '@material-ui/icons';
 
 interface ICommentButtonProps {
 	workId: string;
@@ -19,28 +22,28 @@ interface ICommentButtonProps {
 }
 
 export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
-
 	const [state, setState] = useState({
 		open: false,
 		content: "",
 	});
 
-	const [ comment ] = useMutation<Comment, CommentVariables>(COMMENT);
+	const [comment] = useMutation<Comment, CommentVariables>(COMMENT);
 
 	return (
 		<div>
-			<Button
-				variant="outlined"
-				color="primary"
+			<CircleButton
+				type="button"
+				backgroundColor="black"
 				onClick={() =>
 					setState({
 						...state,
 						open: true,
 					})
-				}
-			>
-				Comment
-			</Button>
+				}>
+				<IconButton>
+					<CommentIcon />
+				</IconButton>
+			</CircleButton>
 
 			<Dialog
 				open={state.open}
@@ -63,8 +66,8 @@ export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
 						onChange={(e) => {
 							setState({
 								...state,
-								content: e.currentTarget.value
-							})
+								content: e.currentTarget.value,
+							});
 						}}
 						fullWidth
 						autoFocus
@@ -81,20 +84,23 @@ export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
 						color="primary">
 						Cancel
 					</Button>
-					<Button onClick={() => {
-						comment({
-							variables: {
-								workId: props.workId,
-								content: state.content,
-							}
-						}).then(() => {
-							setState({
-								...state,
-								open: false,
+					<Button
+						onClick={() => {
+							comment({
+								variables: {
+									workId: props.workId,
+									content: state.content,
+								},
+							}).then(() => {
+								setState({
+									...state,
+									open: false,
+								});
+								props.onCommented && props.onCommented();
 							});
-							props.onCommented && props.onCommented();
-						})
-					}} color="primary" disabled={!state.content}>
+						}}
+						color="primary"
+						disabled={!state.content}>
 						Comment
 					</Button>
 				</DialogActions>

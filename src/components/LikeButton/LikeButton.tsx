@@ -11,7 +11,7 @@ interface ILikeButtonProps {
 
 	workId: string;
 
-	onClick?: () => void;
+	onLiked?: () => void;
 
 }
 
@@ -64,7 +64,7 @@ export const LikeButton: React.FC<ILikeButtonProps> = (props) => {
 					isLiked: !state.isLiked,
 					isLiking: false,
 				});
-				props.onClick && props.onClick();
+				props.onLiked && props.onLiked();
 			}}
 			disabled={state.isLiking || loading}>
 			{state.isLiking ? "Liking" : state.isLiked ? "unlike" : "like"}

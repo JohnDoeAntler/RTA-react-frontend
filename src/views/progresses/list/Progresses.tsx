@@ -25,7 +25,7 @@ export const Progresses: React.FC<IProgressesProps> = (props) => {
 			{
 				data && data.progresses.map((progress) => {
 					return (
-						<Link to={`/work/${progress.work.id}`}>
+						<Link to={`/works/${progress.work.id}`}>
 							<pre>
 								{
 									JSON.stringify(progress, null, 4)

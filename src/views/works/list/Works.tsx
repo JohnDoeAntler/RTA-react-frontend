@@ -67,7 +67,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<Link to="/work/new">
+							<Link to="/works/new">
 								<Tooltip title="Add work.">
 									<CircleButton type="button" backgroundColor="black">
 										<IconButton>
@@ -93,7 +93,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 										<WorkItem
 											key={data.works[state.index % data.works.length].id}
 											{...data.works[state.index % data.works.length]}
-											to={`/work/${data.works[state.index % data.works.length].id}`}
+											to={`/works/${data.works[state.index % data.works.length].id}`}
 										/>
 
 										<Grid spacing={1} container alignItems="center">
@@ -139,19 +139,3 @@ export const Works: React.FC<IWorksProps> = (props) => {
 		</Container>
 	);
 };
-/**
- * 
-		<div>
-			<Link to="/work/new">
-				New
-			</Link>
-
-			<input type="text" onChange={(e) => {
-				setState({
-					...state,
-					filter: e.currentTarget.value,
-				})
-			}}/>
-
-		</div>
- */

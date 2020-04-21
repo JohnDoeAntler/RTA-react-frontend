@@ -38,7 +38,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 			{
 				data && data.favourites.map((favourite) => {
 					return (
-						<Link to={`/work/${favourite.work.id}`}>
+						<Link to={`/works/${favourite.work.id}`}>
 							<pre>
 								{
 									JSON.stringify(favourite, null, 4)

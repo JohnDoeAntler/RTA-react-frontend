@@ -35,7 +35,7 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 							</Grid>
 							<Grid item>
 								<UnderLineText>
-									<Link to={`/user/${id}`}>PROFILE</Link>
+									<Link to={`/users/${id}`}>PROFILE</Link>
 								</UnderLineText>
 							</Grid>
 							<Grid item>

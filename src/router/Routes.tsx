@@ -22,16 +22,16 @@ export const Routes = withRouter((props) => {
 			<Route path="/" component={Home} exact />
 
 			<Route path="/users" component={Users} exact />
-			<Route path="/user/:id/edit/" component={UserEdit} exact />
-			<Route path="/user/:id" component={User} exact />
+			<Route path="/users/:id/edit/" component={UserEdit} exact />
+			<Route path="/users/:id" component={User} exact />
 
 			<Route path="/works" component={Works} exact />
-			<Route path="/work/new" component={WorkNew} exact />
-			<Route path="/work/:id/edit" component={WorkEdit} exact />
-			<Route path="/work/:id/images" component={Images} exact />
-			<Route path="/work/:id/audios" component={Audios} exact />
-			<Route path="/work/:id" component={Work} exact />
-			<Route path="/work/:id/progress/new" component={ProgressNew} exact />
+			<Route path="/works/new" component={WorkNew} exact />
+			<Route path="/works/:id/edit" component={WorkEdit} exact />
+			<Route path="/works/:id/images" component={Images} exact />
+			<Route path="/works/:id/audios" component={Audios} exact />
+			<Route path="/works/:id/progress/new" component={ProgressNew} exact />
+			<Route path="/works/:id" component={Work} exact />
 
 			<Route path="/favourites" component={Favourites} exact />
 			<Route path="/followings" component={Followings} exact />

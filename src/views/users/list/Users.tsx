@@ -34,7 +34,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 			{
 				data && data.users.map((user) => {
 					return (
-						<Link to={`/user/${user.id}`}>
+						<Link to={`/users/${user.id}`}>
 							<pre>
 								{
 									JSON.stringify(user, null, 4)

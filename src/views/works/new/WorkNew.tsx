@@ -6,7 +6,7 @@ import { WORK_NEW } from "../../../graphql/works";
 import { WorkNew as Mutation, WorkNewVariables as Variables } from "../../../types/api";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
-import { TextField, Checkbox, Container, Grid, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { TextField, Checkbox, Container, Grid, FormControl, InputLabel, Select, MenuItem, IconButton } from "@material-ui/core";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
 
@@ -40,6 +40,8 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 						Create Work
 					</div>
 
+					<hr/>
+
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem repudiandae quis eveniet corporis? Neque, doloribus. Dicta dolorum doloribus odit asperiores, provident doloremque, necessitatibus quod animi iusto aspernatur inventore quam quasi.
 					</p>
@@ -49,21 +51,24 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 							name: "",
 							description: "",
 							imageUrl: "",
-							visibility: false,
+							visibility: "private",
 						}}
 						validationSchema={schema}
 						onSubmit={(props) => {
+							console.log("form submitted.");
+
 							createWork({
 								variables: {
 									...props,
+									visibility: props.visibility === "public",
 								},
 							})
-								.then(() => {
-									console.log("work created.");
-								})
-								.catch((e) => {
-									console.error(e);
-								});
+							.then(() => {
+								console.log("work created.");
+							})
+							.catch((e) => {
+								console.error(e);
+							});
 						}}>
 						{(props) => (
 							<Form>
@@ -78,10 +83,19 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 									autoFocus
 								/>
 
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae nesciunt dolores consequatur totam nam
-									accusamus a ipsum, pariatur eveniet quis velit tempore quas quo rerum dignissimos dolorem amet ab?
-								</p>
+								{
+									(props.touched.name && props.errors.name) ? (
+										<p className="warning-text">
+											{
+												props.errors.name
+											}
+										</p>
+									) : (
+										<p>
+											Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										</p>
+									)
+								}
 
 								<TextField
 									fullWidth
@@ -91,13 +105,21 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 									onChange={props.handleChange}
 									onBlur={props.handleBlur}
 									defaultValue={props.initialValues.description}
-									autoFocus
 								/>
 
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eum eius, dignissimos nostrum numquam totam maxime sequi!
-									Debitis a fugiat error neque soluta? Quo illum fugiat dolorem itaque molestias provident!
-								</p>
+								{
+									(props.touched.description && props.errors.description) ? (
+										<p className="warning-text">
+											{
+												props.errors.description
+											}
+										</p>
+									) : (
+										<p>
+											Culpa ullamco nulla nisi culpa cillum in dolor et.
+										</p>
+									)
+								}
 
 								<TextField
 									fullWidth
@@ -107,13 +129,21 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 									onChange={props.handleChange}
 									onBlur={props.handleBlur}
 									defaultValue={props.initialValues.imageUrl}
-									autoFocus
 								/>
 
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa error in, sit illum, sunt, dolorem maiores amet sequi ullam
-									deserunt quod facere voluptate ad ducimus eius repudiandae corrupti blanditiis reiciendis.
-								</p>
+								{
+									(props.touched.imageUrl && props.errors.imageUrl) ? (
+										<p className="warning-text">
+											{
+												props.errors.imageUrl
+											}
+										</p>
+									) : (
+										<p>
+											Nulla in mollit ullamco proident sunt nisi est minim nostrud.
+										</p>
+									)
+								}
 
 								<FormControl variant="filled" fullWidth>
 									<InputLabel id="demo-simple-select-filled-label">Visibility</InputLabel>
@@ -121,27 +151,43 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 										name="visibility"
 										labelId="demo-simple-select-filled-label"
 										id="demo-simple-select-filled"
-										onChange={props.handleChange}>
+										onChange={props.handleChange}
+										onBlur={props.handleBlur}
+										defaultValue={props.initialValues.visibility}
+									>
 										<MenuItem value="public">Public</MenuItem>
 										<MenuItem value="private">Private</MenuItem>
 									</Select>
 								</FormControl>
 
-								<p>
-									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, iste deserunt voluptatibus velit atque ex odio ipsam
-									temporibus eaque cum, ab inventore necessitatibus facilis, minima provident deleniti eligendi pariatur reprehenderit?
-								</p>
+								{
+									(props.touched.visibility && props.errors.visibility) ? (
+										<p className="warning-text">
+											{
+												props.errors.visibility
+											}
+										</p>
+									) : (
+										<p>
+											Cupidatat aliquip aute fugiat tempor ex culpa occaecat eiusmod consequat sunt veniam.
+										</p>
+									)
+								}
 
 								<Grid spacing={1} container>
 									<Grid item>
-										<CircleButton backgroundColor="black" onClick={() => props.submitForm()}>
-											<Done />
+										<CircleButton type="submit" backgroundColor="black">
+											<IconButton>
+												<Done />
+											</IconButton>
 										</CircleButton>
 									</Grid>
 
 									<Grid item>
-										<CircleButton backgroundColor="black" onClick={() => props.submitForm()}>
-											<Replay />
+										<CircleButton type="reset" backgroundColor="black">
+											<IconButton>
+												<Replay />
+											</IconButton>
 										</CircleButton>
 									</Grid>
 								</Grid>

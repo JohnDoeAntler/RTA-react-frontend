@@ -23,7 +23,7 @@
 	color: white !important;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) scale(.8, .8);
+	transform: translate(-50%, -50%) scale(.75, .75);
 }
 
 .circle-button-icon button svg {

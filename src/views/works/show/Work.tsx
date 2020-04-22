@@ -148,7 +148,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 											<UserItem
 												upperText={`Author: ${data?.works_by_pk.user.name || ''}`}
 												imageUrl={data?.works_by_pk.user.imageUrl || ''}
-												lowerText={data?.works_by_pk.user.created_at}
+												lowerText={data?.works_by_pk.user.created_at.split('T')[0]}
 											/>
 										</Link>
 									</div>	

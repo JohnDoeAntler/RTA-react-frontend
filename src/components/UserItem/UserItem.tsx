@@ -1,6 +1,8 @@
-import React from 'react';
-import './UserItem.css';
-import { Link } from 'react-router-dom';
+/** @format */
+
+import React from "react";
+import "./UserItem.css";
+import { Link } from "react-router-dom";
 
 interface IUserItemProps {
 
@@ -10,29 +12,38 @@ interface IUserItemProps {
 
 	imageUrl: string;
 
+	created_at: any;
+
+	updated_at: any;
+
 }
 
 export const UserItem: React.FC<IUserItemProps> = (props) => {
 	return (
-		<div className="user-item">
-			<Link to={props.to}>
+		<Link to={props.to}>
+			<div className="user-item">
 				<div className="user-item-img-wrapper">
 					<img
 						className="user-item-img"
 						src={props.imageUrl}
+						alt=""
 					/>
 				</div>
-	
-				<div style={{
-					overflow: 'hidden',
-				}}>
-					<div className="user-item-title">
-						{
-							props.name
-						}
+
+				<div className="user-item-info">
+					<div className="user-item-name">
+						{props.name}
+					</div>
+
+					<hr/>
+
+					<div style={{
+						color: 'white'
+					}}>
+						joined at: {props.created_at && props.created_at.split('T')[0]}
 					</div>
 				</div>
-			</Link>
-		</div>
-	)
-}
+			</div>
+		</Link>
+	);
+};

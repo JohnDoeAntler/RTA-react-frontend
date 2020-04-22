@@ -16,6 +16,9 @@ import "./Work.css";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Photo, Audiotrack, Edit, ThumbUp, Star, Report, Comment as CommentIcon, CallMerge } from "@material-ui/icons";
 import { Info } from "../../../components/Info/Info";
+import { CommentItem } from '../../../components/CommentItem/CommentItem'
+import { CommentList } from "../../../components/CommentList/CommentList";
+import { UserItem } from "../../../components/UserItem/UserItem";
 
 interface IWorkProps {}
 
@@ -52,83 +55,114 @@ export const Work: React.FC<IWorkProps> = (props) => {
 					}}>
 					<Grid item>
 						<Container>
-							<div className="work-title-text">{data?.works_by_pk.name}</div>
+							<Grid
+								container
+								direction="column"
+								spacing={2}
+							>
+								<Grid item>
+									<div className="work-title-text">{data?.works_by_pk.name}</div>
 
-							<hr />
+									<hr />
 
-							<p
-								style={{
-									width: "50%",
-								}}>
-								{data?.works_by_pk.description}
-							</p>
-
-							<div>
-								<Grid container spacing={1}>
-									{
-										// owner only button
-										user.id === data?.works_by_pk.user.id && (
-											<>
-												<Grid item>
-													<CircleButton type="button" backgroundColor="black">
-														<Link to={`/works/${params.id}/images`}>
-															<IconButton>
-																<Photo />
-															</IconButton>
-														</Link>
-													</CircleButton>
-												</Grid>
-
-												<Grid item>
-													<CircleButton type="button" backgroundColor="black">
-														<Link to={`/works/${params.id}/audios`}>
-															<IconButton>
-																<Audiotrack />
-															</IconButton>
-														</Link>
-													</CircleButton>
-												</Grid>
-
-												<Grid item>
-													<CircleButton type="button" backgroundColor="black">
-														<Link to={`/works/${params.id}/edit`}>
-															<IconButton>
-																<Edit />
-															</IconButton>
-														</Link>
-													</CircleButton>
-												</Grid>
-											</>
-										)
-									}
-
-									<Grid item>
-										<LikeButton userId={user.id} workId={params.id} onLiked={() => refetch()} />
-									</Grid>
-
-									<Grid item>
-										<FavouriteButton userId={user.id} workId={params.id} onFavourited={() => refetch()} />
-									</Grid>
-
-									<Grid item>
-										<CommentButton workId={params.id} onCommented={() => refetch()} />
-									</Grid>
-
-									{user.id !== data?.works_by_pk.user.id && (
-										<Grid item>
-											<ReportButton workId={params.id} />
-										</Grid>
-									)}
-
-									<Grid item>
-										<SynthesizeButton workId={params.id} />
-									</Grid>
+									<div
+										style={{
+											width: "50%",
+										}}>
+										{data?.works_by_pk.description}
+									</div>
 								</Grid>
-							</div>
 
-							<p className="title-text">- Likes: {data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString()}</p>
+								<Grid item>
+									<div>
+										<Grid container spacing={1}>
+											{
+												// owner only button
+												user.id === data?.works_by_pk.user.id && (
+													<>
+														<Grid item>
+															<CircleButton type="button" backgroundColor="black">
+																<Link to={`/works/${params.id}/images`}>
+																	<IconButton>
+																		<Photo />
+																	</IconButton>
+																</Link>
+															</CircleButton>
+														</Grid>
 
-							<p className="title-text">- Favourites: {data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString()}</p>
+														<Grid item>
+															<CircleButton type="button" backgroundColor="black">
+																<Link to={`/works/${params.id}/audios`}>
+																	<IconButton>
+																		<Audiotrack />
+																	</IconButton>
+																</Link>
+															</CircleButton>
+														</Grid>
+
+														<Grid item>
+															<CircleButton type="button" backgroundColor="black">
+																<Link to={`/works/${params.id}/edit`}>
+																	<IconButton>
+																		<Edit />
+																	</IconButton>
+																</Link>
+															</CircleButton>
+														</Grid>
+													</>
+												)
+											}
+
+											<Grid item>
+												<LikeButton userId={user.id} workId={params.id} onLiked={() => refetch()} />
+											</Grid>
+
+											<Grid item>
+												<FavouriteButton userId={user.id} workId={params.id} onFavourited={() => refetch()} />
+											</Grid>
+
+											<Grid item>
+												<CommentButton workId={params.id} onCommented={() => refetch()} />
+											</Grid>
+
+											{user.id !== data?.works_by_pk.user.id && (
+												<Grid item>
+													<ReportButton workId={params.id} />
+												</Grid>
+											)}
+
+											<Grid item>
+												<SynthesizeButton workId={params.id} />
+											</Grid>
+										</Grid>
+									</div>
+								</Grid>
+
+								<Grid item>
+									<div style={{
+										width: '50%',
+									}}>
+										<UserItem
+											to={`/users/${data?.works_by_pk.user.id}`}
+											name={`Author: ${data?.works_by_pk.user.name || ''}`}
+											imageUrl={data?.works_by_pk.user.imageUrl || ''}
+											created_at={data?.works_by_pk.user.created_at}
+											updated_at={data?.works_by_pk.user.updated_at}
+										/>
+									</div>	
+								</Grid>
+
+								<Grid item>
+									<span className="title-text">- Likes: {data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString()}</span>
+								</Grid>
+
+								<Grid item>
+									<span className="title-text">- Favourites: {data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString()}</span>
+								</Grid>
+							</Grid>
+							
+							
+
 						</Container>
 					</Grid>
 				</Grid>
@@ -160,7 +194,33 @@ export const Work: React.FC<IWorkProps> = (props) => {
 				</Grid>
 			</Grid>
 
-			<pre>{JSON.stringify(data, null, 4)}</pre>
+			<Container className="comments-wrapper">
+				<Grid container direction="column" justify="center" style={{
+					height: '100vh'
+				}}>
+					<Grid item>
+						<Grid
+							container
+							spacing={4}
+							alignItems="center"
+						>
+							<Grid item xs={12} sm={6}>
+								<div className="comments-picture-wrapper">
+									<img
+										className="comments-picture"
+										src={data?.works_by_pk.imageUrl || ''}
+										alt=""
+									/>
+								</div>
+							</Grid>
+
+							<Grid item xs={12} sm={6}>
+								<CommentList data={data}/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Container>
 		</div>
 	);
 };

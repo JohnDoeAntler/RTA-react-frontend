@@ -20,10 +20,17 @@ export const Info: React.FC<IInfoProps> = (props) => {
 				spacing={2}
 			>
 				<Grid item>
-					<div className="info-larger-text">
-						{
-							props.largerText
-						}
+					<div className="info-upper-wrapper">
+						<div className="info-larger-text">
+							{
+								props.largerText
+							}
+						</div>
+						<div className="info-background-text">
+							{
+								props.smallerText
+							}
+						</div>
 					</div>
 				</Grid>
 

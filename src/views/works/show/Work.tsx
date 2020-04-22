@@ -18,7 +18,7 @@ import { Photo, Audiotrack, Edit, ThumbUp, Star, Report, Comment as CommentIcon,
 import { Info } from "../../../components/Info/Info";
 import { CommentItem } from '../../../components/CommentItem/CommentItem'
 import { CommentList } from "../../../components/CommentList/CommentList";
-import { UserItem } from "../../../components/UserItem/UserItem";
+import { UserItem } from "../../../components/Card/Card";
 
 interface IWorkProps {}
 
@@ -144,13 +144,13 @@ export const Work: React.FC<IWorkProps> = (props) => {
 									<div style={{
 										width: '50%',
 									}}>
-										<UserItem
-											to={`/users/${data?.works_by_pk.user.id}`}
-											name={`Author: ${data?.works_by_pk.user.name || ''}`}
-											imageUrl={data?.works_by_pk.user.imageUrl || ''}
-											created_at={data?.works_by_pk.user.created_at}
-											updated_at={data?.works_by_pk.user.updated_at}
-										/>
+										<Link to={`/users/${data?.works_by_pk.user.id}`}>
+											<UserItem
+												upperText={`Author: ${data?.works_by_pk.user.name || ''}`}
+												imageUrl={data?.works_by_pk.user.imageUrl || ''}
+												lowerText={data?.works_by_pk.user.created_at}
+											/>
+										</Link>
 									</div>	
 								</Grid>
 

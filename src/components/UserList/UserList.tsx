@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { GetUsers } from '../../types/api';
-import { UserItem } from '../UserItem/UserItem';
+import { UserItem } from '../Card/Card';
 import { Grid } from '@material-ui/core';
 import gsap, { Power4 } from 'gsap';
+import { Link } from 'react-router-dom';
 
 interface IUserListProps {
 
@@ -67,12 +68,14 @@ export const UserList: React.FC<IUserListProps> = ({data, loading}) => {
 					>
 						{
 							data && data.users.slice(index, index + 3).map((el) => (
-								<Grid item>
-									<UserItem
-										key={el.id}
-										{...el}
-										to={`/users/${el.id}`}
-									/>
+								<Grid item key={el.id}>
+									<Link to={`/users/${el.id}`}>
+										<UserItem
+											imageUrl={el.imageUrl}
+											upperText={el.name}
+											lowerText={el.created_at.split('T')[0]}
+										/>
+									</Link>
 								</Grid>
 							))
 						}

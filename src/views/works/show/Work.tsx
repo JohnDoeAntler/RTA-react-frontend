@@ -73,7 +73,9 @@ export const Work: React.FC<IWorkProps> = (props) => {
 									</div>
 								</Grid>
 
-								<Grid item>
+								<Grid item style={{
+									zIndex: 1,
+								}}>
 									<div>
 										<Grid container spacing={1}>
 											{

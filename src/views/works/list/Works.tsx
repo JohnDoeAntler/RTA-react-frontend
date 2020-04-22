@@ -36,7 +36,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 				style={{
 					height: "100vh",
 				}}>
-				<Grid item xs={6}>
+				<Grid item xs={12} sm={6}>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
 							<span className="title-text">Search Works</span>
@@ -83,7 +83,8 @@ export const Works: React.FC<IWorksProps> = (props) => {
 
 				<Grid
 					item
-					xs={6}
+					sm={6}
+					xs={12}
 				>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>

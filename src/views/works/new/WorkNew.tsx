@@ -1,12 +1,11 @@
 /** @format */
 
 import React, { useState } from "react";
-import { useQuery, useMutation } from "react-apollo";
+import { useMutation } from "react-apollo";
 import { WORK_NEW } from "../../../graphql/works";
 import { WorkNew as Mutation, WorkNewVariables as Variables } from "../../../types/api";
-import * as Yup from "yup";
 import { Form, Formik } from "formik";
-import { TextField, Checkbox, Container, Grid, FormControl, InputLabel, Select, MenuItem, IconButton } from "@material-ui/core";
+import { TextField, Container, Grid, FormControl, InputLabel, Select, MenuItem, IconButton } from "@material-ui/core";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
@@ -21,7 +20,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 		isRedirected: false,
 	});
 
-	const [createWork, { data, error, loading }] = useMutation<Mutation, Variables>(WORK_NEW);
+	const [createWork] = useMutation<Mutation, Variables>(WORK_NEW);
 
 	if (state.isRedirected) {
 		return (

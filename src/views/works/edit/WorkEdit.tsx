@@ -158,14 +158,6 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 												</IconButton>
 											</CircleButton>
 										</Grid>
-
-										<Grid item>
-											<CircleButton type="reset" backgroundColor="black">
-												<IconButton>
-													<Replay />
-												</IconButton>
-											</CircleButton>
-										</Grid>
 									</Grid>
 								</Form>
 							)}

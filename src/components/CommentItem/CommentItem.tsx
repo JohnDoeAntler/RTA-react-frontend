@@ -38,7 +38,7 @@ export const CommentItem: React.FC<GetWork_works_by_pk_comments> = (props) => {
 									</span>
 								</Link>
 								{
-									props.created_at
+									props.created_at.split('T')[0]
 								}
 							</Grid>
 						</Grid>

@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GetWorks, GetUserDetail_users_by_pk } from '../../types/api';
+import { GetWorks, GetUserDetail_users_by_pk, GetFavourites } from '../../types/api';
 import { WorkItem } from '../WorkItem/WorkItem';
 import { Grid } from '@material-ui/core';
 import gsap, { Power4 } from 'gsap';
 
 interface IWorkListProps {
-	data?: GetWorks | GetUserDetail_users_by_pk;
+
+	data?: GetWorks;
 
 	loading: boolean;
 }

@@ -1,24 +1,23 @@
 /** @format */
 
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useQuery, useMutation } from "react-apollo";
-import { GET_WORK } from "../../../graphql/works";
-import { GetWorkVariables, GetWork } from "../../../types/api";
-import { useAuth0 } from "../../../utils/react-auth0-spa";
-import { LikeButton } from "../../../components/LikeButton/LikeButton";
+import { Container, Grid, IconButton } from "@material-ui/core";
+import { Audiotrack, Edit, Photo } from "@material-ui/icons";
+import React from "react";
+import { useQuery } from "react-apollo";
+import { Link, useParams } from "react-router-dom";
+import { UserItem } from "../../../components/Card/Card";
+import { CircleButton } from "../../../components/CircleButton/CircleButton";
+import { CommentButton } from "../../../components/CommentButton/CommentButton";
+import { CommentList } from "../../../components/CommentList/CommentList";
 import { FavouriteButton } from "../../../components/FavouriteButton/FavouriteButton";
-import { CommentButton } from "../../../components/CommentButton/Commentbutton";
+import { Info } from "../../../components/Info/Info";
+import { LikeButton } from "../../../components/LikeButton/LikeButton";
 import { ReportButton } from "../../../components/ReportButton/ReportButton";
 import { SynthesizeButton } from "../../../components/SynthesizeButton/SynthesizeButton";
-import { Grid, Container, IconButton } from "@material-ui/core";
+import { GET_WORK } from "../../../graphql/works";
+import { GetWork, GetWorkVariables } from "../../../types/api";
+import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./Work.css";
-import { CircleButton } from "../../../components/CircleButton/CircleButton";
-import { Photo, Audiotrack, Edit, ThumbUp, Star, Report, Comment as CommentIcon, CallMerge } from "@material-ui/icons";
-import { Info } from "../../../components/Info/Info";
-import { CommentItem } from '../../../components/CommentItem/CommentItem'
-import { CommentList } from "../../../components/CommentList/CommentList";
-import { UserItem } from "../../../components/Card/Card";
 
 interface IWorkProps {}
 

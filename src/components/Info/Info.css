@@ -1,9 +1,29 @@
+.info-upper-wrapper {
+	position: relative;
+}
+
 .info-larger-text {
 	font-family: 'Jaapokki';
 	font-size: 15rem;
+	color: white;
+}
+
+.info-background-text {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-text-stroke: 1px rgba(255, 255, 255, .1);
+	-webkit-text-fill-color: transparent;
+	font-family: 'Jaapokki';
+	text-transform: uppercase;
+	font-size: 10rem;
 }
 
 .info-smaller-text {
 	font-family: 'Poppins';
+	color: white;
+	text-transform: uppercase;
 	font-size: 2rem;
+	margin-top: -6rem;
 }

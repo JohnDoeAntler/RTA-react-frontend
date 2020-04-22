@@ -22,6 +22,8 @@ export const UserList: React.FC<IUserListProps> = ({data, loading}) => {
 		<div
 			ref={wrapper}
 			onWheel={(e) => {
+				e.preventDefault();
+
 				if (e.deltaY > 0 && index + 3 < (data?.users.length || 0)) {
 					setIndex(index + 1);
 					gsap.fromTo(

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from 'react-apollo';
 import { GetIsFollowed, GetIsFollowedVariables, Follow, FollowVariables, UnFollow, UnFollowVariables } from '../../types/api';
 import { GET_IS_FOLLOWED, FOLLOW, UNFOLLOW } from './graphql';
+import { CircleButton } from '../CircleButton/CircleButton';
+import { IconButton } from '@material-ui/core';
+import { PersonAdd } from '@material-ui/icons';
 
 interface IFollowButtonProps {
 
@@ -37,7 +40,9 @@ export const FollowButton: React.FC<IFollowButtonProps> = (props) => {
 	const [ unfollow ] = useMutation<UnFollow, UnFollowVariables>(UNFOLLOW);
 
 	return (
-		<button
+		<CircleButton
+			type="button"
+			backgroundColor={state.isFollowed ? '#00dddd' : 'black'}
 			onClick={async () => {
 				setState({
 					...state,
@@ -64,9 +69,12 @@ export const FollowButton: React.FC<IFollowButtonProps> = (props) => {
 				});
 				props.onClick && props.onClick();
 			}}
-			disabled={state.isFollowing || loading}>
-			{state.isFollowing ? "following" : state.isFollowed ? "unfollow" : "follow"}
-		</button>
+			disabled={state.isFollowing || loading}
+		>
+			<IconButton>
+				<PersonAdd/>
+			</IconButton>
+		</CircleButton>
 	)
 }
 

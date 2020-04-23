@@ -74,7 +74,7 @@ export const UserList: React.FC<IUserListProps> = ({ users }) => {
 					}
 				}}>
 				{
-					users.length && (
+					users.length ? (
 						<Grid
 							container
 							direction="column"
@@ -95,6 +95,19 @@ export const UserList: React.FC<IUserListProps> = ({ users }) => {
 									</Grid>
 								))}
 						</Grid>
+					) : (
+						<div style={{
+							backgroundColor: 'rgba(0, 0, 0, .0325)',
+							padding: '3rem',
+							textAlign: 'center',
+							color: '#777',
+							fontSize: '1rem',
+							letterSpacing: '.25rem',
+							textTransform: 'uppercase',
+							fontWeight: 'lighter',
+						}}>
+							- No user was found - 
+						</div>
 					)
 				}
 			</div>

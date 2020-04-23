@@ -28,7 +28,7 @@
 	border-color: #000000 transparent transparent transparent;
 }
 
-.list-scroll-spy-wrapper {
+.scroll-spy-wrapper {
 	position: fixed;
 	right: calc((50vw - 640px) / 2);
 	top: 50%;

@@ -28,7 +28,7 @@ export const UserList: React.FC<IUserListProps> = ({ data, loading }) => {
 
 			<div className="list-scroll-spy-wrapper">
 				<ScrollSpy offset={(data?.users.length || 0) > 3 ? index / ((data?.users.length || 3) - 3) : 1} afterColor="black">
-					<div className="scroll-spy-text">{((data?.users.length || 0) > 3 ? index / ((data?.users.length || 3) - 3) : 1) * 100}%</div>
+					<div className="scroll-spy-text">{Math.round(((data?.users.length || 0) > 3 ? index / ((data?.users.length || 3) - 3) : 1) * 100)}%</div>
 				</ScrollSpy>
 			</div>
 

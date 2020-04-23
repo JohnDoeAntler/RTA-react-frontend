@@ -8,6 +8,7 @@ import gsap, { Power4 } from "gsap";
 import { Link } from "react-router-dom";
 import "./UserList.css";
 import { ScrollSpy } from "../ScrollSpy/ScrollSpy";
+import { FallbackText } from "../FallbackText/FallbackText";
 
 interface IUserListProps {
 
@@ -96,18 +97,7 @@ export const UserList: React.FC<IUserListProps> = ({ users }) => {
 								))}
 						</Grid>
 					) : (
-						<div style={{
-							backgroundColor: 'rgba(0, 0, 0, .0325)',
-							padding: '3rem',
-							textAlign: 'center',
-							color: '#777',
-							fontSize: '1rem',
-							letterSpacing: '.25rem',
-							textTransform: 'uppercase',
-							fontWeight: 'lighter',
-						}}>
-							- No user was found - 
-						</div>
+						<FallbackText text="No user was found"/>
 					)
 				}
 			</div>

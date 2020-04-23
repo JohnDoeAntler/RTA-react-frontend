@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { GetWork } from '../../types/api';
 import { CommentItem } from '../CommentItem/CommentItem';
+import { FallbackText } from '../FallbackText/FallbackText';
 
 interface ICommentListProps {
 	data?: GetWork;
@@ -9,9 +10,7 @@ interface ICommentListProps {
 
 export const CommentList: React.FC<ICommentListProps> = ({data}) => {
 	return (
-		<div style={{
-			height: '75vh',
-		}}>
+		<div>
 			<div className="title-text">
 				Comments
 			</div>
@@ -28,14 +27,17 @@ export const CommentList: React.FC<ICommentListProps> = ({data}) => {
 				spacing={2}
 				style={{
 					width: '100%',
+					marginTop: '1rem',
 				}}
 			>
 				{
-					data && data.works_by_pk.comments.map(x => (
+					data?.works_by_pk.comments.length ? data.works_by_pk.comments.map(x => (
 						<Grid item key={x.id}>
 							<CommentItem {...x}/>
 						</Grid>
-					))
+					)) : (
+						<FallbackText text="No comment was found"/>
+					)
 				}
 			</Grid>
 		</div>

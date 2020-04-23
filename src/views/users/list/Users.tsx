@@ -14,7 +14,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 		filter: "",
 	});
 
-	const { data, loading } = useQuery<GetUsers, GetUsersVariables>(GET_USERS, {
+	const { data } = useQuery<GetUsers, GetUsersVariables>(GET_USERS, {
 		variables: {
 			filter: `%${state.filter}%`,
 		},
@@ -70,7 +70,9 @@ export const Users: React.FC<IUsersProps> = (props) => {
 				>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
-							<UserList data={data}/>
+							{
+								data && <UserList users={data.users}/>
+							}
 						</Grid>
 					</Grid>
 				</Grid>

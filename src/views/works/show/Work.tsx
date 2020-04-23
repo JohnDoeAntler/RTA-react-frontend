@@ -18,6 +18,7 @@ import { GET_WORK, INC_VIEWS } from "../../../graphql/works";
 import { GetWork, GetWorkVariables, IncViews, IncViewsVariables } from "../../../types/api";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./Work.css";
+import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
 
 interface IWorkProps {}
 
@@ -51,6 +52,10 @@ export const Work: React.FC<IWorkProps> = (props) => {
 
 	return (
 		<div>
+			<div className="scroll-spy-wrapper">
+				<PageScrollSpy afterColor="black"/>
+			</div>
+
 			<div className="work-image-wrapper">
 				<img className="work-image" src={data?.works_by_pk.imageUrl || ""} alt="work logo." />
 			</div>

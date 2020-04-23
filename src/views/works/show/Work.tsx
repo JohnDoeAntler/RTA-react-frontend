@@ -173,9 +173,6 @@ export const Work: React.FC<IWorkProps> = (props) => {
 									<span className="title-text">- Favourites: {data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString()}</span>
 								</Grid>
 							</Grid>
-							
-							
-
 						</Container>
 					</Grid>
 				</Grid>

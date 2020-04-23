@@ -70,7 +70,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 				>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
-							<UserList data={data} loading={loading}/>
+							<UserList data={data}/>
 						</Grid>
 					</Grid>
 				</Grid>

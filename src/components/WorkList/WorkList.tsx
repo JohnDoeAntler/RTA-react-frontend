@@ -10,11 +10,9 @@ interface IWorkListProps {
 
 	data?: GetWorks;
 
-	loading: boolean;
-
 }
 
-export const WorkList: React.FC<IWorkListProps> = ({data, loading}) => {
+export const WorkList: React.FC<IWorkListProps> = ({data}) => {
 
 	const [index, setIndex] = useState(0);
 
@@ -71,9 +69,6 @@ export const WorkList: React.FC<IWorkListProps> = ({data, loading}) => {
 					}
 				}}
 			>
-				{
-					!data && loading && "loading..."
-				}
 				{
 					data && (
 						<Grid

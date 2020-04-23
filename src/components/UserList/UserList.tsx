@@ -10,12 +10,12 @@ import "./UserList.css";
 import { ScrollSpy } from "../ScrollSpy/ScrollSpy";
 
 interface IUserListProps {
+
 	data?: GetUsers;
 
-	loading: boolean;
 }
 
-export const UserList: React.FC<IUserListProps> = ({ data, loading }) => {
+export const UserList: React.FC<IUserListProps> = ({ data }) => {
 	const [index, setIndex] = useState(0);
 
 	const wrapper = useRef<HTMLDivElement>(null);
@@ -67,7 +67,6 @@ export const UserList: React.FC<IUserListProps> = ({ data, loading }) => {
 						);
 					}
 				}}>
-				{!data && loading && "loading..."}
 				{data && (
 					<Grid container direction="column" spacing={1}>
 						{data &&

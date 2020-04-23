@@ -127,7 +127,3 @@ export const User: React.FC<IUserProps> = (props) => {
 		</div>
 	);
 };
-
-/**
- *
- */

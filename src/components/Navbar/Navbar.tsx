@@ -13,7 +13,7 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 	const { id, logout } = useAuth0();
 
 	return (
-		<AppBar elevation={0} color="transparent">
+		<AppBar className="navbar" elevation={0} color="transparent">
 			<Toolbar className="navbar-link">
 				<Grid justify="space-between" container>
 					<Grid item>

@@ -12,6 +12,7 @@ import { Info } from "../../../components/Info/Info";
 import { FollowButton } from "../../../components/FollowButton/FollowButton";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Edit } from "@material-ui/icons";
+import { Card } from "../../../components/Card/Card";
 
 interface IUserProps {}
 
@@ -124,6 +125,57 @@ export const User: React.FC<IUserProps> = (props) => {
 					</Container>
 				</Grid>
 			</Grid>
+
+			{
+				data?.users_by_pk.works.length && (
+					<Grid
+						container
+						style={{
+							padding: '5rem',
+						}}
+					>
+						<Grid item>
+							<div className="title-text">
+								{
+									data?.users_by_pk.name
+								}'s works
+							</div>
+
+							<hr/>
+
+							<p>
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, qui! Magnam illum nesciunt eveniet error! Labore facilis vel ex dolore enim doloremque in dolor nam aperiam sint! Placeat, excepturi expedita.
+							</p>
+
+							<Grid
+								container
+								spacing={2}
+							>
+								{
+									data && data?.users_by_pk.works.map((work) => (
+										<Grid
+											item
+											key={work.id}
+											style={{
+												width: '85%',
+											}}
+										>
+											<Link to={`/works/${work.id}`}>
+												<Card
+													isListItem
+													upperText={work.name}
+													lowerText={work.description}
+													imageUrl={work.imageUrl}
+												/>
+											</Link>
+										</Grid>
+									))
+								}
+							</Grid>
+						</Grid>
+					</Grid>
+				)
+			}
 		</div>
 	);
 };

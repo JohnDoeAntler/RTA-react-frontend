@@ -60,7 +60,10 @@ export const Card: React.FC<ICardProps> = (props) => {
 			onMouseEnter={() => handleMouseEnter()}
 			onMouseLeave={() => handleMouseLeave()}
 		>
-			<Grid container>
+			<Grid
+				container
+				wrap="nowrap"
+			>
 				<Grid item>
 					<div className="user-item-border" ref={border} style={{
 						backgroundColor: props.color || '#' +  Math.random().toString(16).substr(-6),

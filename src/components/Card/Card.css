@@ -5,11 +5,25 @@
 	background-color: #111;
 }
 
+.user-item-wrapper::after {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translate(calc(3rem - 1px), -50%);
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10vh 0 10vh 3rem;
+	border-color: transparent transparent transparent #111;
+}
+
 .user-item-border {
 	content: '';
 	width: 1rem;
 	height: 20vh;
 	background-color: #0dd;
+	opacity: .8;
 	z-index: 3;
 }
 

@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 import gsap, { Power4 } from 'gsap';
 import { ScrollSpy } from '../ScrollSpy/ScrollSpy';
 import './WorkList.css';
+import { FallbackText } from '../FallbackText/FallbackText';
 
 interface IWorkListProps {
 
@@ -79,7 +80,7 @@ export const WorkList: React.FC<IWorkListProps> = ({works}) => {
 				}}
 			>
 				{
-					works.length && (
+					works.length ? (
 						<Grid
 							container
 							direction="column"
@@ -100,6 +101,8 @@ export const WorkList: React.FC<IWorkListProps> = ({works}) => {
 								))
 							}
 						</Grid>
+					) : (
+						<FallbackText text="No work was found"/>
 					)
 				}
 			</div>

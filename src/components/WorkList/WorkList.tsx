@@ -83,7 +83,10 @@ export const WorkList: React.FC<IWorkListProps> = ({data, loading}) => {
 						>
 							{
 								data && data.works.slice(index, index + 3).map((el) => (
-									<Grid item>
+									<Grid
+										item
+										key={el.id}
+									>
 										<WorkItem
 											key={el.id}
 											{...el}

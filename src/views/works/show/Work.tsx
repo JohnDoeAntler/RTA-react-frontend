@@ -215,7 +215,6 @@ export const Work: React.FC<IWorkProps> = (props) => {
 						<Grid
 							container
 							spacing={4}
-							alignItems="center"
 						>
 							<Grid item xs={12} sm={6}>
 								<div className="comments-picture-wrapper">

@@ -7,7 +7,7 @@ import { Grid } from "@material-ui/core";
 import gsap, { Power4 } from "gsap";
 import { Link } from "react-router-dom";
 import "./UserList.css";
-import { ScrollSpy } from "../ScrollSpy/ScrollSpy";
+import { ListScrollSpy } from "../ListScrollSpy/ListScrollSpy";
 import { FallbackText } from "../FallbackText/FallbackText";
 
 interface IUserListProps {
@@ -33,10 +33,10 @@ export const UserList: React.FC<IUserListProps> = ({ users }) => {
 
 			<div className="lower-triangle"></div>
 
-			<div className="list-scroll-spy-wrapper">
-				<ScrollSpy offset={(users.length || 0) > 3 ? index / ((users.length || 3) - 3) : 1} afterColor="black">
+			<div className="scroll-spy-wrapper">
+				<ListScrollSpy offset={(users.length || 0) > 3 ? index / ((users.length || 3) - 3) : 1} afterColor="black">
 					<div className="scroll-spy-text">{Math.round(((users.length || 0) > 3 ? index / ((users.length || 3) - 3) : 1) * 100)}%</div>
-				</ScrollSpy>
+				</ListScrollSpy>
 			</div>
 
 			<div

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import gsap, { Power4} from 'gsap';
-import './ScrollSpy.css';
+import './ListScrollSpy.css';
 
-interface IScrollSpyProps {
+interface IListScrollSpyProps {
 
 	beforeColor?: string;
 
@@ -16,7 +16,7 @@ interface IScrollSpyProps {
 
 }
 
-export const ScrollSpy: React.FC<IScrollSpyProps> = (props) => {
+export const ListScrollSpy: React.FC<IListScrollSpyProps> = (props) => {
 
 	const radius = props.radius || 40;
 	const width = props.width || 2;
@@ -44,8 +44,8 @@ export const ScrollSpy: React.FC<IScrollSpyProps> = (props) => {
 	}, [offset]);
 
 	return (
-		<div className="scroll-spy-wrapper">
-			<div className="scroll-spy-children">
+		<div className="list-scroll-spy-wrapper">
+			<div className="list-scroll-spy-children">
 				{
 					props.children
 				}

@@ -69,13 +69,11 @@ export const Works: React.FC<IWorksProps> = (props) => {
 
 						<Grid item>
 							<Link to="/works/new">
-								<Tooltip title="Add work.">
-									<CircleButton type="button" backgroundColor="black">
-										<IconButton>
-											<Add />
-										</IconButton>
-									</CircleButton>
-								</Tooltip>
+								<CircleButton type="button" backgroundColor="black">
+									<IconButton>
+										<Add />
+									</IconButton>
+								</CircleButton>
 							</Link>
 						</Grid>
 					</Grid>

@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-apollo';
+import { Container, Grid } from '@material-ui/core';
+import React from 'react';
+import { useMutation, useQuery } from 'react-apollo';
+import { useParams } from 'react-router-dom';
+import { AddImageButton } from '../../../components/AddImageButton/AddImageButton';
 import { GET_IMAGE_DATAS, IMAGE_DATA_DELETE } from '../../../graphql/works';
 import { GetImageDatas, GetImageDatasVariables, ImageDataDelete, ImageDataDeleteVariables } from '../../../types/api';
-import axios from 'axios';
-import { Container, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
-import { UserList } from '../../../components/UserList/UserList';
-import { CircleButton } from '../../../components/CircleButton/CircleButton';
-import { Add } from '@material-ui/icons';
-import { AddImageButton } from '../../../components/AddImageButton/AddImageButton';
 
 interface IImagesProps {
 }
@@ -48,12 +44,10 @@ export const Images: React.FC<IImagesProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<Tooltip title="Add image training data.">
-								<AddImageButton
-									workId={id || ''}
-									onAddedImage={() => refetch()}
-								/>
-							</Tooltip>
+							<AddImageButton
+								workId={id || ''}
+								onAddedImage={() => refetch()}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>

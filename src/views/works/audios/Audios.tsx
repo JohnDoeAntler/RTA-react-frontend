@@ -44,12 +44,10 @@ export const Audios: React.FC<IAudiosProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<Tooltip title="Add image training data.">
-								<AddAudioButton
-									workId={id || ''}
-									onAddedAudio={() => refetch()}
-								/>
-							</Tooltip>
+							<AddAudioButton
+								workId={id || ''}
+								onAddedAudio={() => refetch()}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>

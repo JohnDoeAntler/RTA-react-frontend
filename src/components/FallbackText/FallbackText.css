@@ -1,0 +1,10 @@
+.fallback-text-wrapper {
+	background-color: rgba(0, 0, 0, .0325);
+	padding: 3rem;
+	text-align: center;
+	color: #777;
+	font-size: 1rem;
+	letter-spacing: .25rem;
+	text-transform: uppercase;
+	font-weight: lighter;
+}

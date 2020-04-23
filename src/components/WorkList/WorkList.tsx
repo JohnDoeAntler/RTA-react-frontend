@@ -30,9 +30,7 @@ export const WorkList: React.FC<IWorkListProps> = ({data, loading}) => {
 			<div className="list-scroll-spy-wrapper">
 				<ScrollSpy offset={(data?.works.length || 0) > 3 ? index / ((data?.works.length || 3) - 3) : 1} afterColor="black">
 					<div className="scroll-spy-text">
-						{
-							((data?.works.length || 0) > 3 ? index / ((data?.works.length || 3) - 3) : 1) * 100
-						}%
+						{Math.round(((data?.works.length || 0) > 3 ? index / ((data?.works.length || 3) - 3) : 1) * 100)}%
 					</div>
 				</ScrollSpy>
 			</div>

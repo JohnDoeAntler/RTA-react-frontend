@@ -205,9 +205,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 			</Grid>
 
 			<Container className="comments-wrapper">
-				<Grid container direction="column" justify="center" style={{
-					height: '100vh'
-				}}>
+				<Grid container direction="column">
 					<Grid item>
 						<Grid
 							container

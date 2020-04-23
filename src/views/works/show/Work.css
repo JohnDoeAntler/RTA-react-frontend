@@ -79,3 +79,11 @@
 	transform: rotate(-90deg) translate(50%, -7rem);
 	z-index: -2;
 }
+
+/** scroll spy */
+.scroll-spy-wrapper {
+	position: fixed;
+	right: calc((50vw - 640px) / 2);
+	top: 50%;
+	transform: translate(35%, -50%);
+}

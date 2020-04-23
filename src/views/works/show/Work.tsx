@@ -2,8 +2,8 @@
 
 import { Container, Grid, IconButton } from "@material-ui/core";
 import { Audiotrack, Edit, Photo } from "@material-ui/icons";
-import React from "react";
-import { useQuery } from "react-apollo";
+import React, { useEffect } from "react";
+import { useQuery, useMutation } from "react-apollo";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
@@ -14,8 +14,8 @@ import { Info } from "../../../components/Info/Info";
 import { LikeButton } from "../../../components/LikeButton/LikeButton";
 import { ReportButton } from "../../../components/ReportButton/ReportButton";
 import { SynthesizeButton } from "../../../components/SynthesizeButton/SynthesizeButton";
-import { GET_WORK } from "../../../graphql/works";
-import { GetWork, GetWorkVariables } from "../../../types/api";
+import { GET_WORK, INC_VIEWS } from "../../../graphql/works";
+import { GetWork, GetWorkVariables, IncViews, IncViewsVariables } from "../../../types/api";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./Work.css";
 
@@ -30,6 +30,17 @@ export const Work: React.FC<IWorkProps> = (props) => {
 	const params = useParams<{
 		id: string;
 	}>();
+
+	const [ incViews ] = useMutation<IncViews, IncViewsVariables>(INC_VIEWS);
+
+	// views increment
+	useEffect(() => {
+		incViews({
+			variables: {
+				id: params.id,
+			}
+		});
+	}, []);
 
 	const { data, refetch } = useQuery<GetWork, GetWorkVariables>(GET_WORK, {
 		variables: {

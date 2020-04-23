@@ -227,3 +227,41 @@ export const AUDIO_DATA_DELETE = gql`
 		}
 	}
 `;
+
+export const INC_VIEWS = gql`
+	mutation IncViews (
+		$id: uuid!
+	) {
+		update_works (
+			where: {
+				id: {
+					_eq: $id
+				}
+			},
+			_inc: {
+				views: 1
+			}
+		) {
+			affected_rows
+		}
+	}
+`;
+
+export const INC_USAGE = gql`
+	mutation IncUsage (
+		$id: uuid!
+	) {
+		update_works (
+			where: {
+				id: {
+					_eq: $id
+				}
+			},
+			_inc: {
+				usage: 1
+			}
+		) {
+			affected_rows
+		}
+	}
+`;

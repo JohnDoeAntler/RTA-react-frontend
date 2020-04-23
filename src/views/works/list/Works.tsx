@@ -86,7 +86,11 @@ export const Works: React.FC<IWorksProps> = (props) => {
 				>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
-							<WorkList data={data}/>
+							{
+								data && (
+									<WorkList works={data.works}/>
+								)
+							}
 						</Grid>
 					</Grid>
 				</Grid>

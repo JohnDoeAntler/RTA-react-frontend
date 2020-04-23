@@ -8,11 +8,20 @@ import './WorkList.css';
 
 interface IWorkListProps {
 
-	data?: GetWorks;
+	works: ReadonlyArray<{
+		id: string,
+		name: string,
+		description: string,
+		imageUrl: string,
+		views: number,
+		usage: number,
+		created_at: any,
+		updated_at: any,
+	}>;
 
 }
 
-export const WorkList: React.FC<IWorkListProps> = ({data}) => {
+export const WorkList: React.FC<IWorkListProps> = ({works}) => {
 
 	const [index, setIndex] = useState(0);
 
@@ -26,9 +35,9 @@ export const WorkList: React.FC<IWorkListProps> = ({data}) => {
 			<div className="lower-triangle"></div>
 
 			<div className="list-scroll-spy-wrapper">
-				<ScrollSpy offset={(data?.works.length || 0) > 3 ? index / ((data?.works.length || 3) - 3) : 1} afterColor="black">
+				<ScrollSpy offset={(works.length || 0) > 3 ? index / ((works.length || 3) - 3) : 1} afterColor="black">
 					<div className="scroll-spy-text">
-						{Math.round(((data?.works.length || 0) > 3 ? index / ((data?.works.length || 3) - 3) : 1) * 100)}%
+						{Math.round(((works.length || 0) > 3 ? index / ((works.length || 3) - 3) : 1) * 100)}%
 					</div>
 				</ScrollSpy>
 			</div>
@@ -38,7 +47,7 @@ export const WorkList: React.FC<IWorkListProps> = ({data}) => {
 				onWheel={(e) => {
 					e.preventDefault();
 	
-					if (e.deltaY > 0 && index + 3 < (data?.works.length || 0)) {
+					if (e.deltaY > 0 && index + 3 < (works.length || 0)) {
 						setIndex(index + 1);
 						gsap.fromTo(
 							wrapper.current,
@@ -70,14 +79,14 @@ export const WorkList: React.FC<IWorkListProps> = ({data}) => {
 				}}
 			>
 				{
-					data && (
+					works.length && (
 						<Grid
 							container
 							direction="column"
 							spacing={1}
 						>
 							{
-								data && data.works.slice(index, index + 3).map((el) => (
+								works.slice(index, index + 3).map((el) => (
 									<Grid
 										item
 										key={el.id}

@@ -5,7 +5,7 @@ import { Audiotrack, Edit, Photo } from "@material-ui/icons";
 import React from "react";
 import { useQuery } from "react-apollo";
 import { Link, useParams } from "react-router-dom";
-import { UserItem } from "../../../components/Card/Card";
+import { Card } from "../../../components/Card/Card";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { CommentButton } from "../../../components/CommentButton/CommentButton";
 import { CommentList } from "../../../components/CommentList/CommentList";
@@ -144,7 +144,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 										width: '50%',
 									}}>
 										<Link to={`/users/${data?.works_by_pk.user.id}`}>
-											<UserItem
+											<Card
 												upperText={`Author: ${data?.works_by_pk.user.name || ''}`}
 												imageUrl={data?.works_by_pk.user.imageUrl || ''}
 												lowerText={data?.works_by_pk.user.created_at.split('T')[0]}

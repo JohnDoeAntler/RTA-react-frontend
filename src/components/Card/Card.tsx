@@ -1,10 +1,11 @@
 /** @format */
 
-import React from "react";
+import React, { useRef } from "react";
 import "./Card.css";
-import { Link } from "react-router-dom";
+import { Grid } from "@material-ui/core";
+import gsap, { Expo } from 'gsap';
 
-interface IUserItemProps {
+interface ICardProps {
 
 	upperText: string;
 
@@ -12,32 +13,86 @@ interface IUserItemProps {
 
 	lowerText: any;
 
+	color?: string;
+
+	isListItem?: boolean;
+
 }
 
-export const UserItem: React.FC<IUserItemProps> = (props) => {
+export const Card: React.FC<ICardProps> = (props) => {
+
+	const border = useRef<HTMLDivElement>(null);
+	const picture = useRef<HTMLDivElement>(null);
+	const wrapper = useRef<HTMLDivElement>(null);
+
+	const isListItem = props.isListItem || false;
+
+	const handleMouseEnter = () => {
+		if (isListItem) {
+			gsap.to(
+				wrapper.current,
+				0.5,
+				{
+					x: 20,
+					ease: Expo.easeOut,
+				},
+			);
+		}
+	}
+
+	const handleMouseLeave = () => {
+		if (isListItem) {
+			gsap.to(
+				wrapper.current,
+				0.5,
+				{
+					x: 0,
+					ease: Expo.easeOut,
+				}
+			);
+		}
+	}
+
 	return (
-		<div className="user-item">
-			<div className="user-item-img-wrapper">
-				<img
-					className="user-item-img"
-					src={props.imageUrl}
-					alt=""
-				/>
-			</div>
+		<div
+			ref={wrapper}
+			className="user-item-wrapper"
+			onMouseEnter={() => handleMouseEnter()}
+			onMouseLeave={() => handleMouseLeave()}
+		>
+			<Grid container>
+				<Grid item>
+					<div className="user-item-border" ref={border} style={{
+						backgroundColor: props.color || '#' +  Math.random().toString(16).substr(-6),
+					}}></div>
+				</Grid>
 
-			<div className="user-item-info">
-				<div className="user-item-name">
-					{props.upperText}
-				</div>
+				<Grid item>
+					<div className="user-item-img-wrapper" ref={picture}>
+						<img
+							className="user-item-img"
+							src={props.imageUrl}
+							alt=""
+						/>
+					</div>
+				</Grid>
 
-				<hr/>
+				<Grid item>
+					<div className="user-item-info">
+						<div className="user-item-name">
+							{props.upperText}
+						</div>
 
-				<div style={{
-					color: 'white'
-				}}>
-					joined at: {props.lowerText}
-				</div>
-			</div>
+						<hr/>
+
+						<div style={{
+							color: 'white'
+						}}>
+							joined at: {props.lowerText}
+						</div>
+					</div>
+				</Grid>
+			</Grid>
 		</div>
 	);
 };

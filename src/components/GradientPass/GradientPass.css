@@ -8,5 +8,5 @@
 	pointer-events: none;
 
 	background: transparent;
-	background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.2) 100%);
+	background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.3) 100%);
 }

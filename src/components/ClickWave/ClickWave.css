@@ -1,0 +1,7 @@
+.click-wave {
+	position: fixed;
+	width: 250px;
+	height: 250px;
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+}

@@ -1,7 +1,7 @@
 .page-info-wrapper {
 	position: absolute;
 	top: 100vh;
-	left: 7rem;
+	left: calc((50vw - 640px - 100px) / 2);
 	transform: translate(-50%, -100%);
 }
 

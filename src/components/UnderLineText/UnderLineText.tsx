@@ -2,7 +2,13 @@ import React, { useRef } from 'react';
 import gsap, { Expo } from "gsap";
 import './UnderLineText.css';
 
-export const UnderLineText: React.FC = (props) => {
+interface IUnderLineTextProps {
+
+	color?: string;
+
+}
+
+export const UnderLineText: React.FC<IUnderLineTextProps> = (props) => {
 
 	const line = useRef<HTMLDivElement>(null);
 
@@ -39,6 +45,9 @@ export const UnderLineText: React.FC = (props) => {
 				className="underline-text-line"
 				ref={line}
 				style={{
+					...(props.color && {
+						borderBottomColor: props.color,
+					}),
 				}}
 			></div>
 		</div>

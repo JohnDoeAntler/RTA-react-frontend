@@ -54,7 +54,10 @@ export const PageScrollSpy: React.FC<IPageScrollSpyProps> = (props) => {
 	}, [offset]);
 
 	return (
-		<div className="page-scroll-spy-wrapper">
+		<div className="page-scroll-spy-wrapper" style={{
+			width: size,
+			height: size,
+		}}>
 			<div className="page-scroll-spy-children">
 				<div className="page-scroll-spy-text">
 					{Math.round(offset * 100)}%

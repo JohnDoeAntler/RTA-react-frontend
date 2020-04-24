@@ -52,7 +52,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 
 	return (
 		<div>
-			<div className="scroll-spy-wrapper">
+			<div className="page-scroll-spy-wrapper">
 				<PageScrollSpy afterColor="black"/>
 			</div>
 

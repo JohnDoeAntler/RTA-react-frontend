@@ -67,3 +67,12 @@
 	transform: translate(-50%, -50%);
 	z-index: -2;
 }
+
+/** scroll spy */
+.page-scroll-spy-wrapper {
+	position: fixed;
+	width: 0;
+	height: 0;
+	top: calc(100vh - 5rem - 82px);
+	left: calc(100vw -  5rem - 82px);
+}

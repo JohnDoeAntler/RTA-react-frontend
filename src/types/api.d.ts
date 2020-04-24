@@ -1054,6 +1054,8 @@ export interface GetImageDatas_image_datas {
   readonly __typename: "image_datas";
   readonly id: any;
   readonly fileUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
 export interface GetImageDatas {
@@ -1106,6 +1108,8 @@ export interface GetAudioDatas_audio_datas {
   readonly __typename: "audio_datas";
   readonly id: any;
   readonly fileUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
 export interface GetAudioDatas {

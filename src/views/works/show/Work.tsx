@@ -19,6 +19,7 @@ import { GetWork, GetWorkVariables, IncViews, IncViewsVariables } from "../../..
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./Work.css";
 import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
+import { PageInfo } from "../../../components/PageInfo/PageInfo";
 
 interface IWorkProps {}
 
@@ -52,6 +53,8 @@ export const Work: React.FC<IWorkProps> = (props) => {
 
 	return (
 		<div>
+			<PageInfo text="Work Detail Page"/>
+
 			<div className="page-scroll-spy-wrapper">
 				<PageScrollSpy afterColor="black"/>
 			</div>

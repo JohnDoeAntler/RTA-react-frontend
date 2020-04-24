@@ -6,6 +6,7 @@ import gsap, { Power4 } from 'gsap';
 import { ListScrollSpy } from '../ListScrollSpy/ListScrollSpy';
 import './WorkList.css';
 import { FallbackText } from '../FallbackText/FallbackText';
+import { Link } from 'react-router-dom';
 
 interface IWorkListProps {
 
@@ -92,11 +93,12 @@ export const WorkList: React.FC<IWorkListProps> = ({works}) => {
 										item
 										key={el.id}
 									>
-										<WorkItem
-											key={el.id}
-											{...el}
-											to={`/works/${el.id}`}
-										/>
+										<Link to={`/works/${el.id}`}>
+											<WorkItem
+												key={el.id}
+												{...el}
+											/>
+										</Link>
 									</Grid>
 								))
 							}

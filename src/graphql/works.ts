@@ -175,6 +175,8 @@ export const GET_IMAGE_DATAS = gql`
 		) {
 			id
 			fileUrl
+			created_at
+			updated_at
 		}
 	}
 `;
@@ -208,6 +210,8 @@ export const GET_AUDIO_DATAS = gql`
 		) {
 			id
 			fileUrl
+			created_at
+			updated_at
 		}
 	}
 `;

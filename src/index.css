@@ -5,6 +5,7 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: white;
 }
 
 @font-face {
@@ -15,6 +16,7 @@ body {
 * {
 	text-decoration: none;
 	font-size: .9rem;
+	cursor: none !important;
 }
 
 a {

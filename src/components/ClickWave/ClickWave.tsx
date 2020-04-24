@@ -15,14 +15,12 @@ export const ClickWave: React.FC<IClickWaveProps> = (props) => {
 			container: el.current as Element,
 			renderer: "svg",
 			loop: false,
-			autoplay: true,
+			autoplay: false,
 			path: "/animations/click.json",
 		});
 
 		const listener = (e: MouseEvent) => {
 			anim.goToAndPlay(0, true);
-
-			console.log(document.elementFromPoint(e.clientX, e.clientY));
 
 			if (el.current) {
 				el.current.style.setProperty('left', `${e.clientX}px`);

@@ -81,9 +81,10 @@
 }
 
 /** scroll spy */
-.scroll-spy-wrapper {
+.page-scroll-spy-wrapper {
 	position: fixed;
-	right: calc((50vw - 640px) / 2);
-	top: 50%;
-	transform: translate(35%, -50%);
+	width: 0;
+	height: 0;
+	top: calc(100vh - 5rem - 82px);
+	left: calc(100vw -  5rem - 82px);
 }

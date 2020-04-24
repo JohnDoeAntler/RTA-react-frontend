@@ -13,6 +13,7 @@ import { FollowButton } from "../../../components/FollowButton/FollowButton";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Edit } from "@material-ui/icons";
 import { Card } from "../../../components/Card/Card";
+import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
 
 interface IUserProps {}
 
@@ -134,6 +135,10 @@ export const User: React.FC<IUserProps> = (props) => {
 							padding: '5rem',
 						}}
 					>
+						<div className="page-scroll-spy-wrapper">
+							<PageScrollSpy afterColor="black"/>
+						</div>
+
 						<Grid item>
 							<div className="title-text">
 								{

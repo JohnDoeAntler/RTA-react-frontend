@@ -5,6 +5,7 @@ import { GET_AUDIO_DATAS, AUDIO_DATA_DELETE } from '../../../graphql/works';
 import { GetAudioDatas, GetAudioDatasVariables, AudioDataDelete, AudioDataDeleteVariables } from '../../../types/api';
 import { Container, Grid, Tooltip } from '@material-ui/core';
 import { AddAudioButton } from '../../../components/AddAudioButton/AddAudioButton';
+import { DataList } from '../../../components/DataList/DataList';
 
 interface IAudiosProps {
 }
@@ -59,26 +60,15 @@ export const Audios: React.FC<IAudiosProps> = (props) => {
 				>
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
-							<pre>
-								{
-									data && data.audio_datas.map((audio) => (
-										// eslint-disable-next-line jsx-a11y/anchor-is-valid
-										<a href="#" onClick={() => {
-											audioDataDelete({
-												variables: {
-													id: audio.id,
-												}
-											})
-										}}>
-											<pre>
-												{
-													JSON.stringify(audio, null, 4)
-												}
-											</pre>
-										</a>
-									))
-								}
-							</pre>
+							{
+								data && (
+									<DataList
+										datas={data.audio_datas}
+										remove={audioDataDelete}
+										onRemoved={() => refetch()}
+									/>
+								)
+							}
 						</Grid>
 					</Grid>
 				</Grid>

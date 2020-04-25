@@ -15,11 +15,17 @@ interface IDataListProps {
 		updated_at: any,
 	}>;
 
+	remove: (options: {
+		variables: {
+			id: string,
+		},
+	}) => Promise<any>;
+
 	onRemoved?: () => void;
 
 }
 
-export const DataList: React.FC<IDataListProps> = ({ datas, onRemoved }) => {
+export const DataList: React.FC<IDataListProps> = ({ datas, remove, onRemoved }) => {
 
 	const [index, setIndex] = useState(0);
 
@@ -93,7 +99,11 @@ export const DataList: React.FC<IDataListProps> = ({ datas, onRemoved }) => {
 										item
 										key={el.id}
 									>
-										<DataCard {...el} onRemoved={() => onRemoved && onRemoved()}/>
+										<DataCard
+											{...el}
+											remove={remove}
+											onRemoved={() => onRemoved && onRemoved()}
+										/>
 									</Grid>
 								))
 							}

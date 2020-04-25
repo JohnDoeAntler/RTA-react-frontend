@@ -13,6 +13,8 @@ export const GET_PROGRESSES = gql`
 		) {
 			progress
 			drivingVideoUrl
+			resultUrl
+			isProcessing
 
 			work {
 				id

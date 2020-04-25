@@ -533,6 +533,7 @@ export interface GetProgresses_progresses_work {
 
 export interface GetProgresses_progresses {
   readonly __typename: "progresses";
+  readonly id: any;
   readonly progress: string;
   readonly drivingVideoUrl: string;
   readonly resultUrl: string;

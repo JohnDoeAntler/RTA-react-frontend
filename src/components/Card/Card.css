@@ -32,6 +32,12 @@
 	line-height: 0;
 }
 
+@media only screen and (max-width: 992px) {
+	.user-item-img-wrapper {
+		display: none;
+	}
+}
+
 .user-item-img {
 	width: 30vh;
 	height: 20vh;

@@ -11,6 +11,7 @@ export const GET_PROGRESSES = gql`
 				}
 			}
 		) {
+			id
 			progress
 			drivingVideoUrl
 			resultUrl

@@ -535,6 +535,8 @@ export interface GetProgresses_progresses {
   readonly __typename: "progresses";
   readonly progress: string;
   readonly drivingVideoUrl: string;
+  readonly resultUrl: string;
+  readonly isProcessing: boolean;
   /**
    * An object relationship
    */

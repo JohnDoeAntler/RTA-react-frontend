@@ -8,9 +8,6 @@
 import React from "react";
 import "./DataCard.css";
 import { Grid } from "@material-ui/core";
-import { useMutation } from "react-apollo";
-import { ImageDataDelete, ImageDataDeleteVariables } from "../../types/api";
-import { IMAGE_DATA_DELETE } from "../../graphql/works";
 import { UnderLineText } from "../UnderLineText/UnderLineText";
 
 interface IDataCardProps {
@@ -23,14 +20,18 @@ interface IDataCardProps {
 
 	updated_at: any;
 
+	remove: (options: {
+		variables: {
+			id: string,
+		},
+	}) => Promise<any>;
+
 	onRemoved?: () => void;
 
 }
 
 export const DataCard: React.FC<IDataCardProps> = (props) => {
 	
-	const [imageDataDelete] = useMutation<ImageDataDelete, ImageDataDeleteVariables>(IMAGE_DATA_DELETE);
-
 	return (
 		<div className="data-card-wrapper">
 			<Grid container wrap="nowrap">
@@ -78,7 +79,7 @@ export const DataCard: React.FC<IDataCardProps> = (props) => {
 										<a
 											href="#"
 											onClick={() => {
-												imageDataDelete({
+												props.remove({
 													variables: {
 														id: props.id,
 													},

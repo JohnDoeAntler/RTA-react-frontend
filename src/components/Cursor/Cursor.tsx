@@ -13,7 +13,7 @@ export const Cursor: React.FC<ICursorProps> = (props) => {
 		const listener = (e: MouseEvent) => {
 			gsap.to(
 				el.current,
-				1,
+				0.5,
 				{
 					left: e.clientX,
 					top: e.clientY,

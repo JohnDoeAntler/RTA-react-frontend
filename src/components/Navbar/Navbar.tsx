@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /** @format */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -45,7 +46,8 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 					<Grid justify="space-between" container>
 						<Grid item>
 							<UnderLineText>
-								<a href="#" onClick={() => {
+								<a href="" onClick={(e) => {
+									e.preventDefault();
 									setOpen(!isOpen);
 								}}>{
 									isOpen ? 'CLOSE' : 'MENU'
@@ -85,7 +87,7 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 			<Menu isOpen={isOpen}/>
 
 			<div ref={el}>
-				<Routes />
+				<Routes isMenuOpened={isOpen} />
 			</div>
 		</>
 	);

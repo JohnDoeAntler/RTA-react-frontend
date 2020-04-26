@@ -77,8 +77,9 @@ export const DataCard: React.FC<IDataCardProps> = (props) => {
 
 									<Grid item>
 										<a
-											href="#"
-											onClick={() => {
+											href=""
+											onClick={(e) => {
+												e.preventDefault();
 												props.remove({
 													variables: {
 														id: props.id,

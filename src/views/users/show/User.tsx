@@ -1,21 +1,18 @@
 /** @format */
 
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-import { useQuery } from "react-apollo";
-import { GetUserDetailVariables, GetUserDetail } from "../../../types/api";
-import { GET_USER_DETAIL } from "../../../graphql/users";
-import { useAuth0 } from "../../../utils/react-auth0-spa";
-import { Grid, Container, Avatar, IconButton, Box } from "@material-ui/core";
-import "./User.css";
-import { Info } from "../../../components/Info/Info";
-import { FollowButton } from "../../../components/FollowButton/FollowButton";
-import { CircleButton } from "../../../components/CircleButton/CircleButton";
+import { Avatar, Container, Grid, IconButton } from "@material-ui/core";
 import { Edit } from "@material-ui/icons";
-import { Card } from "../../../components/Card/Card";
-import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
-import { FallbackText } from "../../../components/FallbackText/FallbackText";
+import React from "react";
+import { useQuery } from "react-apollo";
+import { Link, useParams } from "react-router-dom";
+import { CircleButton } from "../../../components/CircleButton/CircleButton";
+import { FollowButton } from "../../../components/FollowButton/FollowButton";
+import { InfoBlock } from "../../../components/InfoBlock/InfoBlock";
 import { WorkList } from "../../../components/WorkList/WorkList";
+import { GET_USER_DETAIL } from "../../../graphql/users";
+import { GetUserDetail, GetUserDetailVariables } from "../../../types/api";
+import { useAuth0 } from "../../../utils/react-auth0-spa";
+import "./User.css";
 
 interface IUserProps {}
 
@@ -45,6 +42,7 @@ export const User: React.FC<IUserProps> = (props) => {
 						<Grid
 							container
 							justify="center"
+							alignItems="center"
 							direction="column"
 							spacing={4}
 							style={{
@@ -60,9 +58,21 @@ export const User: React.FC<IUserProps> = (props) => {
 							</Grid>
 
 							<Grid item>
-								<div className="title-text">{data?.users_by_pk.name}</div>
+								<div className="title-text" style={{
+									textAlign: 'center'
+								}}>{data?.users_by_pk.name}</div>
 
-								<hr />
+								<hr/>
+
+								<Grid container spacing={1}>
+									<Grid item xs={6}>
+										<InfoBlock upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
+									</Grid>
+
+									<Grid item xs={6}>
+										<InfoBlock upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
+									</Grid>
+								</Grid>
 
 								<p>
 									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore sapiente nihil totam deserunt quo expedita omnis
@@ -85,26 +95,25 @@ export const User: React.FC<IUserProps> = (props) => {
 					</Grid>
 
 					<Grid item xs={12} sm={6}>
-						<Grid container direction="column" justify="center" style={{
-							height: '100vh',
-						}}>
+						<Grid
+							container
+							direction="column"
+							justify="center"
+							style={{
+								height: "100vh",
+							}}>
 							<Grid item>
 								<div className="title-text">{data?.users_by_pk.name}'s works</div>
 
 								<hr />
 
-								<div style={{
-									padding: '2rem',
-								}}></div>
+								<div
+									style={{
+										padding: "2rem",
+									}}></div>
 
 								<Grid container direction="column" spacing={2}>
-									<Grid item>
-										{
-											data && (
-												<WorkList works={data.users_by_pk.works}/>
-											)
-										}
-									</Grid>
+									<Grid item>{data && <WorkList works={data.users_by_pk.works} />}</Grid>
 								</Grid>
 							</Grid>
 						</Grid>

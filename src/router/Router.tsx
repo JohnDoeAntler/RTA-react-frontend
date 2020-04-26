@@ -11,7 +11,6 @@ export const Router: React.FC<IRoutesProps> = (props) => {
 	return (
 		<BrowserRouter>
 			<Navbar />
-			<Routes />
 		</BrowserRouter>
 	);
 };

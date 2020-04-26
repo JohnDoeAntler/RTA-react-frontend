@@ -8,6 +8,12 @@ interface IInfoProps {
 
 	smallerText: string;
 
+	largerTextSize?: string;
+
+	smallerTextSize?: string;
+
+	color?: string;
+
 }
 
 export const Info: React.FC<IInfoProps> = (props) => {
@@ -21,7 +27,14 @@ export const Info: React.FC<IInfoProps> = (props) => {
 			>
 				<Grid item>
 					<div className="info-upper-wrapper">
-						<div className="info-larger-text">
+						<div className="info-larger-text" style={{
+							...(props.color && {
+								color: props.color,
+							}),
+							...(props.largerTextSize && {
+								fontSize: props.largerTextSize,
+							})
+						}}>
 							{
 								props.largerText
 							}
@@ -35,7 +48,14 @@ export const Info: React.FC<IInfoProps> = (props) => {
 				</Grid>
 
 				<Grid item>
-					<div className="info-smaller-text">
+					<div className="info-smaller-text" style={{
+							...(props.color && {
+								color: props.color,
+							}),
+							...(props.smallerTextSize && {
+								fontSize: props.smallerTextSize,
+							})
+					}}>
 						{
 							props.smallerText
 						}

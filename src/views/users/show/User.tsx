@@ -14,11 +14,12 @@ import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Edit } from "@material-ui/icons";
 import { Card } from "../../../components/Card/Card";
 import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
+import { FallbackText } from "../../../components/FallbackText/FallbackText";
+import { WorkList } from "../../../components/WorkList/WorkList";
 
 interface IUserProps {}
 
 export const User: React.FC<IUserProps> = (props) => {
-
 	const currentUser = useAuth0();
 
 	const user = useParams<{
@@ -35,57 +36,39 @@ export const User: React.FC<IUserProps> = (props) => {
 	return (
 		<div>
 			<div className="user-background-text-wrapper">
-				<div className="user-background-text">
-					{
-						data?.users_by_pk.name.repeat(3)
-					}
-				</div>
+				<div className="user-background-text">{data?.users_by_pk.name.repeat(3)}</div>
 			</div>
 
-			<Grid
-				container
-				justify="center"
-				alignItems="center"
-				direction="column"
-				spacing={8}
-				style={{
-					width: "100%",
-					height: "100vh",
-				}}>
-				<Grid item>
-					<Box
-						style={{
-							height: "5rem",
-						}}
-					/>
-				</Grid>
-
-				<Grid item>
-					<div className="user-icon-wrapper">
-						<Avatar className="user-icon" src={data?.users_by_pk.imageUrl || ""} />
-
-						<div className="user-icon-border"></div>
-					</div>
-				</Grid>
-
-				<Grid item>
-					<div className="title-text">
+			<Container>
+				<Grid container>
+					<Grid item xs={12} sm={6}>
 						<Grid
 							container
+							justify="center"
+							direction="column"
 							spacing={4}
-							alignItems="center"
-						>
-							<Grid
-								item
-								style={{
-									fontSize: "5rem",
-								}}>
-								{data?.users_by_pk.name}
+							style={{
+								width: "100%",
+								height: "100vh",
+							}}>
+							<Grid item>
+								<div className="user-icon-wrapper">
+									<Avatar className="user-icon" src={data?.users_by_pk.imageUrl || ""} />
+
+									<div className="user-icon-border"></div>
+								</div>
 							</Grid>
 
-							<Grid item style={{
-								transform: 'scale(200%, 200%)'
-							}}>
+							<Grid item>
+								<div className="title-text">{data?.users_by_pk.name}</div>
+
+								<hr />
+
+								<p>
+									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore sapiente nihil totam deserunt quo expedita omnis
+									consectetur consequuntur recusandae quas, fugiat libero iste est tenetur ipsa fugit. Aspernatur, asperiores quaerat.
+								</p>
+
 								{currentUser.id === user.id ? (
 									<Link to={`/users/${user.id}/edit`}>
 										<CircleButton backgroundColor="black" type="button">
@@ -99,88 +82,35 @@ export const User: React.FC<IUserProps> = (props) => {
 								)}
 							</Grid>
 						</Grid>
-					</div>
-				</Grid>
-			</Grid>
+					</Grid>
 
-			<Grid
-				className="user-popularity"
-				container
-				direction="column"
-				style={{
-					backgroundColor: "#111",
-				}}>
-				<Grid item>
-					<Container>
-						<Grid container justify="space-around" spacing={4}>
+					<Grid item xs={12} sm={6}>
+						<Grid container direction="column" justify="center" style={{
+							height: '100vh',
+						}}>
 							<Grid item>
-								<Info largerText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ""} smallerText="Followers" />
-							</Grid>
+								<div className="title-text">{data?.users_by_pk.name}'s works</div>
 
-							<Grid item></Grid>
+								<hr />
 
-							<Grid item>
-								<Info largerText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ""} smallerText="Followings" />
-							</Grid>
-						</Grid>
-					</Container>
-				</Grid>
-			</Grid>
+								<div style={{
+									padding: '2rem',
+								}}></div>
 
-			{
-				data?.users_by_pk.works.length && (
-					<Grid
-						container
-						style={{
-							padding: '5rem',
-						}}
-					>
-						<div className="page-scroll-spy-wrapper">
-							<PageScrollSpy afterColor="black"/>
-						</div>
-
-						<Grid item>
-							<div className="title-text">
-								{
-									data?.users_by_pk.name
-								}'s works
-							</div>
-
-							<hr/>
-
-							<p>
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, qui! Magnam illum nesciunt eveniet error! Labore facilis vel ex dolore enim doloremque in dolor nam aperiam sint! Placeat, excepturi expedita.
-							</p>
-
-							<Grid
-								container
-								spacing={2}
-							>
-								{
-									data && data?.users_by_pk.works.map((work) => (
-										<Grid
-											item
-											key={work.id}
-											style={{
-												width: '85%',
-											}}
-										>
-											<Link to={`/works/${work.id}`}>
-												<Card
-													isListItem
-													upperText={work.name}
-													lowerText={work.description}
-													imageUrl={work.imageUrl}
-												/>
-											</Link>
-										</Grid>
-									))
-								}
+								<Grid container direction="column" spacing={2}>
+									<Grid item>
+										{
+											data && (
+												<WorkList works={data.users_by_pk.works}/>
+											)
+										}
+									</Grid>
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
-				)
-			}
+				</Grid>
+			</Container>
 		</div>
 	);
 };

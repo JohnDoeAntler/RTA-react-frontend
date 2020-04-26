@@ -21,28 +21,20 @@
 	z-index: -3;
 }
 
-.user-title-text {
-	font-family: "Poppins";
-	font-size: 6rem;
-	text-transform: uppercase;
-	line-height: 5rem;
-}
-
 .user-icon-wrapper {
 	position: relative;
-	--sizes: 25vw;
-}
-
-@media (max-width: 768px) {
-	.user-icon-wrapper {
-		position: relative;
-		--sizes: 50vw;
-	}
+	--sizes: 20rem;
+	width: calc(var(--sizes) + 10px);
+	height: calc(var(--sizes) + 10px);
 }
 
 .user-icon {
+	position: absolute;
 	width: var(--sizes) !important;
 	height: var(--sizes) !important;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	border: 1px solid black;
 }
 
@@ -62,7 +54,7 @@
 .user-popularity {
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 50vh;
 	width: 100%;
 	transform: translate(-50%, -50%);
 	z-index: -2;

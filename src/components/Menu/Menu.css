@@ -1,0 +1,45 @@
+.menu {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 500;
+	background-color: #fff;
+	overflow: hidden;
+	transform: translateX(-100%);
+}
+
+.black {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 499;
+	background-color: black;
+	transform: translateX(-100%);
+}
+
+.inner-menu {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 501;
+}
+
+.menu-container {
+	padding: 5rem;
+}
+
+.menu-option {
+	font-family: 'Playfair Display';
+	font-size: 10rem;
+	text-transform: uppercase;
+	line-height: 10rem;
+}
+
+@media only screen and (max-width: 768px) {
+	.menu-container {
+		padding: 1rem;
+	}
+}

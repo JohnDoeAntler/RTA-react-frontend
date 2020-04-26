@@ -1,0 +1,22 @@
+.fade-enter.fade-enter-active {
+	display: none;
+}
+
+.fade-exit.fade-exit-active {
+	display: none;
+}
+
+.fade-exit.fade-exit-active:last-child {
+	display: block;
+}
+
+.black-transition {
+	position: fixed;
+	z-index: 450;
+	width: 100vw;
+	min-height: 100vh;
+	height: 100%;
+	transform: translateX(100%);
+	background-color: black;
+	pointer-events: none;
+}

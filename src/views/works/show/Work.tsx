@@ -20,6 +20,7 @@ import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./Work.css";
 import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
 import { PageInfo } from "../../../components/PageInfo/PageInfo";
+import { InfoBlock } from "../../../components/InfoBlock/InfoBlock";
 
 interface IWorkProps {}
 
@@ -174,11 +175,19 @@ export const Work: React.FC<IWorkProps> = (props) => {
 								</Grid>
 
 								<Grid item>
-									<span className="title-text">- Likes: {data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString()}</span>
-								</Grid>
-
-								<Grid item>
-									<span className="title-text">- Favourites: {data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString()}</span>
+									<div style={{
+										width: '50%',
+									}}>
+										<Grid container spacing={1}>
+											<Grid item xs={6}>
+												<InfoBlock upperText={data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString() || ''} lowerText="likes"/>
+											</Grid>
+	
+											<Grid item xs={6}>
+												<InfoBlock upperText={data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString() || ''} lowerText="favourites"/>
+											</Grid>
+										</Grid>
+									</div>
 								</Grid>
 							</Grid>
 						</Container>

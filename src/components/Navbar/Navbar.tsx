@@ -56,11 +56,11 @@ export const Navbar: React.FC<INavbarProps> = (props) => {
 						</Grid>
 						<Grid item>
 							<Grid container spacing={4}>
-								<Grid item>
+								{/* <Grid item>
 									<UnderLineText>
 										<Link to={`/notifications`}>NOTIFICATIONS</Link>
 									</UnderLineText>
-								</Grid>
+								</Grid> */}
 								<Grid item>
 									<UnderLineText>
 										<Link to={`/progresses`}>PROGRESSES</Link>

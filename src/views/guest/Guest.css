@@ -1,0 +1,31 @@
+.guest-button-wrapper > button {
+	border: none;
+	background-color: #303030;
+	color: white;
+	padding: 2rem;
+
+-webkit-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+   -moz-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+     -o-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+        transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000); /* custom */
+
+-webkit-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+   -moz-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+     -o-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+        transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000); /* custom */
+}
+
+.guest-button-wrapper > button:hover {
+	background-color: white;
+	color: #303030;
+	border: 1px solid #303030;
+-webkit-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+   -moz-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+     -o-transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000);
+        transition: all 500ms cubic-bezier(0.000, 1.000, 0.000, 1.000); /* custom */
+
+-webkit-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+   -moz-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+     -o-transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000);
+        transition-timing-function: cubic-bezier(0.000, 1.000, 0.000, 1.000); /* custom */
+}

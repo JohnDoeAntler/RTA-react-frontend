@@ -8,7 +8,7 @@
 
 	--size: 20px;
 
-	background-image: radial-gradient(rgba(0, 0, 0, .2) 5%, transparent 10%);
+	background-image: radial-gradient(rgba(0, 0, 0, .2) 5%, white 10%);
 	background-position: 0 0;
 	background-size: var(--size) var(--size);
 }

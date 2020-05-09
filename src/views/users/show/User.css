@@ -1,0 +1,70 @@
+.user-background-text-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.user-background-text {
+	position: absolute;
+	width: 100vw;
+	font-size: 50vh;
+	line-height: 50vh;
+	top: 5vh;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	-webkit-text-stroke: 1px rgba(0, 0, 0, .2);
+	-webkit-text-fill-color: transparent;
+	font-family: 'Jaapokki';
+	z-index: -3;
+}
+
+.user-icon-wrapper {
+	position: relative;
+	--sizes: 20rem;
+	width: calc(var(--sizes) + 10px);
+	height: calc(var(--sizes) + 10px);
+}
+
+.user-icon {
+	position: absolute;
+	width: var(--sizes) !important;
+	height: var(--sizes) !important;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid black;
+}
+
+.user-icon-border {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: calc(var(--sizes) + 10px);
+	height: calc(var(--sizes) + 10px);
+	transform: translate(-50%, -50%);
+	border: 4px solid #000;
+	background-color: #fff;
+	border-radius: 50%;
+	z-index: -1;
+}
+
+.user-popularity {
+	position: absolute;
+	left: 50%;
+	top: 50vh;
+	width: 100%;
+	transform: translate(-50%, -50%);
+	z-index: -2;
+}
+
+/** scroll spy */
+.page-scroll-spy-wrapper {
+	position: fixed;
+	width: 0;
+	height: 0;
+	top: calc(100vh - 5rem - 82px);
+	left: calc(100vw -  5rem - 82px);
+}

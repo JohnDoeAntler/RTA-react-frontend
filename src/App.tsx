@@ -1,77 +1,55 @@
 /** @format */
 
-import { Container } from "@material-ui/core";
-import ApolloClient from "apollo-boost";
-import React, { useEffect, useRef } from "react";
-import { ApolloProvider } from "react-apollo";
-import { Provider } from "unstated";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-import Routes from "./routes/Routes";
-import Lottie from "lottie-web";
-import { BrowserRouter as Router } from 'react-router-dom';
-import { isLocalhost } from "./serviceWorker";
+import { useAuth0 } from "./utils/react-auth0-spa";
+import { Guest } from "./views/guest/Guest";
+import { Router } from "./router/Router";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import { Cursor } from "./components/Cursor/Cursor";
+import { ClickWave } from "./components/ClickWave/ClickWave";
+import { GradientPass } from "./components/GradientPass/GradientPass";
+import { BackgroundGrid } from "./components/BackgroundGrid/BackgroundGrid";
+import { LoadingAnimation } from "./components/LoadingAnimation/LoadingAnimation";
 
-const App: React.FC = () => {
-
-	const client = new ApolloClient({
-		uri: isLocalhost ? "http://192.168.0.100:4000" : "http://119.246.37.218:4000",
-		request: (operation) => {
-			const token = localStorage.getItem("token");
-			operation.setContext({
-				headers: {
-					authorization: token ? `Bearer ${token}` : "",
-				},
-			});
-		},
-	});
-
-	const clickEl = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const anim = Lottie.loadAnimation({
-			container: clickEl.current as Element,
-			renderer: "svg",
-			loop: false,
-			autoplay: false,
-			path: "/animations/click.json",
-		});
-
-		anim.addEventListener("data_ready", () => {
-			anim.goToAndStop(2, true);
-		});
-
-		document.addEventListener("click", (e) => {
-			anim.playSegments([0, 60], true);
-
-			if (clickEl.current) {
-				clickEl.current.style.left = `${e.clientX}px`;
-				clickEl.current.style.top = `${e.clientY}px`;
-			}
-		});
-
-		return () => {
-			anim.destroy();
-		};
-	}, []);
+const App = () => {
+	const { isAuthenticated, getIdTokenClaims, isInitializing } = useAuth0();
 
 	return (
-		<ApolloProvider client={client}>
-			<Provider>
-				<Container className="app">
-					<div ref={clickEl} style={{
-						position: "fixed",
-						width: 200,
-						height: 200,
-						transform: "translate(-50%, -50%)",
-						pointerEvents: "none",
-						zIndex: 1000,
-					}}/>
-		<Router>
-					<Routes />
-		</Router>
-				</Container>
-			</Provider>
-		</ApolloProvider>
+		<>
+			<Cursor />
+			<ClickWave />
+			<GradientPass />
+			<LoadingAnimation isInitializing={isInitializing} />
+
+			{!isInitializing && (
+				<>
+					{isAuthenticated ? (
+						<ApolloProvider
+							client={
+								new ApolloClient({
+									uri: "http://3.12.129.211:8080/v1/graphql",
+									request: async (operation) => {
+										const token = await getIdTokenClaims();
+										operation.setContext({
+											headers: {
+												Authorization: `Bearer ${token.__raw}`,
+											},
+										});
+									},
+								})
+							}>
+							<Router />
+						</ApolloProvider>
+					) : (
+						<Guest />
+					)}
+				</>
+			)}
+
+			<BackgroundGrid />
+		</>
 	);
 };
 

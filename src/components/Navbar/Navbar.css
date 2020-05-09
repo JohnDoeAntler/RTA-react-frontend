@@ -1,0 +1,12 @@
+.navbar {
+	border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.navbar * {
+	background-color: white;
+}
+
+.navbar-link {
+	font-family: "Poppins";
+	text-transform: uppercase;
+}

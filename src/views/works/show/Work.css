@@ -1,0 +1,90 @@
+.work-image-wrapper {
+	position: absolute;
+	top: 50vh;
+	left: 50vw;
+	width: 30vw;
+	height: 75vh;
+	transform: translate(25%, -50%);
+	z-index: -1;
+}
+
+.work-image-wrapper::before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 100%;
+	transform: translate(-5rem, -15rem);
+	background-color: #00eeee;
+	z-index: -2;
+}
+
+.work-image-wrapper::after {
+	position: absolute;
+	content: '- work image -';
+	font-family: 'Poppins';
+	text-transform: uppercase;
+	bottom: 0;
+	right: 0;
+	transform: rotate(-90deg) translate(50%, 350%);
+}
+
+.work-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.work-title-text {
+	font-family: "Poppins";
+	font-size: 6rem;
+	text-transform: uppercase;
+	line-height: 5rem;
+}
+
+.comments-wrapper {
+	position: relative;
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
+
+.comments-picture-wrapper {
+	position: relative;
+}
+
+.comments-picture {
+	width: 100%;
+	height: 75vh;
+	object-fit: cover;
+}
+
+.comments-picture-wrapper::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 75vh;
+	background-color: #d00;
+	top: 0;
+	left: 0;
+	transform: translate(-15rem, 5rem);
+	z-index: -3;
+}
+
+.comments-picture-wrapper::after {
+	content: '- Comment picture - xxx';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-family: 'Poppins';
+	text-transform: uppercase;
+	transform: rotate(-90deg) translate(50%, -7rem);
+	z-index: -2;
+}
+
+/** scroll spy */
+.page-scroll-spy-wrapper {
+	position: sticky !important;
+	width: 0;
+	height: 0;
+	top: calc(100vh - 5rem - 82px);
+	left: calc(100vw -  5rem - 82px);
+}

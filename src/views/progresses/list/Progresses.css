@@ -1,0 +1,11 @@
+.progresses-wrapper {
+	--padding: 4rem;
+	padding: var(--padding);
+	padding-top: calc(var(--padding) + 56px);
+}
+
+@media only screen and (max-width: 768px) {
+	.progresses-wrapper {
+		--padding: 2rem;
+	}
+}

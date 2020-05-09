@@ -1,0 +1,8 @@
+.underline-text-wrapper {
+	overflow: hidden;
+}
+
+.underline-text-line {
+	border-bottom: 2px solid black;
+	transform: translateX(-105%);
+}

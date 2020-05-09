@@ -1,0 +1,29 @@
+.work-item {
+	position: relative;
+}
+
+.work-item-img-wrapper {
+	background-color: black;
+	line-height: 0;
+	margin-bottom: .5rem;
+}
+
+.work-item-img {
+	width: 100%;
+	height: 15vh;
+	object-fit: cover;
+	opacity: 0.90;
+}
+
+.work-item-title {
+	text-transform: uppercase;
+	font-size: 1.2rem;
+}
+
+.work-item-desc {
+	width: 100%;
+	height: 3.5rem;
+	overflow:hidden; 
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+}

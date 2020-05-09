@@ -3,26 +3,32 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetUser
+// GraphQL mutation operation: Comment
 // ====================================================
 
-export interface GetUser_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-  readonly imageUrl: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
+export interface Comment_insert_comments_returning {
+  readonly __typename: "comments";
+  readonly id: any;
 }
 
-export interface GetUser {
-  readonly user: GetUser_user;
+export interface Comment_insert_comments {
+  readonly __typename: "comments_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<Comment_insert_comments_returning>;
 }
 
-export interface GetUserVariables {
-  readonly id: string;
+export interface Comment {
+  /**
+   * insert data into the table: "comments"
+   */
+  readonly insert_comments: Comment_insert_comments;
+}
+
+export interface CommentVariables {
+  readonly workId: any;
+  readonly content: string;
 }
 
 /* tslint:disable */
@@ -30,463 +36,353 @@ export interface GetUserVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetWork
+// GraphQL query operation: GetIsFavourited
 // ====================================================
 
-export interface GetWork_work_likedBy {
-  readonly __typename: "User";
-  readonly id: string;
+export interface GetIsFavourited_works_by_pk_favourites {
+  readonly __typename: "favourites";
+  readonly userId: string;
 }
 
-export interface GetWork_work_favouritedBy {
-  readonly __typename: "User";
-  readonly id: string;
+export interface GetIsFavourited_works_by_pk {
+  readonly __typename: "works";
+  /**
+   * An array relationship
+   */
+  readonly favourites: ReadonlyArray<GetIsFavourited_works_by_pk_favourites>;
 }
 
-export interface GetWork_work_category {
-  readonly __typename: "Category";
-  readonly id: string;
-  readonly name: string;
+export interface GetIsFavourited {
+  /**
+   * fetch data from the table: "works" using primary key columns
+   */
+  readonly works_by_pk: GetIsFavourited_works_by_pk;
 }
 
-export interface GetWork_work_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-  readonly imageUrl: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
+export interface GetIsFavouritedVariables {
+  readonly id: any;
 }
 
-export interface GetWork_work_comments_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly name: string;
-  readonly imageUrl: string;
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Favourite
+// ====================================================
+
+export interface Favourite_insert_favourites {
+  readonly __typename: "favourites_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
 }
 
-export interface GetWork_work_comments {
-  readonly __typename: "Comment";
-  readonly id: string;
-  readonly content: string;
-  readonly user: GetWork_work_comments_user;
-  readonly createdAt: any;
+export interface Favourite {
+  /**
+   * insert data into the table: "favourites"
+   */
+  readonly insert_favourites: Favourite_insert_favourites;
 }
 
-export interface GetWork_work {
-  readonly __typename: "Work";
-  readonly id: string;
+export interface FavouriteVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Unfavourite
+// ====================================================
+
+export interface Unfavourite_delete_favourites {
+  readonly __typename: "favourites_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface Unfavourite {
+  /**
+   * delete data from the table: "favourites"
+   */
+  readonly delete_favourites: Unfavourite_delete_favourites;
+}
+
+export interface UnfavouriteVariables {
+  readonly userId: string;
+  readonly workId: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetIsFollowed
+// ====================================================
+
+export interface GetIsFollowed_followings {
+  readonly __typename: "followings";
+  readonly followingId: string;
+}
+
+export interface GetIsFollowed {
+  /**
+   * fetch data from the table: "followings"
+   */
+  readonly followings: ReadonlyArray<GetIsFollowed_followings>;
+}
+
+export interface GetIsFollowedVariables {
+  readonly followerId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Follow
+// ====================================================
+
+export interface Follow_insert_followings {
+  readonly __typename: "followings_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface Follow {
+  /**
+   * insert data into the table: "followings"
+   */
+  readonly insert_followings: Follow_insert_followings;
+}
+
+export interface FollowVariables {
+  readonly followingId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UnFollow
+// ====================================================
+
+export interface UnFollow_delete_followings {
+  readonly __typename: "followings_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface UnFollow {
+  /**
+   * delete data from the table: "followings"
+   */
+  readonly delete_followings: UnFollow_delete_followings;
+}
+
+export interface UnFollowVariables {
+  readonly followerId: string;
+  readonly followingId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetIsLiked
+// ====================================================
+
+export interface GetIsLiked_works_by_pk_likes {
+  readonly __typename: "likes";
+  readonly userId: string;
+}
+
+export interface GetIsLiked_works_by_pk {
+  readonly __typename: "works";
+  /**
+   * An array relationship
+   */
+  readonly likes: ReadonlyArray<GetIsLiked_works_by_pk_likes>;
+}
+
+export interface GetIsLiked {
+  /**
+   * fetch data from the table: "works" using primary key columns
+   */
+  readonly works_by_pk: GetIsLiked_works_by_pk;
+}
+
+export interface GetIsLikedVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Like
+// ====================================================
+
+export interface Like_insert_likes {
+  readonly __typename: "likes_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface Like {
+  /**
+   * insert data into the table: "likes"
+   */
+  readonly insert_likes: Like_insert_likes;
+}
+
+export interface LikeVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Unlike
+// ====================================================
+
+export interface Unlike_delete_likes {
+  readonly __typename: "likes_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
+}
+
+export interface Unlike {
+  /**
+   * delete data from the table: "likes"
+   */
+  readonly delete_likes: Unlike_delete_likes;
+}
+
+export interface UnlikeVariables {
+  readonly userId: string;
+  readonly workId: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: Report
+// ====================================================
+
+export interface Report_insert_reports_returning {
+  readonly __typename: "reports";
+  readonly id: any;
+}
+
+export interface Report_insert_reports {
+  readonly __typename: "reports_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<Report_insert_reports_returning>;
+}
+
+export interface Report {
+  /**
+   * insert data into the table: "reports"
+   */
+  readonly insert_reports: Report_insert_reports;
+}
+
+export interface ReportVariables {
+  readonly workId: any;
+  readonly reason: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetFavourites
+// ====================================================
+
+export interface GetFavourites_favourites_work_likes_aggregate_aggregate {
+  readonly __typename: "likes_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetFavourites_favourites_work_likes_aggregate {
+  readonly __typename: "likes_aggregate";
+  readonly aggregate: GetFavourites_favourites_work_likes_aggregate_aggregate;
+}
+
+export interface GetFavourites_favourites_work_favourites_aggregate_aggregate {
+  readonly __typename: "favourites_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetFavourites_favourites_work_favourites_aggregate {
+  readonly __typename: "favourites_aggregate";
+  readonly aggregate: GetFavourites_favourites_work_favourites_aggregate_aggregate;
+}
+
+export interface GetFavourites_favourites_work {
+  readonly __typename: "works";
+  readonly id: any;
   readonly name: string;
   readonly description: string;
-  readonly visibility: boolean;
+  readonly imageUrl: string;
+  /**
+   * An aggregated array relationship
+   */
+  readonly likes_aggregate: GetFavourites_favourites_work_likes_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly favourites_aggregate: GetFavourites_favourites_work_favourites_aggregate;
   readonly views: number;
   readonly usage: number;
-  readonly likedBy: ReadonlyArray<GetWork_work_likedBy>;
-  readonly favouritedBy: ReadonlyArray<GetWork_work_favouritedBy>;
-  readonly category: GetWork_work_category;
-  readonly user: GetWork_work_user;
-  readonly comments: ReadonlyArray<GetWork_work_comments>;
-  readonly imageUrl: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
-export interface GetWork {
-  readonly work: GetWork_work;
+export interface GetFavourites_favourites {
+  readonly __typename: "favourites";
+  /**
+   * An object relationship
+   */
+  readonly work: GetFavourites_favourites_work;
 }
 
-export interface GetWorkVariables {
+export interface GetFavourites {
+  /**
+   * fetch data from the table: "favourites"
+   */
+  readonly favourites: ReadonlyArray<GetFavourites_favourites>;
+}
+
+export interface GetFavouritesVariables {
   readonly id: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: Login
-// ====================================================
-
-export interface Login_login_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-}
-
-export interface Login_login {
-  readonly __typename: "AuthPayload";
-  readonly token: string;
-  readonly user: Login_login_user;
-}
-
-export interface Login {
-  readonly login: Login_login;
-}
-
-export interface LoginVariables {
-  readonly email: string;
-  readonly password: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: Register
-// ====================================================
-
-export interface Register_signup_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-}
-
-export interface Register_signup {
-  readonly __typename: "AuthPayload";
-  readonly token: string;
-  readonly user: Register_signup_user;
-}
-
-export interface Register {
-  readonly signup: Register_signup;
-}
-
-export interface RegisterVariables {
-  readonly email: string;
-  readonly password: string;
-  readonly name: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetUserList
-// ====================================================
-
-export interface GetUserList_users {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-  readonly imageUrl: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
-}
-
-export interface GetUserList {
-  readonly users: ReadonlyArray<(GetUserList_users)>;
-}
-
-export interface GetUserListVariables {
-  readonly where?: UserWhereInput;
-  readonly orderBy?: UserOrderByInput;
-  readonly skip?: number;
-  readonly after?: string;
-  readonly before?: string;
-  readonly first?: number;
-  readonly last?: number;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetWorkList
-// ====================================================
-
-export interface GetWorkList_works_user {
-  readonly __typename: "User";
-  readonly id: string;
-  readonly email: string;
-  readonly name: string;
-  readonly role: Role;
-  readonly imageUrl: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
-}
-
-export interface GetWorkList_works_category {
-  readonly __typename: "Category";
-  readonly id: string;
-  readonly name: string;
-  readonly createdAt: any;
-  readonly updatedAt: any;
-}
-
-export interface GetWorkList_works {
-  readonly __typename: "Work";
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly visibility: boolean;
-  readonly views: number;
-  readonly usage: number;
-  readonly imageUrl: string;
-  readonly user: GetWorkList_works_user;
-  readonly category: GetWorkList_works_category;
-  readonly createdAt: any;
-  readonly updatedAt: any;
-}
-
-export interface GetWorkList {
-  readonly works: ReadonlyArray<(GetWorkList_works)>;
-}
-
-export interface GetWorkListVariables {
-  readonly where?: WorkWhereInput;
-  readonly orderBy?: WorkOrderByInput;
-  readonly skip?: number;
-  readonly after?: string;
-  readonly before?: string;
-  readonly first?: number;
-  readonly last?: number;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: IsFollowing
-// ====================================================
-
-export interface IsFollowing_usersConnection_aggregate {
-  readonly __typename: "AggregateUser";
-  readonly count: number;
-}
-
-export interface IsFollowing_usersConnection {
-  readonly __typename: "UserConnection";
-  readonly aggregate: IsFollowing_usersConnection_aggregate;
-}
-
-export interface IsFollowing {
-  readonly usersConnection: IsFollowing_usersConnection;
-}
-
-export interface IsFollowingVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: FollowUser
-// ====================================================
-
-export interface FollowUser_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface FollowUser {
-  readonly updateUser: FollowUser_updateUser;
-}
-
-export interface FollowUserVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UnfollowUser
-// ====================================================
-
-export interface UnfollowUser_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface UnfollowUser {
-  readonly updateUser: UnfollowUser_updateUser;
-}
-
-export interface UnfollowUserVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: IsLiked
-// ====================================================
-
-export interface IsLiked_usersConnection_aggregate {
-  readonly __typename: "AggregateUser";
-  readonly count: number;
-}
-
-export interface IsLiked_usersConnection {
-  readonly __typename: "UserConnection";
-  readonly aggregate: IsLiked_usersConnection_aggregate;
-}
-
-export interface IsLiked {
-  readonly usersConnection: IsLiked_usersConnection;
-}
-
-export interface IsLikedVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: LikeWork
-// ====================================================
-
-export interface LikeWork_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface LikeWork {
-  readonly updateUser: LikeWork_updateUser;
-}
-
-export interface LikeWorkVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UnlikeWork
-// ====================================================
-
-export interface UnlikeWork_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface UnlikeWork {
-  readonly updateUser: UnlikeWork_updateUser;
-}
-
-export interface UnlikeWorkVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: IsFavourited
-// ====================================================
-
-export interface IsFavourited_usersConnection_aggregate {
-  readonly __typename: "AggregateUser";
-  readonly count: number;
-}
-
-export interface IsFavourited_usersConnection {
-  readonly __typename: "UserConnection";
-  readonly aggregate: IsFavourited_usersConnection_aggregate;
-}
-
-export interface IsFavourited {
-  readonly usersConnection: IsFavourited_usersConnection;
-}
-
-export interface IsFavouritedVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: FavouriteWork
-// ====================================================
-
-export interface FavouriteWork_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface FavouriteWork {
-  readonly updateUser: FavouriteWork_updateUser;
-}
-
-export interface FavouriteWorkVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UnfavouriteWork
-// ====================================================
-
-export interface UnfavouriteWork_updateUser {
-  readonly __typename: "User";
-  readonly id: string;
-}
-
-export interface UnfavouriteWork {
-  readonly updateUser: UnfavouriteWork_updateUser;
-}
-
-export interface UnfavouriteWorkVariables {
-  readonly me?: string;
-  readonly target?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: CommentWork
-// ====================================================
-
-export interface CommentWork_createComment {
-  readonly __typename: "Comment";
-  readonly id: string;
-}
-
-export interface CommentWork {
-  readonly createComment: CommentWork_createComment;
-}
-
-export interface CommentWorkVariables {
-  readonly user?: string;
-  readonly work?: string;
-  readonly content: string;
+  readonly filter: string;
 }
 
 /* tslint:disable */
@@ -497,25 +393,270 @@ export interface CommentWorkVariables {
 // GraphQL query operation: GetFollowings
 // ====================================================
 
-export interface GetFollowings_user_following {
-  readonly __typename: "User";
+export interface GetFollowings_users_followers_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetFollowings_users_followers_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetFollowings_users_followers_aggregate_aggregate;
+}
+
+export interface GetFollowings_users_followings_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetFollowings_users_followings_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetFollowings_users_followings_aggregate_aggregate;
+}
+
+export interface GetFollowings_users_works_aggregate_aggregate {
+  readonly __typename: "works_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetFollowings_users_works_aggregate {
+  readonly __typename: "works_aggregate";
+  readonly aggregate: GetFollowings_users_works_aggregate_aggregate;
+}
+
+export interface GetFollowings_users {
+  readonly __typename: "users";
   readonly id: string;
   readonly name: string;
   readonly imageUrl: string;
-  readonly createdAt: any;
-}
-
-export interface GetFollowings_user {
-  readonly __typename: "User";
-  readonly following: ReadonlyArray<GetFollowings_user_following>;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followers_aggregate: GetFollowings_users_followers_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followings_aggregate: GetFollowings_users_followings_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly works_aggregate: GetFollowings_users_works_aggregate;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
 export interface GetFollowings {
-  readonly user: GetFollowings_user;
+  /**
+   * fetch data from the table: "users"
+   */
+  readonly users: ReadonlyArray<GetFollowings_users>;
 }
 
 export interface GetFollowingsVariables {
-  readonly id?: string;
+  readonly id: string;
+  readonly filter: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetNotifications
+// ====================================================
+
+export interface GetNotifications_notifications {
+  readonly __typename: "notifications";
+  readonly id: any;
+  readonly content: string;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetNotifications {
+  /**
+   * fetch data from the table: "notifications"
+   */
+  readonly notifications: ReadonlyArray<GetNotifications_notifications>;
+}
+
+export interface GetNotificationsVariables {
+  readonly id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetProgresses
+// ====================================================
+
+export interface GetProgresses_progresses_work_likes_aggregate_aggregate {
+  readonly __typename: "likes_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetProgresses_progresses_work_likes_aggregate {
+  readonly __typename: "likes_aggregate";
+  readonly aggregate: GetProgresses_progresses_work_likes_aggregate_aggregate;
+}
+
+export interface GetProgresses_progresses_work_favourites_aggregate_aggregate {
+  readonly __typename: "favourites_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetProgresses_progresses_work_favourites_aggregate {
+  readonly __typename: "favourites_aggregate";
+  readonly aggregate: GetProgresses_progresses_work_favourites_aggregate_aggregate;
+}
+
+export interface GetProgresses_progresses_work {
+  readonly __typename: "works";
+  readonly id: any;
+  readonly name: string;
+  readonly description: string;
+  readonly imageUrl: string;
+  /**
+   * An aggregated array relationship
+   */
+  readonly likes_aggregate: GetProgresses_progresses_work_likes_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly favourites_aggregate: GetProgresses_progresses_work_favourites_aggregate;
+  readonly views: number;
+  readonly usage: number;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetProgresses_progresses {
+  readonly __typename: "progresses";
+  readonly id: any;
+  readonly progress: string;
+  readonly drivingVideoUrl: string;
+  readonly resultUrl: string;
+  readonly isProcessing: boolean;
+  /**
+   * An object relationship
+   */
+  readonly work: GetProgresses_progresses_work;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetProgresses {
+  /**
+   * fetch data from the table: "progresses"
+   */
+  readonly progresses: ReadonlyArray<GetProgresses_progresses>;
+}
+
+export interface GetProgressesVariables {
+  readonly id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ProgressNew
+// ====================================================
+
+export interface ProgressNew_insert_progresses_returning {
+  readonly __typename: "progresses";
+  readonly id: any;
+}
+
+export interface ProgressNew_insert_progresses {
+  readonly __typename: "progresses_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<ProgressNew_insert_progresses_returning>;
+}
+
+export interface ProgressNew {
+  /**
+   * insert data into the table: "progresses"
+   */
+  readonly insert_progresses: ProgressNew_insert_progresses;
+}
+
+export interface ProgressNewVariables {
+  readonly drivingVideoUrl: string;
+  readonly workId: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetUsers
+// ====================================================
+
+export interface GetUsers_users_followers_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetUsers_users_followers_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetUsers_users_followers_aggregate_aggregate;
+}
+
+export interface GetUsers_users_followings_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetUsers_users_followings_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetUsers_users_followings_aggregate_aggregate;
+}
+
+export interface GetUsers_users_works_aggregate_aggregate {
+  readonly __typename: "works_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetUsers_users_works_aggregate {
+  readonly __typename: "works_aggregate";
+  readonly aggregate: GetUsers_users_works_aggregate_aggregate;
+}
+
+export interface GetUsers_users {
+  readonly __typename: "users";
+  readonly id: string;
+  readonly name: string;
+  readonly imageUrl: string;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followers_aggregate: GetUsers_users_followers_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followings_aggregate: GetUsers_users_followings_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly works_aggregate: GetUsers_users_works_aggregate;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetUsers {
+  /**
+   * fetch data from the table: "users"
+   */
+  readonly users: ReadonlyArray<GetUsers_users>;
+}
+
+export interface GetUsersVariables {
   readonly filter?: string;
 }
 
@@ -524,21 +665,71 @@ export interface GetFollowingsVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetUserNameAndImageUrl
+// GraphQL query operation: GetUserDetail
 // ====================================================
 
-export interface GetUserNameAndImageUrl_user {
-  readonly __typename: "User";
+export interface GetUserDetail_users_by_pk_followers_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetUserDetail_users_by_pk_followers_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetUserDetail_users_by_pk_followers_aggregate_aggregate;
+}
+
+export interface GetUserDetail_users_by_pk_followings_aggregate_aggregate {
+  readonly __typename: "followings_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetUserDetail_users_by_pk_followings_aggregate {
+  readonly __typename: "followings_aggregate";
+  readonly aggregate: GetUserDetail_users_by_pk_followings_aggregate_aggregate;
+}
+
+export interface GetUserDetail_users_by_pk_works {
+  readonly __typename: "works";
+  readonly id: any;
+  readonly name: string;
+  readonly description: string;
+  readonly imageUrl: string;
+  readonly views: number;
+  readonly usage: number;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetUserDetail_users_by_pk {
+  readonly __typename: "users";
+  readonly id: string;
   readonly name: string;
   readonly imageUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followers_aggregate: GetUserDetail_users_by_pk_followers_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly followings_aggregate: GetUserDetail_users_by_pk_followings_aggregate;
+  /**
+   * An array relationship
+   */
+  readonly works: ReadonlyArray<GetUserDetail_users_by_pk_works>;
 }
 
-export interface GetUserNameAndImageUrl {
-  readonly user: GetUserNameAndImageUrl_user;
+export interface GetUserDetail {
+  /**
+   * fetch data from the table: "users" using primary key columns
+   */
+  readonly users_by_pk: GetUserDetail_users_by_pk;
 }
 
-export interface GetUserNameAndImageUrlVariables {
-  readonly id?: string;
+export interface GetUserDetailVariables {
+  readonly id: string;
 }
 
 /* tslint:disable */
@@ -546,20 +737,56 @@ export interface GetUserNameAndImageUrlVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: UpdateUserNameAndImageUrl
+// GraphQL query operation: GetUserEdit
 // ====================================================
 
-export interface UpdateUserNameAndImageUrl_updateUser {
-  readonly __typename: "User";
+export interface GetUserEdit_users_by_pk {
+  readonly __typename: "users";
+  readonly name: string;
+  readonly imageUrl: string;
+}
+
+export interface GetUserEdit {
+  /**
+   * fetch data from the table: "users" using primary key columns
+   */
+  readonly users_by_pk: GetUserEdit_users_by_pk;
+}
+
+export interface GetUserEditVariables {
   readonly id: string;
 }
 
-export interface UpdateUserNameAndImageUrl {
-  readonly updateUser: UpdateUserNameAndImageUrl_updateUser;
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UserEdit
+// ====================================================
+
+export interface UserEdit_update_users_returning {
+  readonly __typename: "users";
+  readonly id: string;
 }
 
-export interface UpdateUserNameAndImageUrlVariables {
-  readonly id?: string;
+export interface UserEdit_update_users {
+  readonly __typename: "users_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<UserEdit_update_users_returning>;
+}
+
+export interface UserEdit {
+  /**
+   * update data of the table: "users"
+   */
+  readonly update_users: UserEdit_update_users;
+}
+
+export interface UserEditVariables {
+  readonly id: string;
   readonly name?: string;
   readonly imageUrl?: string;
 }
@@ -569,36 +796,58 @@ export interface UpdateUserNameAndImageUrlVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetWorkForEditing
+// GraphQL query operation: GetWorks
 // ====================================================
 
-export interface GetWorkForEditing_work_category {
-  readonly __typename: "Category";
-  readonly id: string;
+export interface GetWorks_works_likes_aggregate_aggregate {
+  readonly __typename: "likes_aggregate_fields";
+  readonly count: number;
 }
 
-export interface GetWorkForEditing_work {
-  readonly __typename: "Work";
+export interface GetWorks_works_likes_aggregate {
+  readonly __typename: "likes_aggregate";
+  readonly aggregate: GetWorks_works_likes_aggregate_aggregate;
+}
+
+export interface GetWorks_works_favourites_aggregate_aggregate {
+  readonly __typename: "favourites_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetWorks_works_favourites_aggregate {
+  readonly __typename: "favourites_aggregate";
+  readonly aggregate: GetWorks_works_favourites_aggregate_aggregate;
+}
+
+export interface GetWorks_works {
+  readonly __typename: "works";
+  readonly id: any;
   readonly name: string;
   readonly description: string;
-  readonly category: GetWorkForEditing_work_category;
   readonly imageUrl: string;
-  readonly visibility: boolean;
+  /**
+   * An aggregated array relationship
+   */
+  readonly likes_aggregate: GetWorks_works_likes_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly favourites_aggregate: GetWorks_works_favourites_aggregate;
+  readonly views: number;
+  readonly usage: number;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
-export interface GetWorkForEditing_categories {
-  readonly __typename: "Category";
-  readonly id: string;
-  readonly name: string;
+export interface GetWorks {
+  /**
+   * fetch data from the table: "works"
+   */
+  readonly works: ReadonlyArray<GetWorks_works>;
 }
 
-export interface GetWorkForEditing {
-  readonly work: GetWorkForEditing_work;
-  readonly categories: ReadonlyArray<(GetWorkForEditing_categories)>;
-}
-
-export interface GetWorkForEditingVariables {
-  readonly id?: string;
+export interface GetWorksVariables {
+  readonly filter?: string;
 }
 
 /* tslint:disable */
@@ -606,25 +855,194 @@ export interface GetWorkForEditingVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: UpdateWork
+// GraphQL query operation: GetWork
 // ====================================================
 
-export interface UpdateWork_updateWork {
-  readonly __typename: "Work";
+export interface GetWork_works_by_pk_likes_aggregate_aggregate {
+  readonly __typename: "likes_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetWork_works_by_pk_likes_aggregate {
+  readonly __typename: "likes_aggregate";
+  readonly aggregate: GetWork_works_by_pk_likes_aggregate_aggregate;
+}
+
+export interface GetWork_works_by_pk_favourites_aggregate_aggregate {
+  readonly __typename: "favourites_aggregate_fields";
+  readonly count: number;
+}
+
+export interface GetWork_works_by_pk_favourites_aggregate {
+  readonly __typename: "favourites_aggregate";
+  readonly aggregate: GetWork_works_by_pk_favourites_aggregate_aggregate;
+}
+
+export interface GetWork_works_by_pk_comments_user {
+  readonly __typename: "users";
   readonly id: string;
+  readonly name: string;
+  readonly imageUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
-export interface UpdateWork {
-  readonly updateWork: UpdateWork_updateWork;
+export interface GetWork_works_by_pk_comments {
+  readonly __typename: "comments";
+  readonly id: any;
+  readonly content: string;
+  /**
+   * An object relationship
+   */
+  readonly user: GetWork_works_by_pk_comments_user;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
-export interface UpdateWorkVariables {
-  readonly id?: string;
+export interface GetWork_works_by_pk_user {
+  readonly __typename: "users";
+  readonly id: string;
+  readonly name: string;
+  readonly imageUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetWork_works_by_pk {
+  readonly __typename: "works";
+  readonly name: string;
+  readonly description: string;
+  readonly imageUrl: string;
+  readonly visibility: boolean;
+  /**
+   * An aggregated array relationship
+   */
+  readonly likes_aggregate: GetWork_works_by_pk_likes_aggregate;
+  /**
+   * An aggregated array relationship
+   */
+  readonly favourites_aggregate: GetWork_works_by_pk_favourites_aggregate;
+  readonly views: number;
+  readonly usage: number;
+  readonly created_at: any;
+  readonly updated_at: any;
+  /**
+   * An array relationship
+   */
+  readonly comments: ReadonlyArray<GetWork_works_by_pk_comments>;
+  /**
+   * An object relationship
+   */
+  readonly user: GetWork_works_by_pk_user;
+}
+
+export interface GetWork {
+  /**
+   * fetch data from the table: "works" using primary key columns
+   */
+  readonly works_by_pk: GetWork_works_by_pk;
+}
+
+export interface GetWorkVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: WorkNew
+// ====================================================
+
+export interface WorkNew_insert_works_returning {
+  readonly __typename: "works";
+  readonly id: any;
+}
+
+export interface WorkNew_insert_works {
+  readonly __typename: "works_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<WorkNew_insert_works_returning>;
+}
+
+export interface WorkNew {
+  /**
+   * insert data into the table: "works"
+   */
+  readonly insert_works: WorkNew_insert_works;
+}
+
+export interface WorkNewVariables {
+  readonly name: string;
+  readonly description: string;
+  readonly imageUrl: string;
+  readonly visibility: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetWorkEdit
+// ====================================================
+
+export interface GetWorkEdit_works_by_pk {
+  readonly __typename: "works";
+  readonly name: string;
+  readonly description: string;
+  readonly imageUrl: string;
+  readonly visibility: boolean;
+}
+
+export interface GetWorkEdit {
+  /**
+   * fetch data from the table: "works" using primary key columns
+   */
+  readonly works_by_pk: GetWorkEdit_works_by_pk;
+}
+
+export interface GetWorkEditVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: WorkEdit
+// ====================================================
+
+export interface WorkEdit_update_works_returning {
+  readonly __typename: "works";
+  readonly id: any;
+}
+
+export interface WorkEdit_update_works {
+  readonly __typename: "works_mutation_response";
+  /**
+   * data of the affected rows by the mutation
+   */
+  readonly returning: ReadonlyArray<WorkEdit_update_works_returning>;
+}
+
+export interface WorkEdit {
+  /**
+   * update data of the table: "works"
+   */
+  readonly update_works: WorkEdit_update_works;
+}
+
+export interface WorkEditVariables {
+  readonly id: any;
   readonly name?: string;
   readonly description?: string;
-  readonly visibility?: boolean;
   readonly imageUrl?: string;
-  readonly categoryId?: string;
+  readonly visibility?: boolean;
 }
 
 /* tslint:disable */
@@ -632,71 +1050,26 @@ export interface UpdateWorkVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetCategories
+// GraphQL query operation: GetImageDatas
 // ====================================================
 
-export interface GetCategories_categories {
-  readonly __typename: "Category";
-  readonly id: string;
-  readonly name: string;
-}
-
-export interface GetCategories {
-  readonly categories: ReadonlyArray<(GetCategories_categories)>;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: CreateWork
-// ====================================================
-
-export interface CreateWork_createWork {
-  readonly __typename: "Work";
-  readonly id: string;
-}
-
-export interface CreateWork {
-  readonly createWork: CreateWork_createWork;
-}
-
-export interface CreateWorkVariables {
-  readonly id?: string;
-  readonly name: string;
-  readonly description: string;
-  readonly visibility: boolean;
-  readonly imageUrl: string;
-  readonly categoryId?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetImageData
-// ====================================================
-
-export interface GetImageData_work_imageDatas {
-  readonly __typename: "ImageData";
-  readonly id: string;
+export interface GetImageDatas_image_datas {
+  readonly __typename: "image_datas";
+  readonly id: any;
   readonly fileUrl: string;
-  readonly createdAt: any;
+  readonly created_at: any;
+  readonly updated_at: any;
 }
 
-export interface GetImageData_work {
-  readonly __typename: "Work";
-  readonly imageDatas: ReadonlyArray<GetImageData_work_imageDatas>;
+export interface GetImageDatas {
+  /**
+   * fetch data from the table: "image_datas"
+   */
+  readonly image_datas: ReadonlyArray<GetImageDatas_image_datas>;
 }
 
-export interface GetImageData {
-  readonly work: GetImageData_work;
-}
-
-export interface GetImageDataVariables {
-  readonly id?: string;
+export interface GetImageDatasVariables {
+  readonly id: any;
 }
 
 /* tslint:disable */
@@ -704,21 +1077,53 @@ export interface GetImageDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: CreateImageData
+// GraphQL mutation operation: ImageDataDelete
 // ====================================================
 
-export interface CreateImageData_createImageData {
-  readonly __typename: "ImageData";
-  readonly id: string;
+export interface ImageDataDelete_delete_image_datas {
+  readonly __typename: "image_datas_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
 }
 
-export interface CreateImageData {
-  readonly createImageData: CreateImageData_createImageData;
+export interface ImageDataDelete {
+  /**
+   * delete data from the table: "image_datas"
+   */
+  readonly delete_image_datas: ImageDataDelete_delete_image_datas;
 }
 
-export interface CreateImageDataVariables {
-  readonly workId?: string;
+export interface ImageDataDeleteVariables {
+  readonly id: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetAudioDatas
+// ====================================================
+
+export interface GetAudioDatas_audio_datas {
+  readonly __typename: "audio_datas";
+  readonly id: any;
   readonly fileUrl: string;
+  readonly created_at: any;
+  readonly updated_at: any;
+}
+
+export interface GetAudioDatas {
+  /**
+   * fetch data from the table: "audio_datas"
+   */
+  readonly audio_datas: ReadonlyArray<GetAudioDatas_audio_datas>;
+}
+
+export interface GetAudioDatasVariables {
+  readonly id: any;
 }
 
 /* tslint:disable */
@@ -726,20 +1131,26 @@ export interface CreateImageDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: DeleteImageData
+// GraphQL mutation operation: AudioDataDelete
 // ====================================================
 
-export interface DeleteImageData_deleteImageData {
-  readonly __typename: "ImageData";
-  readonly id: string;
+export interface AudioDataDelete_delete_audio_datas {
+  readonly __typename: "audio_datas_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
 }
 
-export interface DeleteImageData {
-  readonly deleteImageData: DeleteImageData_deleteImageData;
+export interface AudioDataDelete {
+  /**
+   * delete data from the table: "audio_datas"
+   */
+  readonly delete_audio_datas: AudioDataDelete_delete_audio_datas;
 }
 
-export interface DeleteImageDataVariables {
-  readonly id?: string;
+export interface AudioDataDeleteVariables {
+  readonly id: any;
 }
 
 /* tslint:disable */
@@ -747,27 +1158,26 @@ export interface DeleteImageDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetVoiceData
+// GraphQL mutation operation: IncViews
 // ====================================================
 
-export interface GetVoiceData_work_voiceDatas {
-  readonly __typename: "VoiceData";
-  readonly id: string;
-  readonly fileUrl: string;
-  readonly createdAt: any;
+export interface IncViews_update_works {
+  readonly __typename: "works_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
 }
 
-export interface GetVoiceData_work {
-  readonly __typename: "Work";
-  readonly voiceDatas: ReadonlyArray<GetVoiceData_work_voiceDatas>;
+export interface IncViews {
+  /**
+   * update data of the table: "works"
+   */
+  readonly update_works: IncViews_update_works;
 }
 
-export interface GetVoiceData {
-  readonly work: GetVoiceData_work;
-}
-
-export interface GetVoiceDataVariables {
-  readonly id?: string;
+export interface IncViewsVariables {
+  readonly id: any;
 }
 
 /* tslint:disable */
@@ -775,65 +1185,26 @@ export interface GetVoiceDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: CreateVoiceData
+// GraphQL mutation operation: IncUsage
 // ====================================================
 
-export interface CreateVoiceData_createVoiceData {
-  readonly __typename: "VoiceData";
-  readonly id: string;
+export interface IncUsage_update_works {
+  readonly __typename: "works_mutation_response";
+  /**
+   * number of affected rows by the mutation
+   */
+  readonly affected_rows: number;
 }
 
-export interface CreateVoiceData {
-  readonly createVoiceData: CreateVoiceData_createVoiceData;
+export interface IncUsage {
+  /**
+   * update data of the table: "works"
+   */
+  readonly update_works: IncUsage_update_works;
 }
 
-export interface CreateVoiceDataVariables {
-  readonly workId?: string;
-  readonly fileUrl: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: DeleteVoiceData
-// ====================================================
-
-export interface DeleteVoiceData_deleteVoiceData {
-  readonly __typename: "VoiceData";
-  readonly id: string;
-}
-
-export interface DeleteVoiceData {
-  readonly deleteVoiceData: DeleteVoiceData_deleteVoiceData;
-}
-
-export interface DeleteVoiceDataVariables {
-  readonly id?: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: ReportWork
-// ====================================================
-
-export interface ReportWork_createReport {
-  readonly __typename: "Report";
-  readonly id: string;
-}
-
-export interface ReportWork {
-  readonly createReport: ReportWork_createReport;
-}
-
-export interface ReportWorkVariables {
-  readonly user?: string;
-  readonly work?: string;
-  readonly reason: string;
+export interface IncUsageVariables {
+  readonly id: any;
 }
 
 /* tslint:disable */
@@ -843,540 +1214,6 @@ export interface ReportWorkVariables {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
-
-export enum Role {
-  ADMIN = "ADMIN",
-  CARETAKER = "CARETAKER",
-}
-
-export enum UserOrderByInput {
-  createdAt_ASC = "createdAt_ASC",
-  createdAt_DESC = "createdAt_DESC",
-  email_ASC = "email_ASC",
-  email_DESC = "email_DESC",
-  id_ASC = "id_ASC",
-  id_DESC = "id_DESC",
-  imageUrl_ASC = "imageUrl_ASC",
-  imageUrl_DESC = "imageUrl_DESC",
-  name_ASC = "name_ASC",
-  name_DESC = "name_DESC",
-  password_ASC = "password_ASC",
-  password_DESC = "password_DESC",
-  role_ASC = "role_ASC",
-  role_DESC = "role_DESC",
-  updatedAt_ASC = "updatedAt_ASC",
-  updatedAt_DESC = "updatedAt_DESC",
-}
-
-export enum WorkOrderByInput {
-  createdAt_ASC = "createdAt_ASC",
-  createdAt_DESC = "createdAt_DESC",
-  description_ASC = "description_ASC",
-  description_DESC = "description_DESC",
-  id_ASC = "id_ASC",
-  id_DESC = "id_DESC",
-  imageUrl_ASC = "imageUrl_ASC",
-  imageUrl_DESC = "imageUrl_DESC",
-  name_ASC = "name_ASC",
-  name_DESC = "name_DESC",
-  updatedAt_ASC = "updatedAt_ASC",
-  updatedAt_DESC = "updatedAt_DESC",
-  usage_ASC = "usage_ASC",
-  usage_DESC = "usage_DESC",
-  views_ASC = "views_ASC",
-  views_DESC = "views_DESC",
-  visibility_ASC = "visibility_ASC",
-  visibility_DESC = "visibility_DESC",
-}
-
-export interface CategoryWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly name?: string;
-  readonly name_not?: string;
-  readonly name_in?: ReadonlyArray<string>;
-  readonly name_not_in?: ReadonlyArray<string>;
-  readonly name_lt?: string;
-  readonly name_lte?: string;
-  readonly name_gt?: string;
-  readonly name_gte?: string;
-  readonly name_contains?: string;
-  readonly name_not_contains?: string;
-  readonly name_starts_with?: string;
-  readonly name_not_starts_with?: string;
-  readonly name_ends_with?: string;
-  readonly name_not_ends_with?: string;
-  readonly works_every?: WorkWhereInput;
-  readonly works_some?: WorkWhereInput;
-  readonly works_none?: WorkWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<CategoryWhereInput>;
-  readonly OR?: ReadonlyArray<CategoryWhereInput>;
-  readonly NOT?: ReadonlyArray<CategoryWhereInput>;
-}
-
-export interface CommentWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly content?: string;
-  readonly content_not?: string;
-  readonly content_in?: ReadonlyArray<string>;
-  readonly content_not_in?: ReadonlyArray<string>;
-  readonly content_lt?: string;
-  readonly content_lte?: string;
-  readonly content_gt?: string;
-  readonly content_gte?: string;
-  readonly content_contains?: string;
-  readonly content_not_contains?: string;
-  readonly content_starts_with?: string;
-  readonly content_not_starts_with?: string;
-  readonly content_ends_with?: string;
-  readonly content_not_ends_with?: string;
-  readonly user?: UserWhereInput;
-  readonly work?: WorkWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<CommentWhereInput>;
-  readonly OR?: ReadonlyArray<CommentWhereInput>;
-  readonly NOT?: ReadonlyArray<CommentWhereInput>;
-}
-
-export interface ImageDataWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly fileUrl?: string;
-  readonly fileUrl_not?: string;
-  readonly fileUrl_in?: ReadonlyArray<string>;
-  readonly fileUrl_not_in?: ReadonlyArray<string>;
-  readonly fileUrl_lt?: string;
-  readonly fileUrl_lte?: string;
-  readonly fileUrl_gt?: string;
-  readonly fileUrl_gte?: string;
-  readonly fileUrl_contains?: string;
-  readonly fileUrl_not_contains?: string;
-  readonly fileUrl_starts_with?: string;
-  readonly fileUrl_not_starts_with?: string;
-  readonly fileUrl_ends_with?: string;
-  readonly fileUrl_not_ends_with?: string;
-  readonly work?: WorkWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<ImageDataWhereInput>;
-  readonly OR?: ReadonlyArray<ImageDataWhereInput>;
-  readonly NOT?: ReadonlyArray<ImageDataWhereInput>;
-}
-
-export interface ReportWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly reason?: string;
-  readonly reason_not?: string;
-  readonly reason_in?: ReadonlyArray<string>;
-  readonly reason_not_in?: ReadonlyArray<string>;
-  readonly reason_lt?: string;
-  readonly reason_lte?: string;
-  readonly reason_gt?: string;
-  readonly reason_gte?: string;
-  readonly reason_contains?: string;
-  readonly reason_not_contains?: string;
-  readonly reason_starts_with?: string;
-  readonly reason_not_starts_with?: string;
-  readonly reason_ends_with?: string;
-  readonly reason_not_ends_with?: string;
-  readonly user?: UserWhereInput;
-  readonly work?: WorkWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<ReportWhereInput>;
-  readonly OR?: ReadonlyArray<ReportWhereInput>;
-  readonly NOT?: ReadonlyArray<ReportWhereInput>;
-}
-
-export interface UserWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly name?: string;
-  readonly name_not?: string;
-  readonly name_in?: ReadonlyArray<string>;
-  readonly name_not_in?: ReadonlyArray<string>;
-  readonly name_lt?: string;
-  readonly name_lte?: string;
-  readonly name_gt?: string;
-  readonly name_gte?: string;
-  readonly name_contains?: string;
-  readonly name_not_contains?: string;
-  readonly name_starts_with?: string;
-  readonly name_not_starts_with?: string;
-  readonly name_ends_with?: string;
-  readonly name_not_ends_with?: string;
-  readonly email?: string;
-  readonly email_not?: string;
-  readonly email_in?: ReadonlyArray<string>;
-  readonly email_not_in?: ReadonlyArray<string>;
-  readonly email_lt?: string;
-  readonly email_lte?: string;
-  readonly email_gt?: string;
-  readonly email_gte?: string;
-  readonly email_contains?: string;
-  readonly email_not_contains?: string;
-  readonly email_starts_with?: string;
-  readonly email_not_starts_with?: string;
-  readonly email_ends_with?: string;
-  readonly email_not_ends_with?: string;
-  readonly password?: string;
-  readonly password_not?: string;
-  readonly password_in?: ReadonlyArray<string>;
-  readonly password_not_in?: ReadonlyArray<string>;
-  readonly password_lt?: string;
-  readonly password_lte?: string;
-  readonly password_gt?: string;
-  readonly password_gte?: string;
-  readonly password_contains?: string;
-  readonly password_not_contains?: string;
-  readonly password_starts_with?: string;
-  readonly password_not_starts_with?: string;
-  readonly password_ends_with?: string;
-  readonly password_not_ends_with?: string;
-  readonly imageUrl?: string;
-  readonly imageUrl_not?: string;
-  readonly imageUrl_in?: ReadonlyArray<string>;
-  readonly imageUrl_not_in?: ReadonlyArray<string>;
-  readonly imageUrl_lt?: string;
-  readonly imageUrl_lte?: string;
-  readonly imageUrl_gt?: string;
-  readonly imageUrl_gte?: string;
-  readonly imageUrl_contains?: string;
-  readonly imageUrl_not_contains?: string;
-  readonly imageUrl_starts_with?: string;
-  readonly imageUrl_not_starts_with?: string;
-  readonly imageUrl_ends_with?: string;
-  readonly imageUrl_not_ends_with?: string;
-  readonly role?: Role;
-  readonly role_not?: Role;
-  readonly role_in?: ReadonlyArray<Role>;
-  readonly role_not_in?: ReadonlyArray<Role>;
-  readonly works_every?: WorkWhereInput;
-  readonly works_some?: WorkWhereInput;
-  readonly works_none?: WorkWhereInput;
-  readonly liked_every?: WorkWhereInput;
-  readonly liked_some?: WorkWhereInput;
-  readonly liked_none?: WorkWhereInput;
-  readonly favourited_every?: WorkWhereInput;
-  readonly favourited_some?: WorkWhereInput;
-  readonly favourited_none?: WorkWhereInput;
-  readonly reports_every?: ReportWhereInput;
-  readonly reports_some?: ReportWhereInput;
-  readonly reports_none?: ReportWhereInput;
-  readonly comments_every?: CommentWhereInput;
-  readonly comments_some?: CommentWhereInput;
-  readonly comments_none?: CommentWhereInput;
-  readonly following_every?: UserWhereInput;
-  readonly following_some?: UserWhereInput;
-  readonly following_none?: UserWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<UserWhereInput>;
-  readonly OR?: ReadonlyArray<UserWhereInput>;
-  readonly NOT?: ReadonlyArray<UserWhereInput>;
-}
-
-export interface VoiceDataWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly fileUrl?: string;
-  readonly fileUrl_not?: string;
-  readonly fileUrl_in?: ReadonlyArray<string>;
-  readonly fileUrl_not_in?: ReadonlyArray<string>;
-  readonly fileUrl_lt?: string;
-  readonly fileUrl_lte?: string;
-  readonly fileUrl_gt?: string;
-  readonly fileUrl_gte?: string;
-  readonly fileUrl_contains?: string;
-  readonly fileUrl_not_contains?: string;
-  readonly fileUrl_starts_with?: string;
-  readonly fileUrl_not_starts_with?: string;
-  readonly fileUrl_ends_with?: string;
-  readonly fileUrl_not_ends_with?: string;
-  readonly work?: WorkWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<VoiceDataWhereInput>;
-  readonly OR?: ReadonlyArray<VoiceDataWhereInput>;
-  readonly NOT?: ReadonlyArray<VoiceDataWhereInput>;
-}
-
-export interface WorkWhereInput {
-  readonly id?: string;
-  readonly id_not?: string;
-  readonly id_in?: ReadonlyArray<string>;
-  readonly id_not_in?: ReadonlyArray<string>;
-  readonly id_lt?: string;
-  readonly id_lte?: string;
-  readonly id_gt?: string;
-  readonly id_gte?: string;
-  readonly id_contains?: string;
-  readonly id_not_contains?: string;
-  readonly id_starts_with?: string;
-  readonly id_not_starts_with?: string;
-  readonly id_ends_with?: string;
-  readonly id_not_ends_with?: string;
-  readonly name?: string;
-  readonly name_not?: string;
-  readonly name_in?: ReadonlyArray<string>;
-  readonly name_not_in?: ReadonlyArray<string>;
-  readonly name_lt?: string;
-  readonly name_lte?: string;
-  readonly name_gt?: string;
-  readonly name_gte?: string;
-  readonly name_contains?: string;
-  readonly name_not_contains?: string;
-  readonly name_starts_with?: string;
-  readonly name_not_starts_with?: string;
-  readonly name_ends_with?: string;
-  readonly name_not_ends_with?: string;
-  readonly description?: string;
-  readonly description_not?: string;
-  readonly description_in?: ReadonlyArray<string>;
-  readonly description_not_in?: ReadonlyArray<string>;
-  readonly description_lt?: string;
-  readonly description_lte?: string;
-  readonly description_gt?: string;
-  readonly description_gte?: string;
-  readonly description_contains?: string;
-  readonly description_not_contains?: string;
-  readonly description_starts_with?: string;
-  readonly description_not_starts_with?: string;
-  readonly description_ends_with?: string;
-  readonly description_not_ends_with?: string;
-  readonly visibility?: boolean;
-  readonly visibility_not?: boolean;
-  readonly views?: number;
-  readonly views_not?: number;
-  readonly views_in?: ReadonlyArray<number>;
-  readonly views_not_in?: ReadonlyArray<number>;
-  readonly views_lt?: number;
-  readonly views_lte?: number;
-  readonly views_gt?: number;
-  readonly views_gte?: number;
-  readonly usage?: number;
-  readonly usage_not?: number;
-  readonly usage_in?: ReadonlyArray<number>;
-  readonly usage_not_in?: ReadonlyArray<number>;
-  readonly usage_lt?: number;
-  readonly usage_lte?: number;
-  readonly usage_gt?: number;
-  readonly usage_gte?: number;
-  readonly imageUrl?: string;
-  readonly imageUrl_not?: string;
-  readonly imageUrl_in?: ReadonlyArray<string>;
-  readonly imageUrl_not_in?: ReadonlyArray<string>;
-  readonly imageUrl_lt?: string;
-  readonly imageUrl_lte?: string;
-  readonly imageUrl_gt?: string;
-  readonly imageUrl_gte?: string;
-  readonly imageUrl_contains?: string;
-  readonly imageUrl_not_contains?: string;
-  readonly imageUrl_starts_with?: string;
-  readonly imageUrl_not_starts_with?: string;
-  readonly imageUrl_ends_with?: string;
-  readonly imageUrl_not_ends_with?: string;
-  readonly user?: UserWhereInput;
-  readonly category?: CategoryWhereInput;
-  readonly imageDatas_every?: ImageDataWhereInput;
-  readonly imageDatas_some?: ImageDataWhereInput;
-  readonly imageDatas_none?: ImageDataWhereInput;
-  readonly voiceDatas_every?: VoiceDataWhereInput;
-  readonly voiceDatas_some?: VoiceDataWhereInput;
-  readonly voiceDatas_none?: VoiceDataWhereInput;
-  readonly likedBy_every?: UserWhereInput;
-  readonly likedBy_some?: UserWhereInput;
-  readonly likedBy_none?: UserWhereInput;
-  readonly favouritedBy_every?: UserWhereInput;
-  readonly favouritedBy_some?: UserWhereInput;
-  readonly favouritedBy_none?: UserWhereInput;
-  readonly reports_every?: ReportWhereInput;
-  readonly reports_some?: ReportWhereInput;
-  readonly reports_none?: ReportWhereInput;
-  readonly comments_every?: CommentWhereInput;
-  readonly comments_some?: CommentWhereInput;
-  readonly comments_none?: CommentWhereInput;
-  readonly createdAt?: any;
-  readonly createdAt_not?: any;
-  readonly createdAt_in?: ReadonlyArray<any>;
-  readonly createdAt_not_in?: ReadonlyArray<any>;
-  readonly createdAt_lt?: any;
-  readonly createdAt_lte?: any;
-  readonly createdAt_gt?: any;
-  readonly createdAt_gte?: any;
-  readonly updatedAt?: any;
-  readonly updatedAt_not?: any;
-  readonly updatedAt_in?: ReadonlyArray<any>;
-  readonly updatedAt_not_in?: ReadonlyArray<any>;
-  readonly updatedAt_lt?: any;
-  readonly updatedAt_lte?: any;
-  readonly updatedAt_gt?: any;
-  readonly updatedAt_gte?: any;
-  readonly AND?: ReadonlyArray<WorkWhereInput>;
-  readonly OR?: ReadonlyArray<WorkWhereInput>;
-  readonly NOT?: ReadonlyArray<WorkWhereInput>;
-}
 
 //==============================================================
 // END Enums and Input Objects

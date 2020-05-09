@@ -1,0 +1,23 @@
+.page-scroll-spy-wrapper {
+	position: relative;
+}
+
+.page-scroll-spy-children {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.page-scroll-spy-text {
+	font-family: 'Jaapokki';
+	font-size: 1rem;
+}
+
+.page-scroll-spy-text::before {
+	content: '[';
+}
+
+.page-scroll-spy-text::after {
+	content: ']';
+}

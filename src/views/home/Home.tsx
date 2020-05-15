@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useRef } from "react";
-import { Grid, Container } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import gsap, { Expo } from 'gsap';
 import "./Home.css";
 

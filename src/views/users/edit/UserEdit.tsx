@@ -29,14 +29,11 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 
 	const [userEdit] = useMutation<Mutation, Variables>(USER_EDIT);
 
-	if (state.isRedirected) {
-		return (
-			<Redirect to={`/users/${id}`}/>
-		);
-	}
-
 	return (
 		<Container>
+			{
+				state.isRedirected && <Redirect to={`/users/${id}`}/>
+			}
 			<Grid
 				container
 				direction="column"

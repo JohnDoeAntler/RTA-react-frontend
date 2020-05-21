@@ -54,6 +54,10 @@ export const Work: React.FC<IWorkProps> = (props) => {
 
 	return (
 		<div>
+			<div className="work-background-text-wrapper">
+				<div className="work-background-text">{data?.works_by_pk.name.repeat(3)}</div>
+			</div>
+
 			<PageInfo text="Work Detail Page"/>
 
 			<div className="page-scroll-spy-wrapper">

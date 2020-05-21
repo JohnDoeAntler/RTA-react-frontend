@@ -17,7 +17,8 @@ interface IWorksProps {}
 export const Works: React.FC<IWorksProps> = (props) => {
 
 	const [state, setState] = useState({
-		filter: "",
+		filter: '',
+		delayedFilter: '',
 	});
 
 	const { data, loading } = useQuery<GetWorks, GetWorksVariables>(GET_WORKS, {
@@ -25,6 +26,12 @@ export const Works: React.FC<IWorksProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: "no-cache",
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -88,7 +95,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						<Grid item>
 							{
 								data && (
-									<WorkList works={data.works}/>
+									<WorkList works={data.works} filter={state.delayedFilter}/>
 								)
 							}
 						</Grid>

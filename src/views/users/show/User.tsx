@@ -65,11 +65,11 @@ export const User: React.FC<IUserProps> = (props) => {
 								<hr/>
 
 								<Grid container spacing={1}>
-									<Grid item xs={6}>
+									<Grid item xs={12} md={6}>
 										<InfoBlock upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
 									</Grid>
 
-									<Grid item xs={6}>
+									<Grid item xs={12} md={6}>
 										<InfoBlock upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
 									</Grid>
 								</Grid>
@@ -113,7 +113,7 @@ export const User: React.FC<IUserProps> = (props) => {
 									}}></div>
 
 								<Grid container direction="column" spacing={2}>
-									<Grid item>{data && <WorkList works={data.users_by_pk.works} />}</Grid>
+									<Grid item>{data && <WorkList works={data.users_by_pk.works} filter=""/>}</Grid>
 								</Grid>
 							</Grid>
 						</Grid>

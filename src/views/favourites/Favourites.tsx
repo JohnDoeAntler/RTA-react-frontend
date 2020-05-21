@@ -18,6 +18,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: '',
+		delayedFilter: '',
 	})
 
 	const { data } = useQuery<GetFavourites, GetFavouritesVariables>(GET_FAVOURITES, {
@@ -26,8 +27,13 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			})
+		}
 	});
-
 	
 
 	return (
@@ -81,7 +87,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 						<Grid item>
 							{
 								data && (
-									<WorkList works={data.favourites.map(x => x.work).map(x => x)}/>
+									<WorkList works={data.favourites.map(x => x.work).map(x => x)} filter={state.delayedFilter}/>
 								)
 							}
 						</Grid>

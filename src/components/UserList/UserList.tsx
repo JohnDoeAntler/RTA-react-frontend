@@ -20,12 +20,22 @@ interface IUserListProps {
 		updated_at: any,
 	}>;
 
+	filter: string;
+
 }
 
-export const UserList: React.FC<IUserListProps> = ({ users }) => {
+export const UserList: React.FC<IUserListProps> = ({ users, filter }) => {
+
 	const [index, setIndex] = useState(0);
 
+	const [_filter, setFilter] = useState("");
+
 	const wrapper = useRef<HTMLDivElement>(null);
+
+	if (filter != _filter) {
+		setFilter(filter);
+		setIndex(0);
+	}
 
 	return (
 		<div className="user-list-wrapper">
@@ -90,7 +100,6 @@ export const UserList: React.FC<IUserListProps> = ({ users }) => {
 												upperText={el.name}
 												lowerText={el.created_at.split("T")[0]}
 												color={"#" + Math.random().toString(16).substr(-6)}
-												isListItem
 											/>
 										</Link>
 									</Grid>

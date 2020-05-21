@@ -7,6 +7,7 @@ import { ListScrollSpy } from '../ListScrollSpy/ListScrollSpy';
 import './WorkList.css';
 import { FallbackText } from '../FallbackText/FallbackText';
 import { Link } from 'react-router-dom';
+import { Card } from '../Card/Card';
 
 interface IWorkListProps {
 
@@ -20,6 +21,8 @@ interface IWorkListProps {
 		created_at: any,
 		updated_at: any,
 	}>;
+
+	filter: string;
 
 }
 
@@ -94,9 +97,11 @@ export const WorkList: React.FC<IWorkListProps> = ({works}) => {
 										key={el.id}
 									>
 										<Link to={`/works/${el.id}`}>
-											<WorkItem
-												key={el.id}
-												{...el}
+											<Card
+												imageUrl={el.imageUrl}
+												upperText={el.name}
+												lowerText={el.description}
+												color={"#" + Math.random().toString(16).substr(-6)}
 											/>
 										</Link>
 									</Grid>

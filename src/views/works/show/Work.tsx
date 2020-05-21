@@ -179,11 +179,11 @@ export const Work: React.FC<IWorkProps> = (props) => {
 										width: '50%',
 									}}>
 										<Grid container spacing={1}>
-											<Grid item xs={6}>
+											<Grid item xs={12} md={6}>
 												<InfoBlock upperText={data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString() || ''} lowerText="likes"/>
 											</Grid>
 	
-											<Grid item xs={6}>
+											<Grid item xs={12} md={6}>
 												<InfoBlock upperText={data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString() || ''} lowerText="favourites"/>
 											</Grid>
 										</Grid>

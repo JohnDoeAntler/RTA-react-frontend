@@ -16,6 +16,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: '',
+		delayedFilter: '',
 	});
 
 	const { data } = useQuery<GetFollowings, GetFollowingsVariables>(GET_FOLLOWINGS, {
@@ -24,6 +25,12 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -76,7 +83,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
 							{
-								data && <UserList users={data.users}/>
+								data && <UserList users={data.users} filter={state.delayedFilter}/>
 							}
 						</Grid>
 					</Grid>

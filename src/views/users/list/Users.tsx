@@ -12,6 +12,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: "",
+		delayedFilter: "",
 	});
 
 	const { data } = useQuery<GetUsers, GetUsersVariables>(GET_USERS, {
@@ -19,6 +20,12 @@ export const Users: React.FC<IUsersProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -71,7 +78,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
 							{
-								data && <UserList users={data.users}/>
+								data && <UserList users={data.users} filter={state.delayedFilter}/>
 							}
 						</Grid>
 					</Grid>

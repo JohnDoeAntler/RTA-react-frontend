@@ -15,8 +15,6 @@ interface ICardProps {
 
 	color?: string;
 
-	isListItem?: boolean;
-
 }
 
 export const Card: React.FC<ICardProps> = (props) => {
@@ -25,32 +23,26 @@ export const Card: React.FC<ICardProps> = (props) => {
 	const picture = useRef<HTMLDivElement>(null);
 	const wrapper = useRef<HTMLDivElement>(null);
 
-	const isListItem = props.isListItem || false;
-
 	const handleMouseEnter = () => {
-		if (isListItem) {
-			gsap.to(
-				wrapper.current,
-				0.5,
-				{
-					x: 20,
-					ease: Expo.easeOut,
-				},
-			);
-		}
+		gsap.to(
+			wrapper.current,
+			0.5,
+			{
+				x: 20,
+				ease: Expo.easeOut,
+			},
+		);
 	}
 
 	const handleMouseLeave = () => {
-		if (isListItem) {
-			gsap.to(
-				wrapper.current,
-				0.5,
-				{
-					x: 0,
-					ease: Expo.easeOut,
-				}
-			);
-		}
+		gsap.to(
+			wrapper.current,
+			0.5,
+			{
+				x: 0,
+				ease: Expo.easeOut,
+			}
+		);
 	}
 
 	return (

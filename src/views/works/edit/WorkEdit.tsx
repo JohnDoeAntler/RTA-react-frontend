@@ -29,12 +29,11 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 
 	const [workEdit] = useMutation<Mutation, Variables>(WORK_EDIT);
 
-	if (state.isRedirected) {
-		return <Redirect to={`/works/${id}`} />;
-	}
-
 	return (
 		<Container>
+			{
+				state.isRedirected && <Redirect to={`/works/${id}`} />
+			}
 			<Grid
 				container
 				direction="column"

@@ -184,11 +184,11 @@ export const Work: React.FC<IWorkProps> = (props) => {
 									}}>
 										<Grid container spacing={1}>
 											<Grid item xs={12} md={6}>
-												<InfoBlock upperText={data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString() || ''} lowerText="likes"/>
+												<InfoBlock color="#ff7" upperText={data?.works_by_pk.likes_aggregate.aggregate.count.toLocaleString() || ''} lowerText="likes"/>
 											</Grid>
 	
 											<Grid item xs={12} md={6}>
-												<InfoBlock upperText={data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString() || ''} lowerText="favourites"/>
+												<InfoBlock color="#f77" upperText={data?.works_by_pk.favourites_aggregate.aggregate.count.toLocaleString() || ''} lowerText="favourites"/>
 											</Grid>
 										</Grid>
 									</div>

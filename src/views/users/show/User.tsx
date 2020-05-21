@@ -66,11 +66,11 @@ export const User: React.FC<IUserProps> = (props) => {
 
 								<Grid container spacing={1}>
 									<Grid item xs={12} md={6}>
-										<InfoBlock upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
+										<InfoBlock color="#f77" upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
 									</Grid>
 
 									<Grid item xs={12} md={6}>
-										<InfoBlock upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
+										<InfoBlock color="#7ff"upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
 									</Grid>
 								</Grid>
 

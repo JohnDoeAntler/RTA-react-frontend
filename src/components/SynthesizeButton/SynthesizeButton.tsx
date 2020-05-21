@@ -17,9 +17,11 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 	const [state, setState] = useState<{
 		file: File | null;
 		open: boolean;
+		isError: boolean;
 	}>({
 		file: null,
 		open: false,
+		isError: false,
 	});
 
 	return (
@@ -49,30 +51,42 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 				aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Synthesize</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo quisquam dicta repellat tenetur laboriosam sint provident tempore!
-					</DialogContentText>
+					{
+						state.isError ? (
+							<p>
+								For work owner: Please confirm the training material on both audio and image is enough to be synthesized.
+								<br/>
+								For user: Please confirm the uploaded video in appropriate format.
+							</p>
+						) : (
+							<>
+								<DialogContentText>
+									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo quisquam dicta repellat tenetur laboriosam sint provident tempore!
+								</DialogContentText>
 
-					<input
-						type="file"
-						id="raised-button-file"
-						accept="video/mp4"
-						style={{
-							display: "none",
-						}}
-						onChange={(e) => {
-							setState({
-								...state,
-								file: e.target.files && e.target.files[0],
-							});
-						}}
-					/>
+								<input
+									type="file"
+									id="raised-button-file"
+									accept="video/mp4"
+									style={{
+										display: "none",
+									}}
+									onChange={(e) => {
+										setState({
+											...state,
+											file: e.target.files && e.target.files[0],
+										});
+									}}
+								/>
 
-					<label htmlFor="raised-button-file">
-						<Button component="span" fullWidth>
-							{!!state.file ? state.file.name : "Upload"}
-						</Button>
-					</label>
+								<label htmlFor="raised-button-file">
+									<Button component="span" fullWidth>
+										{!!state.file ? state.file.name : "Upload"}
+									</Button>
+								</label>
+							</>
+						)
+					}
 				</DialogContent>
 				<DialogActions>
 					<Button
@@ -105,6 +119,11 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 										...state,
 										open: false,
 									});
+								}).catch(() => {
+									setState({
+										...state,
+										isError: true,
+									})
 								});
 							}
 						}}>

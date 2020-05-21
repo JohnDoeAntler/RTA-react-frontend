@@ -106,7 +106,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 												user.id === data?.works_by_pk.user.id && (
 													<>
 														<Grid item>
-															<CircleButton type="button" backgroundColor="black">
+															<CircleButton type="button" backgroundColor="black" alt="View image training files.">
 																<Link to={`/works/${params.id}/images`}>
 																	<IconButton>
 																		<Photo />
@@ -116,7 +116,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 														</Grid>
 
 														<Grid item>
-															<CircleButton type="button" backgroundColor="black">
+															<CircleButton type="button" backgroundColor="black" alt="View audio training files.">
 																<Link to={`/works/${params.id}/audios`}>
 																	<IconButton>
 																		<Audiotrack />
@@ -126,7 +126,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 														</Grid>
 
 														<Grid item>
-															<CircleButton type="button" backgroundColor="black">
+															<CircleButton type="button" backgroundColor="black" alt="Edit work information.">
 																<Link to={`/works/${params.id}/edit`}>
 																	<IconButton>
 																		<Edit />

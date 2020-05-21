@@ -111,7 +111,7 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 
 									<Grid spacing={1} container>
 										<Grid item>
-											<CircleButton type="submit" backgroundColor="black">
+											<CircleButton type="submit" backgroundColor="black" alt="Submit.">
 												<IconButton>
 													<Done />
 												</IconButton>

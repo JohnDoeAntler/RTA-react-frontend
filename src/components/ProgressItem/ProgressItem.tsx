@@ -55,7 +55,7 @@ export const ProgressItem: React.FC<IProgressItemProps> = (props) => {
 					<Grid container spacing={1} wrap="nowrap">
 						<Grid item>
 							<Link to={`/works/${props.work.id}`}>
-								<CircleButton type="button" backgroundColor="black">
+								<CircleButton type="button" backgroundColor="black" alt="Goto synthesization work.">
 									<IconButton>
 										<Portrait />
 									</IconButton>
@@ -65,7 +65,7 @@ export const ProgressItem: React.FC<IProgressItemProps> = (props) => {
 
 						<Grid item>
 							<a href={`${process.env.REACT_APP_FILE_SERVER_ENDPOINT}/${props.drivingVideoUrl}`} rel="noreferrer noopener" target="_blank">
-								<CircleButton type="button" backgroundColor="black">
+								<CircleButton type="button" backgroundColor="black" alt="View driving video.">
 									<IconButton>
 										<Input />
 									</IconButton>
@@ -76,7 +76,7 @@ export const ProgressItem: React.FC<IProgressItemProps> = (props) => {
 						{props.resultUrl && (
 							<Grid item>
 								<a href={`${process.env.REACT_APP_FILE_SERVER_ENDPOINT}/${props.resultUrl}`} rel="noreferrer noopener" target="_blank">
-									<CircleButton type="button" backgroundColor="black">
+									<CircleButton type="button" backgroundColor="black" alt="View synthesization result.">
 										<IconButton>
 											<Movie />
 										</IconButton>

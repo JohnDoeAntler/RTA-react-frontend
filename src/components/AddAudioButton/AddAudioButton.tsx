@@ -27,6 +27,7 @@ export const AddAudioButton: React.FC<IAddAudioButtonProps> = (props) => {
 			<CircleButton
 				type="button"
 				backgroundColor="black"
+				alt="Add audio training file."
 				onClick={() =>
 					setState({
 						...state,

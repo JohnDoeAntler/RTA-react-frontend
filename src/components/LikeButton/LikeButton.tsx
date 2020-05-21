@@ -42,6 +42,7 @@ export const LikeButton: React.FC<ILikeButtonProps> = (props) => {
 		<CircleButton
 			type="button"
 			backgroundColor={state.isLiked ? "#dddd00" : "black"}
+			alt="Like work."
 			onClick={async () => {
 				setState({
 					...state,

@@ -29,6 +29,7 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 			<CircleButton
 				type="button"
 				backgroundColor="black"
+				alt="Send synthesization request."
 				onClick={() =>
 					setState({
 						...state,

@@ -28,6 +28,7 @@ export const AddImageButton: React.FC<IAddImageButtonProps> = (props) => {
 			<CircleButton
 				type="button"
 				backgroundColor="black"
+				alt="Add image training file."
 				onClick={() =>
 					setState({
 						...state,

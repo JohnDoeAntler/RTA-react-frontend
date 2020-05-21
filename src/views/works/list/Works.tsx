@@ -76,7 +76,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 
 						<Grid item>
 							<Link to="/works/new">
-								<CircleButton type="button" backgroundColor="black">
+								<CircleButton type="button" backgroundColor="black" alt="Create work.">
 									<IconButton>
 										<Add />
 									</IconButton>

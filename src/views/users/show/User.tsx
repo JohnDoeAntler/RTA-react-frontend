@@ -81,7 +81,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
 								{currentUser.id === user.id ? (
 									<Link to={`/users/${user.id}/edit`}>
-										<CircleButton backgroundColor="black" type="button">
+										<CircleButton backgroundColor="black" type="button" alt="Edit user information.">
 											<IconButton>
 												<Edit />
 											</IconButton>

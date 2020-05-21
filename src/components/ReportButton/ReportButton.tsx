@@ -25,6 +25,7 @@ export const ReportButton: React.FC<IReportButtonProps> = (props) => {
 			<CircleButton
 				type="button"
 				backgroundColor="black"
+				alt="Report work."
 				onClick={() => {
 					setState({
 						...state,

@@ -34,6 +34,7 @@ export const CommentButton: React.FC<ICommentButtonProps> = (props) => {
 			<CircleButton
 				type="button"
 				backgroundColor="black"
+				alt="Add comment."
 				onClick={() =>
 					setState({
 						...state,

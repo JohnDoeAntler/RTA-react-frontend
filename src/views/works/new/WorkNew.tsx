@@ -180,7 +180,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 
 								<Grid spacing={1} container>
 									<Grid item>
-										<CircleButton type="submit" backgroundColor="black">
+										<CircleButton type="submit" backgroundColor="black" alt="Create work.">
 											<IconButton>
 												<Done />
 											</IconButton>
@@ -188,7 +188,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 									</Grid>
 
 									<Grid item>
-										<CircleButton type="reset" backgroundColor="black">
+										<CircleButton type="reset" backgroundColor="black" alt="Reset.">
 											<IconButton>
 												<Replay />
 											</IconButton>

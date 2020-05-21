@@ -151,7 +151,7 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 
 									<Grid spacing={1} container>
 										<Grid item>
-											<CircleButton type="submit" backgroundColor="black">
+											<CircleButton type="submit" backgroundColor="black" alt="Edit work information.">
 												<IconButton>
 													<Done />
 												</IconButton>

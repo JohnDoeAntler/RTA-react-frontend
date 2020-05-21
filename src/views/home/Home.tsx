@@ -11,26 +11,6 @@ export const Home: React.FC<IHomeProps> = (props) => {
 
 	const img = useRef<HTMLImageElement>(null);
 
-	useEffect(() => {
-
-		const listener = (e: MouseEvent) => {
-			gsap.to(
-				img.current,
-				1,
-				{
-					x: (document.documentElement.clientWidth / 2 - e.clientX) / 100,
-					y: (document.documentElement.clientHeight / 2 - e.clientY) / 100,
-					ease: Expo.easeOut,
-				}
-			)
-		}
-
-		document.addEventListener('mousemove', listener);
-
-		return () => document.removeEventListener('mousemove', listener);
-
-	}, []);
-
 	return (
 		<div className="home-wrapper">
 			<Grid
@@ -75,7 +55,7 @@ export const Home: React.FC<IHomeProps> = (props) => {
 			</Grid>
 
 			<div className="home-img-wrapper">
-				<img ref={img} className="home-img" src="https://images.pexels.com/photos/707676/pexels-photo-707676.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt=""/>
+				<img ref={img} className="home-img" src="https://images.pexels.com/photos/3617559/pexels-photo-3617559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt=""/>
 			</div>
 		</div>
 	);

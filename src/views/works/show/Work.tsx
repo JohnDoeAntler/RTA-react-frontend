@@ -22,7 +22,7 @@ import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
 import { PageInfo } from "../../../components/PageInfo/PageInfo";
 import { InfoBlock } from "../../../components/InfoBlock/InfoBlock";
 import { TitleLine } from "../../../components/TitleLine/TitleLine";
-import gsap, { Power1 } from 'gsap';
+import gsap, { Power1, Expo } from 'gsap';
 
 interface IWorkProps {}
 
@@ -55,6 +55,10 @@ export const Work: React.FC<IWorkProps> = (props) => {
 	});
 
 	const ref = useRef<HTMLDivElement>(null);
+	const image = useRef<HTMLImageElement>(null);
+	const transistor = useRef<HTMLDivElement>(null);
+	const title = useRef<HTMLDivElement>(null);
+	const titleText = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 
@@ -63,14 +67,13 @@ export const Work: React.FC<IWorkProps> = (props) => {
 		const callDistort = function () {
 			const newPos = window.pageYOffset;
 			const diff = newPos - currentPos;
-			const speed = diff * 0.1;
+			const speed = diff * 0.05;
 
 			gsap.to(
 				ref.current,
 				.5,
 				{
 					skewY: speed * .5,
-					scaleY: 1 + Math.abs(speed * 0.005),
 					ease: Power1.easeOut,
 				}
 			)
@@ -79,6 +82,67 @@ export const Work: React.FC<IWorkProps> = (props) => {
 		};
 
 		callDistort();
+
+		gsap.fromTo(
+			image.current,
+			1.5,
+			{
+				scale: 1.5,
+				y: "10rem",
+				ease: Expo.easeInOut,
+			}, {
+				scale: 1,
+				y: "0rem",
+				ease: Expo.easeInOut,
+			}
+		)
+
+		gsap.fromTo(
+			transistor.current,
+			2,
+			{
+				height: "100%",
+				ease: Expo.easeInOut,
+			},
+			{
+				height: "0%",
+				ease: Expo.easeInOut,
+			}
+		);
+
+		gsap.fromTo(
+			transistor.current,
+			1,
+			{
+				y: "0",
+				ease: Expo.easeInOut,
+				delay: 2,
+			},
+			{
+				y: "-100%",
+				ease: Expo.easeInOut,
+				delay: 2,
+			}
+		);
+
+		title.current && title.current.style.setProperty("overflow", "hidden");
+		title.current && title.current.style.setProperty("height", "5rem");
+
+		gsap.fromTo(
+			titleText.current,
+			1,
+			{
+				y: "100%",
+				ease: Expo.easeInOut,
+				delay: .5,
+			}, {
+				y: "0%",
+				ease: Expo.easeInOut,
+				delay: .5,
+			}
+		)
+
+
 	}, []);
 
 
@@ -95,7 +159,9 @@ export const Work: React.FC<IWorkProps> = (props) => {
 	
 				<PageInfo text="Work Detail Page"/>
 	
-				<div className="work-image-wrapper">
+				<div ref={image} className="work-image-wrapper">
+					<div ref={transistor} className="transistor"></div>
+
 					<img className="work-image" src={data?.works_by_pk.imageUrl || ""} alt="work logo." />
 				</div>
 	
@@ -115,13 +181,19 @@ export const Work: React.FC<IWorkProps> = (props) => {
 									spacing={2}
 								>
 									<Grid item>
-										<div className="work-title-text">{data?.works_by_pk.name}</div>
+										<div ref={title}>
+											<div ref={titleText} className="work-title-text">
+												{data?.works_by_pk.name}
+											</div>
+										</div>
 	
 										<TitleLine/>
 	
 										<div
 											style={{
 												width: "50%",
+												paddingLeft: ".8rem",
+												borderLeft: "1rem solid #dd7"
 											}}>
 											{data?.works_by_pk.description}
 										</div>

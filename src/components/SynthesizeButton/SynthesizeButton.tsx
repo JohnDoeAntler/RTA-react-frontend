@@ -2,7 +2,19 @@
 
 import React, { useState } from "react";
 import { useAuth0 } from "../../utils/react-auth0-spa";
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, IconButton } from "@material-ui/core";
+import {
+	Button,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogContentText,
+	TextField,
+	DialogActions,
+	IconButton,
+	CircularProgress,
+	LinearProgress,
+	Box,
+} from "@material-ui/core";
 import axios from "axios";
 import { CircleButton } from "../CircleButton/CircleButton";
 import { CallMerge } from "@material-ui/icons";
@@ -18,10 +30,12 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 		file: File | null;
 		open: boolean;
 		isError: boolean;
+		isLoading: boolean;
 	}>({
 		file: null,
 		open: false,
 		isError: false,
+		isLoading: false,
 	});
 
 	return (
@@ -34,6 +48,8 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 					setState({
 						...state,
 						open: true,
+						isError: false,
+						isLoading: false,
 					})
 				}>
 				<IconButton>
@@ -52,7 +68,13 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 				aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Synthesize</DialogTitle>
 				<DialogContent>
-					{state.isError ? (
+					{state.isLoading ? (
+						<DialogContentText>
+							<LinearProgress color="secondary" />
+							<Box margin="1rem"></Box>
+							Uploading the driving video to the file server, please wait a minute...
+						</DialogContentText>
+					) : state.isError ? (
 						<DialogContentText>
 							For work owner: Please confirm the training material on both audio and image is enough to be synthesized.
 							<br />
@@ -88,18 +110,20 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 					)}
 				</DialogContent>
 				<DialogActions>
-					<Button
-						color="primary"
-						onClick={() => {
-							setState({
-								...state,
-								open: false,
-							});
-						}}>
-						Cancel
-					</Button>
+					{!state.isLoading && (
+						<Button
+							color="primary"
+							onClick={() => {
+								setState({
+									...state,
+									open: false,
+								});
+							}}>
+							Cancel
+						</Button>
+					)}
 
-					{!state.isError && (
+					{!state.isError && !state.isLoading && (
 						<Button
 							color="primary"
 							disabled={!state.file}
@@ -115,18 +139,28 @@ export const SynthesizeButton: React.FC<ISynthesizeButtonProps> = (props) => {
 											"content-type": "multipart/form-data",
 										},
 									};
+
+									setState({
+										...state,
+										isLoading: true,
+									});
+
 									axios
 										.post(endpoint, formData, config)
 										.then((x) => {
 											setState({
 												...state,
 												open: false,
+												file: null,
+												isLoading: false,
 											});
 										})
 										.catch(() => {
 											setState({
 												...state,
+												file: null,
 												isError: true,
+												isLoading: false,
 											});
 										});
 								}

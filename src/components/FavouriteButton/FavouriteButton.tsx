@@ -42,6 +42,7 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = (props) => {
 		<CircleButton
 			type="button"
 			backgroundColor={state.isFavourited ? "#dd0000" : "black"}
+			alt="Add to favourite list."
 			onClick={async () => {
 				setState({
 					...state,

@@ -13,6 +13,7 @@ import { GET_USER_DETAIL } from "../../../graphql/users";
 import { GetUserDetail, GetUserDetailVariables } from "../../../types/api";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./User.css";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IUserProps {}
 
@@ -65,23 +66,26 @@ export const User: React.FC<IUserProps> = (props) => {
 								<hr/>
 
 								<Grid container spacing={1}>
-									<Grid item xs={6}>
-										<InfoBlock upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
+									<Grid item xs={12} md={6}>
+										<InfoBlock color="#f77" upperText={data?.users_by_pk.followings_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followings"/>
 									</Grid>
 
-									<Grid item xs={6}>
-										<InfoBlock upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
+									<Grid item xs={12} md={6}>
+										<InfoBlock color="#7ff"upperText={data?.users_by_pk.followers_aggregate.aggregate.count.toLocaleString() || ''} lowerText="followers"/>
 									</Grid>
 								</Grid>
 
-								<p>
+								<p style={{
+									paddingLeft: ".8rem",
+									borderLeft: "1rem solid #dd7",
+								}}>
 									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore sapiente nihil totam deserunt quo expedita omnis
 									consectetur consequuntur recusandae quas, fugiat libero iste est tenetur ipsa fugit. Aspernatur, asperiores quaerat.
 								</p>
 
 								{currentUser.id === user.id ? (
 									<Link to={`/users/${user.id}/edit`}>
-										<CircleButton backgroundColor="black" type="button">
+										<CircleButton backgroundColor="black" type="button" alt="Edit user information.">
 											<IconButton>
 												<Edit />
 											</IconButton>
@@ -105,7 +109,7 @@ export const User: React.FC<IUserProps> = (props) => {
 							<Grid item>
 								<div className="title-text">{data?.users_by_pk.name}'s works</div>
 
-								<hr />
+								<TitleLine/>
 
 								<div
 									style={{
@@ -113,7 +117,7 @@ export const User: React.FC<IUserProps> = (props) => {
 									}}></div>
 
 								<Grid container direction="column" spacing={2}>
-									<Grid item>{data && <WorkList works={data.users_by_pk.works} />}</Grid>
+									<Grid item>{data && <WorkList works={data.users_by_pk.works} filter=""/>}</Grid>
 								</Grid>
 							</Grid>
 						</Grid>

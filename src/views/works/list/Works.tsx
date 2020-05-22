@@ -11,13 +11,15 @@ import { WorkItem } from "../../../components/WorkItem/WorkItem";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Add, ArrowForwardIos, ArrowBackIos, ArrowLeft, ArrowRight } from "@material-ui/icons";
 import { WorkList } from "../../../components/WorkList/WorkList";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorksProps {}
 
 export const Works: React.FC<IWorksProps> = (props) => {
 
 	const [state, setState] = useState({
-		filter: "",
+		filter: '',
+		delayedFilter: '',
 	});
 
 	const { data, loading } = useQuery<GetWorks, GetWorksVariables>(GET_WORKS, {
@@ -25,6 +27,12 @@ export const Works: React.FC<IWorksProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: "no-cache",
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -43,7 +51,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>
@@ -69,7 +77,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 
 						<Grid item>
 							<Link to="/works/new">
-								<CircleButton type="button" backgroundColor="black">
+								<CircleButton type="button" backgroundColor="black" alt="Create work.">
 									<IconButton>
 										<Add />
 									</IconButton>
@@ -88,7 +96,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						<Grid item>
 							{
 								data && (
-									<WorkList works={data.works}/>
+									<WorkList works={data.works} filter={state.delayedFilter}/>
 								)
 							}
 						</Grid>

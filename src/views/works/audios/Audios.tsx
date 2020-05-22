@@ -6,6 +6,7 @@ import { GetAudioDatas, GetAudioDatasVariables, AudioDataDelete, AudioDataDelete
 import { Container, Grid, Tooltip } from '@material-ui/core';
 import { AddAudioButton } from '../../../components/AddAudioButton/AddAudioButton';
 import { DataList } from '../../../components/DataList/DataList';
+import { TitleLine } from '../../../components/TitleLine/TitleLine';
 
 interface IAudiosProps {
 }
@@ -39,7 +40,7 @@ export const Audios: React.FC<IAudiosProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

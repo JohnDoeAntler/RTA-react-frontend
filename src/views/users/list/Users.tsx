@@ -4,6 +4,7 @@ import { GET_USERS } from '../../../graphql/users';
 import { GetUsers, GetUsersVariables } from '../../../types/api';
 import { Container, Grid, TextField } from '@material-ui/core';
 import { UserList } from '../../../components/UserList/UserList';
+import { TitleLine } from '../../../components/TitleLine/TitleLine';
 
 interface IUsersProps {
 };
@@ -12,6 +13,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: "",
+		delayedFilter: "",
 	});
 
 	const { data } = useQuery<GetUsers, GetUsersVariables>(GET_USERS, {
@@ -19,6 +21,12 @@ export const Users: React.FC<IUsersProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -37,7 +45,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>
@@ -71,7 +79,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
 							{
-								data && <UserList users={data.users}/>
+								data && <UserList users={data.users} filter={state.delayedFilter}/>
 							}
 						</Grid>
 					</Grid>

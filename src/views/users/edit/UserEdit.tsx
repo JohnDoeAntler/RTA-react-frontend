@@ -10,6 +10,7 @@ import { schema } from "../../../yup/users";
 import { TextField, Grid, IconButton, Container } from "@material-ui/core";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done } from "@material-ui/icons";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IUserEditProps {}
 
@@ -29,14 +30,11 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 
 	const [userEdit] = useMutation<Mutation, Variables>(USER_EDIT);
 
-	if (state.isRedirected) {
-		return (
-			<Redirect to={`/users/${id}`}/>
-		);
-	}
-
 	return (
 		<Container>
+			{
+				state.isRedirected && <Redirect to={`/users/${id}`}/>
+			}
 			<Grid
 				container
 				direction="column"
@@ -47,7 +45,7 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 				<Grid item>
 					<div className="title-text">Edit User</div>
 
-					<hr />
+					<TitleLine/>
 
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, facilis. Non minima, quod dolor voluptas pariatur esse fugiat, quae
@@ -114,7 +112,7 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 
 									<Grid spacing={1} container>
 										<Grid item>
-											<CircleButton type="submit" backgroundColor="black">
+											<CircleButton type="submit" backgroundColor="black" alt="Submit.">
 												<IconButton>
 													<Done />
 												</IconButton>

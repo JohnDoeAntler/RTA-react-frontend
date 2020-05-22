@@ -10,6 +10,7 @@ import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
 import { schema } from '../../../yup/works';
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorkNewProps {}
 
@@ -43,7 +44,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 						Create Work
 					</div>
 
-					<hr/>
+					<TitleLine/>
 
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem repudiandae quis eveniet corporis? Neque, doloribus. Dicta dolorum doloribus odit asperiores, provident doloremque, necessitatibus quod animi iusto aspernatur inventore quam quasi.
@@ -180,7 +181,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 
 								<Grid spacing={1} container>
 									<Grid item>
-										<CircleButton type="submit" backgroundColor="black">
+										<CircleButton type="submit" backgroundColor="black" alt="Create work.">
 											<IconButton>
 												<Done />
 											</IconButton>
@@ -188,7 +189,7 @@ export const WorkNew: React.FC<IWorkNewProps> = (props) => {
 									</Grid>
 
 									<Grid item>
-										<CircleButton type="reset" backgroundColor="black">
+										<CircleButton type="reset" backgroundColor="black" alt="Reset.">
 											<IconButton>
 												<Replay />
 											</IconButton>

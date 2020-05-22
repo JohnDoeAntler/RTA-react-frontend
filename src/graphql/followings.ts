@@ -16,7 +16,7 @@ export const GET_FOLLOWINGS = gql`
 						},
 					}, {
 						name: {
-							_like: $filter
+							_ilike: $filter
 						}
 					}
 				]

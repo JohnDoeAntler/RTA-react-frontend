@@ -1,22 +1,37 @@
+/** @format */
+
 import React, { useEffect, useRef } from "react";
 import "./CircleButton.css";
 import Lottie from "lottie-web";
+import { Popover, Typography } from "@material-ui/core";
 
 interface ICircleButtonProps {
 	type: "button" | "reset" | "submit";
 	backgroundColor: string;
-	onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void);
+	alt: string;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	disabled?: boolean;
 }
 
 export const CircleButton: React.FC<ICircleButtonProps> = (props) => {
-
 	//
 	// ─── ANIMATION ──────────────────────────────────────────────────────────────────
 	//
 
 	const fx = useRef<HTMLDivElement>(null);
 	const btn = useRef<HTMLButtonElement>(null);
+
+	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
+	const open = Boolean(anchorEl);
+
+	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
 
 	useEffect(() => {
 		const anim = Lottie.loadAnimation({
@@ -31,9 +46,10 @@ export const CircleButton: React.FC<ICircleButtonProps> = (props) => {
 			anim.goToAndStop(100, true);
 		});
 
-		btn.current && btn.current.addEventListener("click", () => {
-			anim.goToAndPlay(0, true);
-		});
+		btn.current &&
+			btn.current.addEventListener("click", () => {
+				anim.goToAndPlay(0, true);
+			});
 
 		return () => {
 			anim.destroy();
@@ -41,30 +57,62 @@ export const CircleButton: React.FC<ICircleButtonProps> = (props) => {
 	}, []);
 
 	return (
-		<span>
-			<button
-				ref={btn}
-				type={props.type}
-				className="circle-button"
-				style={{ backgroundColor: props.backgroundColor }}
-				onClick={props.onClick}
-				disabled={props.disabled}
+		<div>
+			<span
+				onMouseEnter={handlePopoverOpen}
+				onMouseLeave={handlePopoverClose}
 			>
-				<span className="circle-button-icon">
-					<div className="circle-button-icon-lottie" ref={fx} style={{
-						position: "absolute",
-						width: 120,
-						height: 120,
-						left: "50%",
-						top: "50%",
-						pointerEvents: "none",
-						zIndex: -1,
-					}}/>
+				<button
+					ref={btn}
+					type={props.type}
+					className="circle-button"
+					style={{ backgroundColor: props.backgroundColor }}
+					onClick={props.onClick}
+					disabled={props.disabled}>
+					<span className="circle-button-icon">
+						<div
+							className="circle-button-icon-lottie"
+							ref={fx}
+							style={{
+								position: "absolute",
+								width: 120,
+								height: 120,
+								left: "50%",
+								top: "50%",
+								pointerEvents: "none",
+								zIndex: -1,
+							}}
+						/>
+						{props.children}
+					</span>
+				</button>
+			</span>
+
+			<Popover
+				id="mouse-over-popover"
+				open={open}
+				anchorEl={anchorEl}
+				anchorOrigin={{
+					vertical: "bottom",
+					horizontal: "left",
+				}}
+				transformOrigin={{
+					vertical: "top",
+					horizontal: "left",
+				}}
+				onClose={handlePopoverClose}
+				disableRestoreFocus
+				style={{
+					pointerEvents: "none",
+					marginTop: "1rem",
+				}}
+			>
+				<Typography>
 					{
-						props.children
+						props.alt
 					}
-				</span>
-			</button>
-		</span>
+				</Typography>
+			</Popover>
+		</div>
 	);
 };

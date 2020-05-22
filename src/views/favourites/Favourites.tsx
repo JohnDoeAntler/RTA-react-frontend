@@ -8,6 +8,7 @@ import { WorkList } from '../../components/WorkList/WorkList';
 import { Container, Grid, TextField, IconButton } from '@material-ui/core';
 import { CircleButton } from '../../components/CircleButton/CircleButton';
 import { Add } from '@material-ui/icons';
+import { TitleLine } from '../../components/TitleLine/TitleLine';
 
 interface IFavouritesProps {
 };
@@ -18,6 +19,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: '',
+		delayedFilter: '',
 	})
 
 	const { data } = useQuery<GetFavourites, GetFavouritesVariables>(GET_FAVOURITES, {
@@ -26,8 +28,13 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			})
+		}
 	});
-
 	
 
 	return (
@@ -46,7 +53,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>
@@ -81,7 +88,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 						<Grid item>
 							{
 								data && (
-									<WorkList works={data.favourites.map(x => x.work).map(x => x)}/>
+									<WorkList works={data.favourites.map(x => x.work).map(x => x)} filter={state.delayedFilter}/>
 								)
 							}
 						</Grid>

@@ -43,6 +43,7 @@ export const FollowButton: React.FC<IFollowButtonProps> = (props) => {
 		<CircleButton
 			type="button"
 			backgroundColor={state.isFollowed ? '#00dddd' : 'black'}
+			alt="Follow user."
 			onClick={async () => {
 				setState({
 					...state,

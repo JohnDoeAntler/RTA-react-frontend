@@ -10,6 +10,7 @@ import { Formik, Form } from "formik";
 import { schema } from "../../../yup/works";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorkEditProps {}
 
@@ -29,12 +30,11 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 
 	const [workEdit] = useMutation<Mutation, Variables>(WORK_EDIT);
 
-	if (state.isRedirected) {
-		return <Redirect to={`/works/${id}`} />;
-	}
-
 	return (
 		<Container>
+			{
+				state.isRedirected && <Redirect to={`/works/${id}`} />
+			}
 			<Grid
 				container
 				direction="column"
@@ -45,7 +45,7 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 				<Grid item>
 					<div className="title-text">Edit Work</div>
 
-					<hr />
+					<TitleLine/>
 
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem repudiandae quis eveniet corporis? Neque, doloribus. Dicta dolorum
@@ -152,7 +152,7 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 
 									<Grid spacing={1} container>
 										<Grid item>
-											<CircleButton type="submit" backgroundColor="black">
+											<CircleButton type="submit" backgroundColor="black" alt="Edit work information.">
 												<IconButton>
 													<Done />
 												</IconButton>

@@ -8,6 +8,7 @@ import './Progresses.css';
 import { Grid } from '@material-ui/core';
 import { FallbackText } from '../../../components/FallbackText/FallbackText';
 import { ProgressItem } from '../../../components/ProgressItem/ProgressItem';
+import { TitleLine } from '../../../components/TitleLine/TitleLine';
 
 interface IProgressesProps {
 };
@@ -30,7 +31,7 @@ export const Progresses: React.FC<IProgressesProps> = (props) => {
 				Progresses
 			</div>
 
-			<hr/>
+			<TitleLine/>
 
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, dolor quaerat nam debitis voluptatum ea mollitia vel ad eius ex ut saepe itaque dolore. Maiores laborum asperiores debitis quae saepe.

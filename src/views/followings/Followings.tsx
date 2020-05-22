@@ -6,6 +6,7 @@ import { useAuth0 } from '../../utils/react-auth0-spa';
 import { Link } from 'react-router-dom';
 import { Container, Grid, TextField } from '@material-ui/core';
 import { UserList } from '../../components/UserList/UserList';
+import { TitleLine } from '../../components/TitleLine/TitleLine';
 
 interface IFollowingsProps {
 };
@@ -16,6 +17,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 
 	const [ state, setState ] = useState({
 		filter: '',
+		delayedFilter: '',
 	});
 
 	const { data } = useQuery<GetFollowings, GetFollowingsVariables>(GET_FOLLOWINGS, {
@@ -24,6 +26,12 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 			filter: `%${state.filter}%`,
 		},
 		fetchPolicy: 'no-cache',
+		onCompleted: () => {
+			setState({
+				...state,
+				delayedFilter: state.filter,
+			});
+		}
 	});
 
 	return (
@@ -42,7 +50,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>
@@ -76,7 +84,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 					<Grid container direction="column" spacing={2}>
 						<Grid item>
 							{
-								data && <UserList users={data.users}/>
+								data && <UserList users={data.users} filter={state.delayedFilter}/>
 							}
 						</Grid>
 					</Grid>

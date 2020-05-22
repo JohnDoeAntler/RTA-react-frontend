@@ -21,6 +21,7 @@ import "./Work.css";
 import { PageScrollSpy } from "../../../components/PageScrollSpy/PageScrollSpy";
 import { PageInfo } from "../../../components/PageInfo/PageInfo";
 import { InfoBlock } from "../../../components/InfoBlock/InfoBlock";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorkProps {}
 
@@ -86,7 +87,7 @@ export const Work: React.FC<IWorkProps> = (props) => {
 								<Grid item>
 									<div className="work-title-text">{data?.works_by_pk.name}</div>
 
-									<hr />
+									<TitleLine/>
 
 									<div
 										style={{

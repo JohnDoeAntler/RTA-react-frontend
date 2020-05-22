@@ -11,6 +11,7 @@ import { WorkItem } from "../../../components/WorkItem/WorkItem";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Add, ArrowForwardIos, ArrowBackIos, ArrowLeft, ArrowRight } from "@material-ui/icons";
 import { WorkList } from "../../../components/WorkList/WorkList";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorksProps {}
 
@@ -50,7 +51,7 @@ export const Works: React.FC<IWorksProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

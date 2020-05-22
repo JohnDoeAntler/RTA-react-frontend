@@ -6,6 +6,7 @@ import { useAuth0 } from '../../utils/react-auth0-spa';
 import { Link } from 'react-router-dom';
 import { Container, Grid, TextField } from '@material-ui/core';
 import { UserList } from '../../components/UserList/UserList';
+import { TitleLine } from '../../components/TitleLine/TitleLine';
 
 interface IFollowingsProps {
 };
@@ -49,7 +50,7 @@ export const Followings: React.FC<IFollowingsProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

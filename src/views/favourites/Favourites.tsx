@@ -8,6 +8,7 @@ import { WorkList } from '../../components/WorkList/WorkList';
 import { Container, Grid, TextField, IconButton } from '@material-ui/core';
 import { CircleButton } from '../../components/CircleButton/CircleButton';
 import { Add } from '@material-ui/icons';
+import { TitleLine } from '../../components/TitleLine/TitleLine';
 
 interface IFavouritesProps {
 };
@@ -52,7 +53,7 @@ export const Favourites: React.FC<IFavouritesProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

@@ -13,6 +13,7 @@ import { GET_USER_DETAIL } from "../../../graphql/users";
 import { GetUserDetail, GetUserDetailVariables } from "../../../types/api";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import "./User.css";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IUserProps {}
 
@@ -74,7 +75,10 @@ export const User: React.FC<IUserProps> = (props) => {
 									</Grid>
 								</Grid>
 
-								<p>
+								<p style={{
+									paddingLeft: ".8rem",
+									borderLeft: "1rem solid #dd7",
+								}}>
 									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore sapiente nihil totam deserunt quo expedita omnis
 									consectetur consequuntur recusandae quas, fugiat libero iste est tenetur ipsa fugit. Aspernatur, asperiores quaerat.
 								</p>
@@ -105,7 +109,7 @@ export const User: React.FC<IUserProps> = (props) => {
 							<Grid item>
 								<div className="title-text">{data?.users_by_pk.name}'s works</div>
 
-								<hr />
+								<TitleLine/>
 
 								<div
 									style={{

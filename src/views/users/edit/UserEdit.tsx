@@ -10,6 +10,7 @@ import { schema } from "../../../yup/users";
 import { TextField, Grid, IconButton, Container } from "@material-ui/core";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done } from "@material-ui/icons";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IUserEditProps {}
 
@@ -44,7 +45,7 @@ export const UserEdit: React.FC<IUserEditProps> = (props) => {
 				<Grid item>
 					<div className="title-text">Edit User</div>
 
-					<hr />
+					<TitleLine/>
 
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, facilis. Non minima, quod dolor voluptas pariatur esse fugiat, quae

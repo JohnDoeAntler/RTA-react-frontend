@@ -1,9 +1,15 @@
+.user-item-animation-wrapper {
+	width: calc(100% + 3rem + 20px);
+	overflow: hidden;
+}
+
 .user-item-wrapper {
 	--height: 20vh;
-	width: 100%;
+	width: calc(100% - 3rem - 20px);
 	height: var(--height);
 	position: relative;
 	background-color: #111;
+	transform: translateX(-100%);
 }
 
 .user-item-wrapper::after {
@@ -31,6 +37,7 @@
 .user-item-img-wrapper {
 	background-color: #111;
 	line-height: 0;
+	overflow: hidden;
 }
 
 @media only screen and (max-width: 992px) {

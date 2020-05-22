@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import { GetWork } from '../../types/api';
 import { CommentItem } from '../CommentItem/CommentItem';
 import { FallbackText } from '../FallbackText/FallbackText';
+import { TitleLine } from '../TitleLine/TitleLine';
 
 interface ICommentListProps {
 	data?: GetWork;
@@ -15,7 +16,7 @@ export const CommentList: React.FC<ICommentListProps> = ({data}) => {
 				Comments
 			</div>
 
-			<hr/>
+			<TitleLine/>
 
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facilis quia labore quis alias. Saepe, amet libero quis, laudantium rerum autem totam voluptatem cumque corporis facilis inventore ex voluptatum nulla!

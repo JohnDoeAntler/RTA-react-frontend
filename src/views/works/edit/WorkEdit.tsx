@@ -10,6 +10,7 @@ import { Formik, Form } from "formik";
 import { schema } from "../../../yup/works";
 import { CircleButton } from "../../../components/CircleButton/CircleButton";
 import { Done, Replay } from "@material-ui/icons";
+import { TitleLine } from "../../../components/TitleLine/TitleLine";
 
 interface IWorkEditProps {}
 
@@ -44,7 +45,7 @@ export const WorkEdit: React.FC<IWorkEditProps> = (props) => {
 				<Grid item>
 					<div className="title-text">Edit Work</div>
 
-					<hr />
+					<TitleLine/>
 
 					<p>
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem repudiandae quis eveniet corporis? Neque, doloribus. Dicta dolorum

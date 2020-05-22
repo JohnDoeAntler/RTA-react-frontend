@@ -4,6 +4,7 @@ import { GET_USERS } from '../../../graphql/users';
 import { GetUsers, GetUsersVariables } from '../../../types/api';
 import { Container, Grid, TextField } from '@material-ui/core';
 import { UserList } from '../../../components/UserList/UserList';
+import { TitleLine } from '../../../components/TitleLine/TitleLine';
 
 interface IUsersProps {
 };
@@ -44,7 +45,7 @@ export const Users: React.FC<IUsersProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

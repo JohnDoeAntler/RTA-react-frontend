@@ -6,6 +6,7 @@ import { AddImageButton } from '../../../components/AddImageButton/AddImageButto
 import { DataList } from '../../../components/DataList/DataList';
 import { GET_IMAGE_DATAS, IMAGE_DATA_DELETE } from '../../../graphql/works';
 import { GetImageDatas, GetImageDatasVariables, ImageDataDelete, ImageDataDeleteVariables } from '../../../types/api';
+import { TitleLine } from '../../../components/TitleLine/TitleLine';
 
 interface IImagesProps {
 }
@@ -39,7 +40,7 @@ export const Images: React.FC<IImagesProps> = (props) => {
 						</Grid>
 
 						<Grid item>
-							<hr />
+							<TitleLine/>
 
 							<span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
 						</Grid>

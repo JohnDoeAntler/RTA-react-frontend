@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[![Thumbnail](https://i.ytimg.com/vi/MiQ5C8tJ-uc/hqdefault.jpg)](https://www.youtube.com/watch?v=MiQ5C8tJ-uc)
+[![Thumbnail](http://i3.ytimg.com/vi/YklUbZSkETI/maxresdefault.jpg)](https://www.youtube.com/watch?v=YklUbZSkETI)
 
 ## Available Scripts
 
